@@ -1,0 +1,13 @@
+/usr/local/Cellar/cmake/3.10.1/bin/cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" /Users/ziqwang/Documents/GitHub/FrameInterlock
+-- Creating target: igl::core
+-- Creating target: igl::mosek
+-- Creating target: igl::opengl
+-- Creating target: igl::opengl2
+-- Using Cocoa for window creation
+-- NanoGUI: using libc++ and libc++abi.
+-- Creating target: igl::opengl_glfw
+-- Creating target: igl::viewer
+-- Boost version: 1.66.0
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release
