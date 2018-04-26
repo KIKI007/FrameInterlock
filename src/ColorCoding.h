@@ -30,7 +30,6 @@ public:
 public:
     void request(int num)
     {
-
         for(int id = part_num_; id < num; id++)
         {
             Eigen::RowVector3d c, oc;
@@ -40,12 +39,17 @@ public:
                                        rand()%255/255.0,
                                        rand()%255/255.0);
                 int jd;
-                for(jd = 0; jd < 10; jd++)
+                bool is_duplicate = false;
+                for(jd = std::max((int)colorCode.size() - 10, 0); jd < colorCode.size(); jd++)
                 {
                     oc = Eigen::RowVector3d((colorCode[jd])->r(), (colorCode[jd])->g(), (colorCode[jd])->b());
-                    if((c - oc).norm() < 0.4) break;
+                    if((c - oc).norm() < 0.4)
+                    {
+                        is_duplicate = true;
+                        break;
+                    }
                 }
-                if(jd == 10)
+                if(!is_duplicate)
                 {
                     break;
                 }

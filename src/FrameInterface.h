@@ -9,6 +9,7 @@
 #include "voxel/VoxelizedRenderCube.h"
 #include "voxel/VoxelizedRenderSphere.h"
 #include "FrameMesh.h"
+#include <fstream>
 
 struct FramePillar
 {
@@ -16,6 +17,8 @@ struct FramePillar
 
     //0 +X  1 -X    2 +Y    3 -Y   4 +Z    5 -Z
     int pos_in_cube_face[2];
+
+    int cube_id[2];
 
     double angle_from_face_normal[2];
 
@@ -45,11 +48,11 @@ public:
 
 public:
 
+    void draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_frame, bool is_draw_joints);
 
+    void draw_frame_mesh(FrameInterfaceRenderUnit &unit);
 
-
-
-    void draw(MatrixXd &V, MatrixXi &F, MatrixXd &C);
+    void draw_joints(vector<FrameInterfaceRenderUnit> &render_list);
 
 public:
 
@@ -62,6 +65,12 @@ public:
     void remove_duplicate_pillar(vector<vector<std::shared_ptr<FramePillar>>> &pillar_in_cube_face);
 
     void init_joints(int cube_voxel_num);
+
+public:
+
+    void write_fpuz(string file_name);
+
+    void read_fpuz(string file_name);
 
 public:
 

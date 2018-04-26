@@ -75,7 +75,7 @@ void VoxelizedRenderCube::rendering(MatrixXd &V, MatrixXi &F, MatrixXd &C)
 
 void VoxelizedRenderCube::add_color_by_groupID(MatrixXd &C)
 {
-    colorcoder_->request(compute_max_part_id());
+    colorcoder_->request(compute_max_part_id() + 2);
 
     int id = 0;
     for(int i = 0; i < Nx; i++) {
