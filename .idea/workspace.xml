@@ -123,7 +123,7 @@
       <file leaf-file-name="FrameInterface.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FrameInterface.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
+            <state relative-caret-position="515">
               <caret line="422" lean-forward="true" selection-start-line="422" selection-end-line="422" />
             </state>
           </provider>
@@ -270,12 +270,12 @@
       <option name="presentableId" value="Default" />
       <updated>1524407354338</updated>
       <workItem from="1524407356692" duration="3289000" />
-      <workItem from="1524510639445" duration="40419000" />
+      <workItem from="1524510639445" duration="40511000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43708000" />
+    <option name="totallyTimeSpent" value="43800000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2048" height="1152" extended-state="0" />
@@ -647,7 +647,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FrameInterface.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
+        <state relative-caret-position="515">
           <caret line="422" lean-forward="true" selection-start-line="422" selection-end-line="422" />
         </state>
       </provider>
