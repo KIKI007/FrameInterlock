@@ -138,6 +138,17 @@ void show_joints_face_index()
     }
 }
 
+void read_fpuz(){
+    string path = "";
+    path = igl::file_dialog_open();
+    if(path != "") {
+        frame_interface.reset();
+        frame_interface = std::make_shared<FrameInterface>(FrameInterface(para.render_pillar_radius, para.render_joint_size_, colorcoder));
+        frame_interface->read_fpuz(path);
+        draw_frame_mesh();
+    }
+};
+
 void read_mesh_file()
 {
     string path = "";

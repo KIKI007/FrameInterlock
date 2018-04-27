@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.10.1/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.10.1/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -61,7 +61,7 @@ nanogui/nanogui_resources.cpp: /Users/ziqwang/Documents/GitHub/libigl/external/n
 nanogui/nanogui_resources.cpp: /Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/Roboto-Regular.ttf
 nanogui/nanogui_resources.cpp: /Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/entypo.ttf
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running bin2c"
-	cd /Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release/nanogui && /usr/local/Cellar/cmake/3.10.1/bin/cmake -DOUTPUT_C=nanogui_resources.cpp -DOUTPUT_H=nanogui_resources.h -DINPUT_FILES=/Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/Roboto-Bold.ttf,/Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/Roboto-Regular.ttf,/Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/entypo.ttf -P /Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/bin2c.cmake
+	cd /Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release/nanogui && /Applications/CLion.app/Contents/bin/cmake/bin/cmake -DOUTPUT_C=nanogui_resources.cpp -DOUTPUT_H=nanogui_resources.h -DINPUT_FILES=/Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/Roboto-Bold.ttf,/Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/Roboto-Regular.ttf,/Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/entypo.ttf -P /Users/ziqwang/Documents/GitHub/libigl/external/nanogui/resources/bin2c.cmake
 
 nanogui/nanogui_resources.h: nanogui/nanogui_resources.cpp
 	@$(CMAKE_COMMAND) -E touch_nocreate nanogui/nanogui_resources.h

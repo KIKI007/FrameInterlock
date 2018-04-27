@@ -10,6 +10,7 @@
 #include "voxel/VoxelizedRenderSphere.h"
 #include "FrameMesh.h"
 #include <fstream>
+#include <map>
 
 struct FramePillar
 {
