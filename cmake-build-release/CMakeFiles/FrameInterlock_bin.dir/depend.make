@@ -485,6 +485,8 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Docum
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glew/include/GL/glew.h
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glfw/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg_gl.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/include/nanogui/button.h
@@ -620,8 +622,6 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Docum
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOBJ.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.cpp
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.h
-CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /usr/local/include/GL/glew.h
-CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /usr/local/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /usr/local/include/boost/array.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /usr/local/include/boost/assert.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o: /usr/local/include/boost/call_traits.hpp
@@ -1361,6 +1361,8 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glew/include/GL/glew.h
+CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glfw/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg_gl.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/include/nanogui/button.h
@@ -1496,8 +1498,6 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOBJ.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.cpp
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.h
-CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /usr/local/include/GL/glew.h
-CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: /usr/local/include/GLFW/glfw3.h
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: ../src/Assembly.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: ../src/ColorCoding.h
@@ -1768,6 +1768,8 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziq
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glew/include/GL/glew.h
+CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glfw/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg_gl.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/include/nanogui/button.h
@@ -1903,8 +1905,6 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziq
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOBJ.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.cpp
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.h
-CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /usr/local/include/GL/glew.h
-CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /usr/local/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /usr/local/include/boost/array.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /usr/local/include/boost/assert.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: /usr/local/include/boost/call_traits.hpp
@@ -2642,6 +2642,8 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/zi
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glew/include/GL/glew.h
+CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glfw/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg_gl.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/include/nanogui/button.h
@@ -2777,8 +2779,6 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/zi
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOBJ.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.cpp
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.h
-CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /usr/local/include/GL/glew.h
-CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /usr/local/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /usr/local/include/boost/array.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /usr/local/include/boost/assert.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: /usr/local/include/boost/call_traits.hpp
@@ -3516,6 +3516,8 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glew/include/GL/glew.h
+CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glfw/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg_gl.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/include/nanogui/button.h
@@ -3651,8 +3653,6 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOBJ.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.cpp
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.h
-CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /usr/local/include/GL/glew.h
-CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /usr/local/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /usr/local/include/boost/array.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /usr/local/include/boost/assert.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: /usr/local/include/boost/call_traits.hpp
@@ -4612,6 +4612,8 @@ CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHu
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/CommonCwiseUnaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/eigen/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glew/include/GL/glew.h
+CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/glfw/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg.h
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/ext/nanovg/src/nanovg_gl.h
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../external/nanogui/include/nanogui/button.h
@@ -4747,8 +4749,6 @@ CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHu
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOBJ.h
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.cpp
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /Users/ziqwang/Documents/GitHub/libigl/shared/cmake/../../include/igl/writeOFF.h
-CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /usr/local/include/GL/glew.h
-CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /usr/local/include/GLFW/glfw3.h
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /usr/local/include/boost/array.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /usr/local/include/boost/assert.hpp
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: /usr/local/include/boost/call_traits.hpp

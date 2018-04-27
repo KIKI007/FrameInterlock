@@ -30,7 +30,7 @@ int main() {
 
         viewer.ngui->addGroup("I/O");
         viewer.ngui->addButton("Read .obj", [](){read_mesh_file();});
-        viewer.ngui->addButton("Read .fpuz", [](){});
+        viewer.ngui->addButton("Read .fpuz", [](){read_fpuz();});
         viewer.ngui->addButton("Write .fpuz", [](){write_fpuz();});
 
         viewer.ngui->addGroup("Render");
