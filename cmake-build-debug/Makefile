@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.10.1/bin/cmake
 
 # The command to remove a file.
-RM = /Applications/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
+RM = /usr/local/Cellar/cmake/3.10.1/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,25 +59,25 @@ CMAKE_BINARY_DIR = /Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-de
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/usr/local/Cellar/cmake/3.10.1/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
 install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/usr/local/Cellar/cmake/3.10.1/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -P cmake_install.cmake
+	/usr/local/Cellar/cmake/3.10.1/bin/cmake -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -P cmake_install.cmake
+	/usr/local/Cellar/cmake/3.10.1/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target list_install_components
@@ -93,7 +93,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.10.1/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -104,19 +104,19 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/usr/local/Cellar/cmake/3.10.1/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
 install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/usr/local/Cellar/cmake/3.10.1/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/Applications/CLion.app/Contents/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/usr/local/Cellar/cmake/3.10.1/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -315,6 +315,60 @@ src/FrameInterface.cpp.s:
 	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.s
 .PHONY : src/FrameInterface.cpp.s
 
+src/FrameInterlocking.o: src/FrameInterlocking.cpp.o
+
+.PHONY : src/FrameInterlocking.o
+
+# target to build an object file
+src/FrameInterlocking.cpp.o:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o
+.PHONY : src/FrameInterlocking.cpp.o
+
+src/FrameInterlocking.i: src/FrameInterlocking.cpp.i
+
+.PHONY : src/FrameInterlocking.i
+
+# target to preprocess a source file
+src/FrameInterlocking.cpp.i:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.i
+.PHONY : src/FrameInterlocking.cpp.i
+
+src/FrameInterlocking.s: src/FrameInterlocking.cpp.s
+
+.PHONY : src/FrameInterlocking.s
+
+# target to generate assembly for a file
+src/FrameInterlocking.cpp.s:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.s
+.PHONY : src/FrameInterlocking.cpp.s
+
+src/FrameInterlockingTree.o: src/FrameInterlockingTree.cpp.o
+
+.PHONY : src/FrameInterlockingTree.o
+
+# target to build an object file
+src/FrameInterlockingTree.cpp.o:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o
+.PHONY : src/FrameInterlockingTree.cpp.o
+
+src/FrameInterlockingTree.i: src/FrameInterlockingTree.cpp.i
+
+.PHONY : src/FrameInterlockingTree.i
+
+# target to preprocess a source file
+src/FrameInterlockingTree.cpp.i:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.i
+.PHONY : src/FrameInterlockingTree.cpp.i
+
+src/FrameInterlockingTree.s: src/FrameInterlockingTree.cpp.s
+
+.PHONY : src/FrameInterlockingTree.s
+
+# target to generate assembly for a file
+src/FrameInterlockingTree.cpp.s:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.s
+.PHONY : src/FrameInterlockingTree.cpp.s
+
 src/FrameMesh.o: src/FrameMesh.cpp.o
 
 .PHONY : src/FrameMesh.o
@@ -368,6 +422,60 @@ src/Voxel/VoxelizedInterface.s: src/Voxel/VoxelizedInterface.cpp.s
 src/Voxel/VoxelizedInterface.cpp.s:
 	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.s
 .PHONY : src/Voxel/VoxelizedInterface.cpp.s
+
+src/Voxel/VoxelizedPart.o: src/Voxel/VoxelizedPart.cpp.o
+
+.PHONY : src/Voxel/VoxelizedPart.o
+
+# target to build an object file
+src/Voxel/VoxelizedPart.cpp.o:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.o
+.PHONY : src/Voxel/VoxelizedPart.cpp.o
+
+src/Voxel/VoxelizedPart.i: src/Voxel/VoxelizedPart.cpp.i
+
+.PHONY : src/Voxel/VoxelizedPart.i
+
+# target to preprocess a source file
+src/Voxel/VoxelizedPart.cpp.i:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.i
+.PHONY : src/Voxel/VoxelizedPart.cpp.i
+
+src/Voxel/VoxelizedPart.s: src/Voxel/VoxelizedPart.cpp.s
+
+.PHONY : src/Voxel/VoxelizedPart.s
+
+# target to generate assembly for a file
+src/Voxel/VoxelizedPart.cpp.s:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.s
+.PHONY : src/Voxel/VoxelizedPart.cpp.s
+
+src/Voxel/VoxelizedPuzzle.o: src/Voxel/VoxelizedPuzzle.cpp.o
+
+.PHONY : src/Voxel/VoxelizedPuzzle.o
+
+# target to build an object file
+src/Voxel/VoxelizedPuzzle.cpp.o:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.o
+.PHONY : src/Voxel/VoxelizedPuzzle.cpp.o
+
+src/Voxel/VoxelizedPuzzle.i: src/Voxel/VoxelizedPuzzle.cpp.i
+
+.PHONY : src/Voxel/VoxelizedPuzzle.i
+
+# target to preprocess a source file
+src/Voxel/VoxelizedPuzzle.cpp.i:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.i
+.PHONY : src/Voxel/VoxelizedPuzzle.cpp.i
+
+src/Voxel/VoxelizedPuzzle.s: src/Voxel/VoxelizedPuzzle.cpp.s
+
+.PHONY : src/Voxel/VoxelizedPuzzle.s
+
+# target to generate assembly for a file
+src/Voxel/VoxelizedPuzzle.cpp.s:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.s
+.PHONY : src/Voxel/VoxelizedPuzzle.cpp.s
 
 src/Voxel/VoxelizedRenderCube.o: src/Voxel/VoxelizedRenderCube.cpp.o
 
@@ -531,12 +639,24 @@ help:
 	@echo "... src/FrameInterface.o"
 	@echo "... src/FrameInterface.i"
 	@echo "... src/FrameInterface.s"
+	@echo "... src/FrameInterlocking.o"
+	@echo "... src/FrameInterlocking.i"
+	@echo "... src/FrameInterlocking.s"
+	@echo "... src/FrameInterlockingTree.o"
+	@echo "... src/FrameInterlockingTree.i"
+	@echo "... src/FrameInterlockingTree.s"
 	@echo "... src/FrameMesh.o"
 	@echo "... src/FrameMesh.i"
 	@echo "... src/FrameMesh.s"
 	@echo "... src/Voxel/VoxelizedInterface.o"
 	@echo "... src/Voxel/VoxelizedInterface.i"
 	@echo "... src/Voxel/VoxelizedInterface.s"
+	@echo "... src/Voxel/VoxelizedPart.o"
+	@echo "... src/Voxel/VoxelizedPart.i"
+	@echo "... src/Voxel/VoxelizedPart.s"
+	@echo "... src/Voxel/VoxelizedPuzzle.o"
+	@echo "... src/Voxel/VoxelizedPuzzle.i"
+	@echo "... src/Voxel/VoxelizedPuzzle.s"
 	@echo "... src/Voxel/VoxelizedRenderCube.o"
 	@echo "... src/Voxel/VoxelizedRenderCube.i"
 	@echo "... src/Voxel/VoxelizedRenderCube.s"

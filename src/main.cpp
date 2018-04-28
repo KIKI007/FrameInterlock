@@ -28,6 +28,11 @@ int main() {
         viewer.ngui->addVariable("Show Joints Face Index", para.render_show_joint_face_index);
         viewer.ngui->addVariable("Focus", para.render_foucus_joint_index);
 
+        viewer.ngui->addGroup("Modify Frame");
+        viewer.ngui->addVariable("Joints Face 0", para.render_add_pillar_f0);
+        viewer.ngui->addVariable("Joints Face 1", para.render_add_pillar_f1);
+        viewer.ngui->addButton("Add Pillar", [](){add_pillar();});
+
         viewer.ngui->addGroup("I/O");
         viewer.ngui->addButton("Read .obj", [](){read_mesh_file();});
         viewer.ngui->addButton("Read .fpuz", [](){read_fpuz();});

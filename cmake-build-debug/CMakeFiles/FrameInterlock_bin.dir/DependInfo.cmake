@@ -6,8 +6,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Assembly.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/Assembly.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterface.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o"
+  "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o"
+  "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlockingTree.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameMesh.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedInterface.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o"
+  "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPart.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.o"
+  "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPuzzle.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedRenderCube.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedRenderSphere.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraphSSC.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/src/graph/DirectedGraphSSC.cpp.o"

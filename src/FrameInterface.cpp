@@ -124,8 +124,6 @@ void FrameInterface::draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_fr
 
 
 
-
-
 void FrameInterface::create_void_joints(int voxel_num) {
 
     joint_voxels_.clear();
@@ -166,12 +164,12 @@ void FrameInterface::init_joints(int cube_voxel_num)
 
     for(int id = 0; id < pillars_.size(); id++)
     {
-        pillars_[id]->index = id;
+        pillars_[id]->index = id + 1;
         for(int kd = 0; kd < 2; kd++)
         {
             std::shared_ptr<VoxelizedInterface> joints = pillars_[id]->cube[kd];
             int nrm = pillars_[id]->pos_in_cube_face[kd];
-            fill_one_face_of_joints(joints, nrm, id);
+            fill_one_face_of_joints(joints, nrm, pillars_[id]->index);
         }
     }
 
@@ -468,7 +466,7 @@ void FrameInterface::read_fpuz(string file_name)
         e1 = f1 / 6;
         pillar->cube[0] = joint_voxels_[e0];
         pillar->cube[1] = joint_voxels_[e1];
-        pillar->index = id;
+        pillar->index = id + 1;
         pillar->pos_in_cube_face[0] = f0;
         pillar->pos_in_cube_face[1] = f1;
         pillar->end_points_cood[0] = points[e0] + Vector3d(dX[f0 % 6], dY[f0 % 6], dZ[f0 % 6]) * num_voxel_in_joint / 2 * cube_size_;
@@ -477,4 +475,28 @@ void FrameInterface::read_fpuz(string file_name)
     }
 
     fin.close();
+}
+
+void FrameInterface::add_pillar(int f0, int f1)
+{
+    int num_voxel_in_joint = joint_voxels_.front()->Nx;
+    int dX[6] = {1, -1, 0 ,0 ,0 ,0};
+    int dY[6] = {0, 0, 1, -1, 0, 0};
+    int dZ[6] = {0, 0, 0, 0, 1, -1};
+    std::shared_ptr<FramePillar> pillar;
+    pillar = std::make_shared<FramePillar>(FramePillar());
+    int e0, e1;
+    e0 = f0 / 6;
+    e1 = f1 / 6;
+    pillar->cube[0] = joint_voxels_[e0];
+    pillar->cube[1] = joint_voxels_[e1];
+    pillar->index = pillars_.size();
+    pillar->pos_in_cube_face[0] = f0;
+    pillar->pos_in_cube_face[1] = f1;
+    pillar->end_points_cood[0] = frame_mesh_->points_[e0] + Vector3d(dX[f0 % 6], dY[f0 % 6], dZ[f0 % 6]) *  num_voxel_in_joint / 2 * cube_size_;
+    pillar->end_points_cood[1] = frame_mesh_->points_[e1] + Vector3d(dX[f1 % 6], dY[f1 % 6], dZ[f1 % 6]) * num_voxel_in_joint / 2 * cube_size_;
+    pillars_.push_back(pillar);
+
+    fill_one_face_of_joints(joint_voxels_[e0], f0 % 6, pillar->index);
+    fill_one_face_of_joints(joint_voxels_[e1], f1 % 6, pillar->index);
 }

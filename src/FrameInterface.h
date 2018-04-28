@@ -14,10 +14,10 @@
 
 struct FramePillar
 {
-    std::shared_ptr<VoxelizedInterface> cube[2];
-
     //0 +X  1 -X    2 +Y    3 -Y   4 +Z    5 -Z
     int pos_in_cube_face[2];
+
+    std::shared_ptr<VoxelizedInterface> cube[2];
 
     int cube_id[2];
 
@@ -66,6 +66,10 @@ public:
     void remove_duplicate_pillar(vector<vector<std::shared_ptr<FramePillar>>> &pillar_in_cube_face);
 
     void init_joints(int cube_voxel_num);
+
+public:
+
+    void add_pillar(int f0, int f1);
 
 public:
 

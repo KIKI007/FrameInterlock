@@ -43,6 +43,10 @@ struct Parameter
     int render_num_joint_voxel;
 
     int render_foucus_joint_index;
+
+    int render_add_pillar_f0;
+
+    int render_add_pillar_f1;
 }para;
 
 void draw_frame_mesh()
@@ -120,6 +124,17 @@ void show_joints_index()
     }
 }
 
+void add_pillar()
+{
+    if(frame_interface)
+    {
+        if(para.render_add_pillar_f0 >= 0 && para.render_add_pillar_f1 >= 0)
+        {
+            frame_interface->add_pillar(para.render_add_pillar_f0, para.render_add_pillar_f1);
+        }
+    }
+}
+
 void show_joints_face_index()
 {
     int id = 0;
@@ -186,7 +201,8 @@ void init()
     para.render_show_joint_face_index = false;
     para.render_show_joint_index = false;
     para.render_foucus_joint_index = -1;
-
+    para.render_add_pillar_f0 = -1;
+    para.render_add_pillar_f1 = -1;
     Vector3d colorTable[10] = {
             Vector3d(0.9, 0.2, 0.2),   //  1: Red
             Vector3d(0.2, 0.2, 0.9),   //  2: Blue
