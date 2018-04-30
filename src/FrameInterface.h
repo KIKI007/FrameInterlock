@@ -39,7 +39,10 @@ struct FrameInterfaceRenderUnit{
 
 class FrameInterface {
 public:
-    FrameInterface(double radius, double cube_size, std::shared_ptr<ColorCoding> &colorcoder);
+
+    FrameInterface(const FrameInterface& interface);
+
+    FrameInterface(double radius, double cube_size, int voxel_num, std::shared_ptr<ColorCoding> &colorcoder);
 
 public:
 
@@ -57,7 +60,7 @@ public:
 
 public:
 
-    void create_void_joints(int voxel_num);
+    void create_void_joints();
 
     void fill_one_face_of_joints(std::shared_ptr<VoxelizedInterface> joint, int nrm, int index);
 
@@ -65,7 +68,7 @@ public:
 
     void remove_duplicate_pillar(vector<vector<std::shared_ptr<FramePillar>>> &pillar_in_cube_face);
 
-    void init_joints(int cube_voxel_num);
+    void init_joints();
 
 public:
 
@@ -89,6 +92,8 @@ public:
 
 
 public:
+
+    int voxel_num_;
 
     double radius_;
 

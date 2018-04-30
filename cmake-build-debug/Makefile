@@ -396,6 +396,33 @@ src/FrameMesh.cpp.s:
 	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.s
 .PHONY : src/FrameMesh.cpp.s
 
+src/Voxel/VPuzzleGraph.o: src/Voxel/VPuzzleGraph.cpp.o
+
+.PHONY : src/Voxel/VPuzzleGraph.o
+
+# target to build an object file
+src/Voxel/VPuzzleGraph.cpp.o:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.o
+.PHONY : src/Voxel/VPuzzleGraph.cpp.o
+
+src/Voxel/VPuzzleGraph.i: src/Voxel/VPuzzleGraph.cpp.i
+
+.PHONY : src/Voxel/VPuzzleGraph.i
+
+# target to preprocess a source file
+src/Voxel/VPuzzleGraph.cpp.i:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.i
+.PHONY : src/Voxel/VPuzzleGraph.cpp.i
+
+src/Voxel/VPuzzleGraph.s: src/Voxel/VPuzzleGraph.cpp.s
+
+.PHONY : src/Voxel/VPuzzleGraph.s
+
+# target to generate assembly for a file
+src/Voxel/VPuzzleGraph.cpp.s:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.s
+.PHONY : src/Voxel/VPuzzleGraph.cpp.s
+
 src/Voxel/VoxelizedInterface.o: src/Voxel/VoxelizedInterface.cpp.o
 
 .PHONY : src/Voxel/VoxelizedInterface.o
@@ -449,6 +476,33 @@ src/Voxel/VoxelizedPart.s: src/Voxel/VoxelizedPart.cpp.s
 src/Voxel/VoxelizedPart.cpp.s:
 	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.s
 .PHONY : src/Voxel/VoxelizedPart.cpp.s
+
+src/Voxel/VoxelizedPartition.o: src/Voxel/VoxelizedPartition.cpp.o
+
+.PHONY : src/Voxel/VoxelizedPartition.o
+
+# target to build an object file
+src/Voxel/VoxelizedPartition.cpp.o:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.o
+.PHONY : src/Voxel/VoxelizedPartition.cpp.o
+
+src/Voxel/VoxelizedPartition.i: src/Voxel/VoxelizedPartition.cpp.i
+
+.PHONY : src/Voxel/VoxelizedPartition.i
+
+# target to preprocess a source file
+src/Voxel/VoxelizedPartition.cpp.i:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.i
+.PHONY : src/Voxel/VoxelizedPartition.cpp.i
+
+src/Voxel/VoxelizedPartition.s: src/Voxel/VoxelizedPartition.cpp.s
+
+.PHONY : src/Voxel/VoxelizedPartition.s
+
+# target to generate assembly for a file
+src/Voxel/VoxelizedPartition.cpp.s:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.s
+.PHONY : src/Voxel/VoxelizedPartition.cpp.s
 
 src/Voxel/VoxelizedPuzzle.o: src/Voxel/VoxelizedPuzzle.cpp.o
 
@@ -648,12 +702,18 @@ help:
 	@echo "... src/FrameMesh.o"
 	@echo "... src/FrameMesh.i"
 	@echo "... src/FrameMesh.s"
+	@echo "... src/Voxel/VPuzzleGraph.o"
+	@echo "... src/Voxel/VPuzzleGraph.i"
+	@echo "... src/Voxel/VPuzzleGraph.s"
 	@echo "... src/Voxel/VoxelizedInterface.o"
 	@echo "... src/Voxel/VoxelizedInterface.i"
 	@echo "... src/Voxel/VoxelizedInterface.s"
 	@echo "... src/Voxel/VoxelizedPart.o"
 	@echo "... src/Voxel/VoxelizedPart.i"
 	@echo "... src/Voxel/VoxelizedPart.s"
+	@echo "... src/Voxel/VoxelizedPartition.o"
+	@echo "... src/Voxel/VoxelizedPartition.i"
+	@echo "... src/Voxel/VoxelizedPartition.s"
 	@echo "... src/Voxel/VoxelizedPuzzle.o"
 	@echo "... src/Voxel/VoxelizedPuzzle.i"
 	@echo "... src/Voxel/VoxelizedPuzzle.s"

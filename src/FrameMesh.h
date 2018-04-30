@@ -33,7 +33,6 @@ struct FrameUnit
 
 class FrameMesh {
 public:
-
     FrameMesh(std::shared_ptr<ColorCoding> colorcode, double radius);
 
 public:

@@ -48,6 +48,7 @@ public:
 typedef std::shared_ptr<VoxelElement> shared_pEmt;
 typedef VoxelElement* pEmt;
 using std::vector;
+typedef vector<pEmt> VoxelsList;
 
 //class OrderedVElemList
 //{

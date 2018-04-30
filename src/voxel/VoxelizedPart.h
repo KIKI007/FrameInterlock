@@ -20,7 +20,7 @@ typedef VoxelizedPart* pPart;
 using std::vector;
 using std::unordered_map;
 
-typedef vector<pEmt> VoxelsList;
+
 
 /********************************************/
 /*             VPartNeighbor                */

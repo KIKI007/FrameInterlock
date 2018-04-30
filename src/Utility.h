@@ -13,6 +13,7 @@
 
 #include "FrameMesh.h"
 #include "FrameInterface.h"
+#include "FrameInterlocking.h"
 
 using std::string;
 using Eigen::MatrixXd;
@@ -158,7 +159,7 @@ void read_fpuz(){
     path = igl::file_dialog_open();
     if(path != "") {
         frame_interface.reset();
-        frame_interface = std::make_shared<FrameInterface>(FrameInterface(para.render_pillar_radius, para.render_joint_size_, colorcoder));
+        frame_interface = std::make_shared<FrameInterface>(FrameInterface(para.render_pillar_radius, para.render_joint_size_, -1, colorcoder));
         frame_interface->read_fpuz(path);
         draw_frame_mesh();
     }
@@ -178,9 +179,9 @@ void read_mesh_file()
             frameMesh->set_mesh(V, F);
 
             frame_interface.reset();
-            frame_interface = std::make_shared<FrameInterface>(FrameInterface(para.render_pillar_radius, para.render_joint_size_, colorcoder));
+            frame_interface = std::make_shared<FrameInterface>(FrameInterface(para.render_pillar_radius, para.render_joint_size_, para.render_num_joint_voxel, colorcoder));
             frame_interface->set_frame_mesh(frameMesh);
-            frame_interface->init_joints(para.render_num_joint_voxel);
+            frame_interface->init_joints();
 
             draw_frame_mesh();
         }
@@ -223,6 +224,17 @@ void init()
     }
 
     colorcoder = std::make_shared<ColorCoding>(ColorCoding(render_colorTab));
+}
+
+void test()
+{
+    if(frame_interface)
+    {
+        FrameInterlocking interlock(frame_interface);
+        frame_interface = interlock.output_present_frame();
+        draw_frame_mesh();
+    }
+    return;
 }
 
 #endif //FRAMEINTERLOCK_UTILITY_H

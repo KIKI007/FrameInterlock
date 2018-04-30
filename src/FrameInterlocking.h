@@ -18,17 +18,17 @@ public:
 
     void init_tree();
 
-    void 
+    void select_key_pillar();
 
 public:
 
-    std::shared_ptr<FrameInterface> output_interface();
+    std::shared_ptr<FrameInterface> generate_interlocking();
+
+    std::shared_ptr<FrameInterface> output_present_frame();
 
 public:
 
-    std::shared_ptr<FrameInterface> frame_interface;
-
-public:
+    std::shared_ptr<FrameInterface> frame_interface_;
 
     std::shared_ptr<FrameInterlockingTree> tree_;
 

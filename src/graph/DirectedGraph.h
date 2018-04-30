@@ -9,6 +9,7 @@
 #include "vector"
 #include <fstream>
 #include <string>
+#include "../voxel/VoxelElement.h"
 using std::string;
 using std::vector;
 
@@ -16,6 +17,7 @@ struct DirectedGraphNode;
 struct DirectedGraphEdge
 {
     double weight;
+    std::shared_ptr<VoxelsList> list;
     std::weak_ptr<DirectedGraphNode> node;
 };
 
@@ -50,12 +52,28 @@ public:
 
 public:
 
-    void virtual add_edge(int idA, int idB, double weight = 0)
+    void virtual add_edge(int idA, int idB)
     {
         DirectedGraphEdge edge;
-        edge.weight = weight;
+        edge.weight = 0;
         edge.node = nodeLists_[idB];
         nodeLists_[idA]->neighborList_.push_back(edge);
+    }
+
+    void virtual add_edge(int idA, int idB, std::shared_ptr<VoxelsList> list)
+    {
+        for(auto u : nodeLists_[idA]->neighborList_)
+        {
+            if(u.node.lock()->index_ == idB)
+                return;
+        }
+
+        DirectedGraphEdge edge;
+        edge.list = list;
+        edge.weight = 0;
+        edge.node = nodeLists_[idB];
+        nodeLists_[idA]->neighborList_.push_back(edge);
+        return;
     }
 
     void virtual output_dot(std::string filename, string caption)

@@ -40,6 +40,7 @@ int main() {
 
         viewer.ngui->addGroup("Render");
         viewer.ngui->addButton("Draw", [](){draw_frame_mesh();});
+        viewer.ngui->addButton("Test", []{test();});
 
         viewer.screen->performLayout();
         return true;

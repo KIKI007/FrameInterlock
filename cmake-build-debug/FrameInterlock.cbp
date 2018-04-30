@@ -614,6 +614,12 @@
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Utility.h">
 			<Option target="FrameInterlock_bin"/>
 		</Unit>
+		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VPuzzleGraph.cpp">
+			<Option target="FrameInterlock_bin"/>
+		</Unit>
+		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VPuzzleGraph.h">
+			<Option target="FrameInterlock_bin"/>
+		</Unit>
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelElement.h">
 			<Option target="FrameInterlock_bin"/>
 		</Unit>
@@ -627,6 +633,12 @@
 			<Option target="FrameInterlock_bin"/>
 		</Unit>
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPart.h">
+			<Option target="FrameInterlock_bin"/>
+		</Unit>
+		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPartition.cpp">
+			<Option target="FrameInterlock_bin"/>
+		</Unit>
+		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPartition.h">
 			<Option target="FrameInterlock_bin"/>
 		</Unit>
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPuzzle.cpp">

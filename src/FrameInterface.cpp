@@ -4,11 +4,15 @@
 
 #include "FrameInterface.h"
 
-FrameInterface::FrameInterface(double radius, double cube_size, std::shared_ptr<ColorCoding> &colorcoder)
+FrameInterface::FrameInterface(double radius, double cube_size, int voxel_num, std::shared_ptr<ColorCoding> &colorcoder)
 {
     radius_ = radius;
     cube_size_ = cube_size;
+    voxel_num_ = voxel_num;
     colorcoder_ = colorcoder;
+
+    frame_mesh_ = nullptr;
+
 }
 
 void FrameInterface::set_frame_mesh(std::shared_ptr<FrameMesh> frame_mesh) {
@@ -124,19 +128,19 @@ void FrameInterface::draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_fr
 
 
 
-void FrameInterface::create_void_joints(int voxel_num) {
+void FrameInterface::create_void_joints() {
 
     joint_voxels_.clear();
     for(int id = 0; id < frame_mesh_->points_.size(); id++)
     {
         std::shared_ptr<VoxelizedInterface> voxel_interface
-                =std::make_shared<VoxelizedInterface>(VoxelizedInterface(voxel_num, voxel_num, voxel_num, colorcoder_));
+                =std::make_shared<VoxelizedInterface>(VoxelizedInterface(voxel_num_, voxel_num_, voxel_num_, colorcoder_));
 
-        for(int ix = 0; ix < voxel_num; ix++)
+        for(int ix = 0; ix < voxel_num_; ix++)
         {
-            for(int iy = 0; iy < voxel_num; iy++)
+            for(int iy = 0; iy < voxel_num_; iy++)
             {
-                for(int iz = 0; iz < voxel_num; iz ++)
+                for(int iz = 0; iz < voxel_num_; iz ++)
                 {
                     voxel_interface->set_grid_part_index(Vector3i(ix, iy, iz), 0);
                 }
@@ -147,13 +151,13 @@ void FrameInterface::create_void_joints(int voxel_num) {
     }
 }
 
-void FrameInterface::init_joints(int cube_voxel_num)
+void FrameInterface::init_joints()
 {
-    create_void_joints(cube_voxel_num);
+    create_void_joints();
 
     //6 * number of cube
     vector<vector<std::shared_ptr<FramePillar>>> pillar_in_cube_face;
-    assigned_pillar_to_each_face(pillar_in_cube_face, cube_voxel_num);
+    assigned_pillar_to_each_face(pillar_in_cube_face, voxel_num_);
 
     std::sort(pillars_.begin(), pillars_.end(), [&](std::shared_ptr<FramePillar> a, std::shared_ptr<FramePillar> b)
     {
@@ -162,9 +166,23 @@ void FrameInterface::init_joints(int cube_voxel_num)
 
     remove_duplicate_pillar(pillar_in_cube_face);
 
+    for(auto &joint : joint_voxels_)
+    {
+        for(int ix = 0; ix < voxel_num_; ix++)
+        {
+            for(int iy = 0; iy < voxel_num_; iy++)
+            {
+                for(int iz = 0; iz < voxel_num_; iz ++)
+                {
+                    joint->set_grid_part_index(Vector3i(ix, iy, iz), pillars_.size());
+                }
+            }
+        }
+    }
+
     for(int id = 0; id < pillars_.size(); id++)
     {
-        pillars_[id]->index = id + 1;
+        pillars_[id]->index = id;
         for(int kd = 0; kd < 2; kd++)
         {
             std::shared_ptr<VoxelizedInterface> joints = pillars_[id]->cube[kd];
@@ -172,7 +190,6 @@ void FrameInterface::init_joints(int cube_voxel_num)
             fill_one_face_of_joints(joints, nrm, pillars_[id]->index);
         }
     }
-
 }
 
 void FrameInterface::assigned_pillar_to_each_face(vector<vector<std::shared_ptr<FramePillar>>> &pillar_in_cube_face, int cube_voxel_num)
@@ -430,6 +447,7 @@ void FrameInterface::read_fpuz(string file_name)
 
     int num_joints, num_voxel_in_joint;
     fin >> num_joints >> num_voxel_in_joint;
+    voxel_num_ = num_voxel_in_joint;
     for(int id = 0; id < num_joints; id++)
     {
         std::shared_ptr<VoxelizedInterface> voxel_interface;
@@ -466,7 +484,7 @@ void FrameInterface::read_fpuz(string file_name)
         e1 = f1 / 6;
         pillar->cube[0] = joint_voxels_[e0];
         pillar->cube[1] = joint_voxels_[e1];
-        pillar->index = id + 1;
+        pillar->index = id;
         pillar->pos_in_cube_face[0] = f0;
         pillar->pos_in_cube_face[1] = f1;
         pillar->end_points_cood[0] = points[e0] + Vector3d(dX[f0 % 6], dY[f0 % 6], dZ[f0 % 6]) * num_voxel_in_joint / 2 * cube_size_;
@@ -499,4 +517,63 @@ void FrameInterface::add_pillar(int f0, int f1)
 
     fill_one_face_of_joints(joint_voxels_[e0], f0 % 6, pillar->index);
     fill_one_face_of_joints(joint_voxels_[e1], f1 % 6, pillar->index);
+}
+
+FrameInterface::FrameInterface(const FrameInterface &interface)
+{
+    radius_ = interface.radius_;
+    cube_size_  = interface.cube_size_;
+    voxel_num_ = interface.voxel_num_;
+    colorcoder_ = interface.colorcoder_;
+
+    frame_mesh_ = std::make_shared<FrameMesh>(FrameMesh(colorcoder_, radius_));
+    if(interface.frame_mesh_)
+    {
+        frame_mesh_->set_vertices(interface.frame_mesh_->points_);
+        for(auto nodeU : interface.frame_mesh_->graph_->nodeLists_)
+        {
+            for(auto edgeV: nodeU->neighborList_)
+            {
+                auto nodeV = edgeV.node.lock();
+                if(nodeU->index_ < nodeV->index_)
+                    frame_mesh_->add_edge(nodeU->index_, nodeV->index_);
+            }
+        }
+    }
+
+    for(int id = 0; id < interface.joint_voxels_.size(); id++)
+    {
+        std::shared_ptr<VoxelizedInterface> joint = std::make_shared<VoxelizedInterface>(
+                VoxelizedInterface(voxel_num_, voxel_num_, voxel_num_, colorcoder_));
+        for(int ix = 0; ix < voxel_num_; ix++)
+        {
+            for(int iy = 0; iy < voxel_num_;iy ++)
+            {
+                for(int iz = 0; iz < voxel_num_; iz++)
+                {
+                    joint->set_grid_part_index(Vector3i(ix, iy, iz),
+                                               interface.joint_voxels_[id]->get_grid_part_index(Vector3i(ix, iy, iz)));
+                }
+            }
+        }
+
+        joint_voxels_.push_back(joint);
+    }
+
+    for(int id = 0; id < interface.pillars_.size(); id++)
+    {
+        std::shared_ptr<FramePillar> pillar = std::make_shared<FramePillar>();
+        pillar->index = interface.pillars_[id]->index;
+        for(int kd = 0; kd < 2; kd++)
+        {
+            pillar->end_points_cood[kd] = interface.pillars_[id]->end_points_cood[kd];
+            pillar->cube_id[kd] = interface.pillars_[id]->cube_id[kd];
+            pillar->cube[kd] = joint_voxels_[pillar->cube_id[kd]];
+            pillar->pos_in_cube_face[kd] = interface.pillars_[id]->pos_in_cube_face[kd];
+            pillar->angle_from_face_normal[kd] = interface.pillars_[id]->angle_from_face_normal[kd];
+        }
+        pillars_.push_back(pillar);
+    }
+
+    return;
 }

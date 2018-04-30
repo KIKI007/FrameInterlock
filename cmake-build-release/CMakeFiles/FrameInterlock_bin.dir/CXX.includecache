@@ -61,6 +61,10 @@ voxel/VoxelizedPuzzle.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPuzzle.h
 FrameMesh.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameMesh.h
+FrameInterface.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterface.h
+graph/DirectedGraph.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraph.h
 
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameMesh.cpp
 FrameMesh.h
@@ -99,6 +103,18 @@ FrameMesh.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameMesh.h
 FrameInterface.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterface.h
+FrameInterlocking.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.h
+
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/PuzzleCandidateFilter.h
+VoxelElement.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelElement.h
+algorithm
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/algorithm
+
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VPuzzleGraph.cpp
+
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VPuzzleGraph.h
 
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelElement.h
 Eigen/Dense
@@ -146,6 +162,30 @@ algorithm
 cmath
 -
 
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPartition.cpp
+VoxelizedPartition.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPartition.h
+
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPartition.h
+VoxelizedPuzzle.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPuzzle.h
+PuzzleCandidateFilter.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/PuzzleCandidateFilter.h
+VPuzzleGraph.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VPuzzleGraph.h
+queue
+-
+unordered_map
+-
+algorithm
+-
+stdlib.h
+-
+iostream
+-
+map
+-
+
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPuzzle.cpp
 VoxelizedPuzzle.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPuzzle.h
@@ -191,6 +231,8 @@ fstream
 -
 string
 -
+../voxel/VoxelElement.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelElement.h
 
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraphSSC.cpp
 DirectedGraphSSC.h
