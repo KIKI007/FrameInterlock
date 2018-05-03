@@ -1101,9 +1101,12 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Part.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraph.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/UndirectedGraph.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/PuzzleCandidateFilter.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VPuzzleGraph.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelElement.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedInterface.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPart.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPartition.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPuzzle.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedRenderCube.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedRenderSphere.h
@@ -1987,9 +1990,12 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Part.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraph.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/UndirectedGraph.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/PuzzleCandidateFilter.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VPuzzleGraph.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelElement.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedInterface.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPart.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPartition.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPuzzle.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedRenderCube.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedRenderSphere.h
@@ -8289,11 +8295,16 @@ CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Part.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Utility.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraph.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraphSSC.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/InterlockSDChecking.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/UndirectedGraph.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/main.cpp
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/PuzzleCandidateFilter.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VPuzzleGraph.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelElement.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedInterface.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPart.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPartition.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPuzzle.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedRenderCube.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedRenderSphere.h

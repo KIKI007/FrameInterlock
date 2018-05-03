@@ -5,7 +5,12 @@
 #ifndef FRAMEINTERLOCK_UNDIRECTEDGRAPH_H
 #define FRAMEINTERLOCK_UNDIRECTEDGRAPH_H
 
+#include <stack>
+#include <map>
 #include "DirectedGraph.h"
+
+using std::stack;
+
 class UndirectedGraph : public DirectedGraph {
 public:
     UndirectedGraph(int num) : DirectedGraph(num)
@@ -41,7 +46,6 @@ public:
             edge.weight = weight;
             edge.node = nodeLists_[idA];
             nodeLists_[idB]->neighborList_.push_back(edge);
-
         }
         return;
     }
@@ -71,6 +75,26 @@ public:
             fout << "}";
         }
     }
+
+public:
+
+    void tarjan_init();
+
+    void tarjan_cut_points(std::map<int, bool> &cutpoints);
+
+    void tarjan_dfs(int pID, std::map<int, bool> &cutpoints);
+
+public:
+
+    vector<int> DFN_;
+
+    vector<int> LOW_;
+
+    vector<int> PARENT_;
+
+
+    int Dindex;
+
 };
 
 

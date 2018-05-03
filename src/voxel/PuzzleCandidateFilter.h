@@ -34,6 +34,8 @@ struct VPuzCycleDat
     vector<VoxelsList *> anchor_voxels_list;
 
     VPuzConnType type;
+
+    bool exchangable;
 };
 template <typename ExtraData>
 using VPuzFE =  VPuzFilterElement<ExtraData>;

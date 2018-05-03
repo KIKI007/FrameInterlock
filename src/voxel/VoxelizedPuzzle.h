@@ -59,7 +59,7 @@ public:
     // Edge also have the information of the voxel which produces this relation
     void build_part_connection(pPart part);
 
-    void partition_part(pPart part, vector<pEmt> remove_portion);
+    void partition_part(const vector<pEmt> &new_part_voxels, int new_part_id);
 
     void update_part_connection(pPart part);
 

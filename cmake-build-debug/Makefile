@@ -639,6 +639,33 @@ src/graph/InterlockSDChecking.cpp.s:
 	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/graph/InterlockSDChecking.cpp.s
 .PHONY : src/graph/InterlockSDChecking.cpp.s
 
+src/graph/UndirectedGraph.o: src/graph/UndirectedGraph.cpp.o
+
+.PHONY : src/graph/UndirectedGraph.o
+
+# target to build an object file
+src/graph/UndirectedGraph.cpp.o:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.o
+.PHONY : src/graph/UndirectedGraph.cpp.o
+
+src/graph/UndirectedGraph.i: src/graph/UndirectedGraph.cpp.i
+
+.PHONY : src/graph/UndirectedGraph.i
+
+# target to preprocess a source file
+src/graph/UndirectedGraph.cpp.i:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.i
+.PHONY : src/graph/UndirectedGraph.cpp.i
+
+src/graph/UndirectedGraph.s: src/graph/UndirectedGraph.cpp.s
+
+.PHONY : src/graph/UndirectedGraph.s
+
+# target to generate assembly for a file
+src/graph/UndirectedGraph.cpp.s:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.s
+.PHONY : src/graph/UndirectedGraph.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -729,6 +756,9 @@ help:
 	@echo "... src/graph/InterlockSDChecking.o"
 	@echo "... src/graph/InterlockSDChecking.i"
 	@echo "... src/graph/InterlockSDChecking.s"
+	@echo "... src/graph/UndirectedGraph.o"
+	@echo "... src/graph/UndirectedGraph.i"
+	@echo "... src/graph/UndirectedGraph.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

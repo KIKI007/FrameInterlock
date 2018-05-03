@@ -215,6 +215,27 @@ bool VoxelizedPuzzle::is_same(VoxelizedPuzzle *A) {
     return true;
 }
 
+ void VoxelizedPuzzle::partition_part(const vector<pEmt> &new_part_voxels, int new_part_id)
+ {
+
+     vector<pEmt> list;
+     for(pEmt voxel : new_part_voxels)
+     {
+         list.push_back(map_ip_[voxel->order_]);
+         map_ip_[voxel->order_]->gid_ = new_part_id;
+     }
+
+     parts_.back()->remove_voxels();
+
+     shared_pPart part = std::make_shared<VoxelizedPart>(VoxelizedPart(list,
+                                                                       &map_ip_,
+                                                                       new_part_id,
+                                                                       joint_id_,
+                                                                       Vector3i(Nx, Ny, Nz)));
+     parts_.insert(parts_.end() - 1, part);
+     return;
+ }
+
 //void VoxelizedPuzzle::build_part_connection(VoxelizedPart *vpart)
 ////build connection
 //{

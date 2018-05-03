@@ -59,6 +59,8 @@ FrameInterlockingTree.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlockingTree.h
 voxel/VoxelizedPuzzle.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPuzzle.h
+voxel/VoxelizedPartition.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPartition.h
 FrameMesh.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameMesh.h
 FrameInterface.h
@@ -105,6 +107,8 @@ FrameInterface.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterface.h
 FrameInterlocking.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.h
+graph/InterlockSDChecking.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/InterlockSDChecking.h
 
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/PuzzleCandidateFilter.h
 VoxelElement.h
@@ -266,6 +270,14 @@ DirectedGraph.h
 Utility.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Utility.h
 
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/PuzzleCandidateFilter.h
+VoxelElement.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelElement.h
+algorithm
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/algorithm
+
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VPuzzleGraph.h
+
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelElement.h
 Eigen/Dense
 -
@@ -300,6 +312,26 @@ vector
 algorithm
 -
 cmath
+-
+
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPartition.h
+VoxelizedPuzzle.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPuzzle.h
+PuzzleCandidateFilter.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/PuzzleCandidateFilter.h
+VPuzzleGraph.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VPuzzleGraph.h
+queue
+-
+unordered_map
+-
+algorithm
+-
+stdlib.h
+-
+iostream
+-
+map
 -
 
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedPuzzle.h

@@ -14,6 +14,7 @@
 #include "FrameMesh.h"
 #include "FrameInterface.h"
 #include "FrameInterlocking.h"
+#include "graph/InterlockSDChecking.h"
 
 using std::string;
 using Eigen::MatrixXd;
@@ -23,7 +24,7 @@ extern igl::viewer::Viewer viewer;
 extern std::string shared_ptr;
 extern std::shared_ptr<ColorCoding> colorcoder;
 extern std::shared_ptr<FrameInterface> frame_interface;
-
+extern std::shared_ptr<FrameInterlocking> frame_interlock;
 
 struct Parameter
 {
@@ -34,6 +35,8 @@ struct Parameter
     bool render_show_pillar_index;
 
     bool render_show_joint_index;
+
+    bool render_joint_sphere_;
 
     bool render_show_joint_face_index;
 
@@ -48,6 +51,8 @@ struct Parameter
     int render_add_pillar_f0;
 
     int render_add_pillar_f1;
+
+    int interlock_children_id;
 }para;
 
 void draw_frame_mesh()
@@ -59,7 +64,7 @@ void draw_frame_mesh()
 
         frame_interface->cube_size_ = para.render_joint_size_;
         frame_interface->radius_ = para.render_pillar_radius;
-        frame_interface->draw(renderV, renderF, renderC, para.render_frame_mesh, para.render_joint_knots);
+        frame_interface->draw(renderV, renderF, renderC, para.render_frame_mesh, para.render_joint_knots, para.render_joint_sphere_);
 
         viewer.data.clear();
         viewer.data.set_mesh(renderV, renderF);
@@ -81,7 +86,7 @@ void draw_frame_mesh()
         else
             {
             viewer.core.align_camera_center(renderV);
-            viewer.core.camera_zoom = 2;
+            viewer.core.camera_zoom = 1.3;
         }
 
         viewer.core.show_lines = false;
@@ -161,6 +166,7 @@ void read_fpuz(){
         frame_interface.reset();
         frame_interface = std::make_shared<FrameInterface>(FrameInterface(para.render_pillar_radius, para.render_joint_size_, -1, colorcoder));
         frame_interface->read_fpuz(path);
+        frame_interlock = std::make_shared<FrameInterlocking>(FrameInterlocking(frame_interface));
         draw_frame_mesh();
     }
 };
@@ -182,7 +188,7 @@ void read_mesh_file()
             frame_interface = std::make_shared<FrameInterface>(FrameInterface(para.render_pillar_radius, para.render_joint_size_, para.render_num_joint_voxel, colorcoder));
             frame_interface->set_frame_mesh(frameMesh);
             frame_interface->init_joints();
-
+            frame_interlock = std::make_shared<FrameInterlocking>(FrameInterlocking(frame_interface));
             draw_frame_mesh();
         }
     }
@@ -194,16 +200,19 @@ void init()
     shared_ptr += "/tutorial/shared/";
 
     para.render_num_joint_voxel = 4;
-    para.render_joint_size_ = 0.005;
-    para.render_pillar_radius = 0.003;
+    para.render_joint_size_ = 0.05;
+    para.render_pillar_radius = 0.05;
     para.render_joint_knots = true;
     para.render_frame_mesh = true;
     para.render_show_pillar_index = false;
+    para.render_joint_sphere_ = false;
     para.render_show_joint_face_index = false;
     para.render_show_joint_index = false;
     para.render_foucus_joint_index = -1;
     para.render_add_pillar_f0 = -1;
     para.render_add_pillar_f1 = -1;
+    para.interlock_children_id = 0;
+
     Vector3d colorTable[10] = {
             Vector3d(0.9, 0.2, 0.2),   //  1: Red
             Vector3d(0.2, 0.2, 0.9),   //  2: Blue
@@ -224,16 +233,166 @@ void init()
     }
 
     colorcoder = std::make_shared<ColorCoding>(ColorCoding(render_colorTab));
+    frame_interlock = nullptr;
 }
 
-void test()
+void write_show_puzzle_blocking_graph(std::shared_ptr<FrameInterface> interf)
 {
-    if(frame_interface)
+    if(interf)
     {
-        FrameInterlocking interlock(frame_interface);
-        frame_interface = interlock.output_present_frame();
-        draw_frame_mesh();
+        std::shared_ptr<Assembly> assembly = interf->output_assembly();
+        InterlockSDChecking checker;
+        Vector3d vec[3] = {
+                Vector3d(1, 0, 0),
+                Vector3d(0, 1, 0),
+                Vector3d(0, 0, 1)};
+        string caption[3] = {"X Direction", "Y Direction", "Z Direction"};
+        string openfile;
+        for(int id = 0; id < 3; id++)
+        {
+            std::shared_ptr<DirectedGraph> graph =  checker.init_sd_graph(vec[id], *assembly);
+            string dot_file = "tmp_" + std::to_string(id) + ".dot";
+            string png_file = "tmp_" + std::to_string(id) + ".png";
+            graph->output_dot(dot_file, caption[id]);
+            string command = "dot -Tpng " + dot_file + " -o " + png_file;
+            system(command.c_str());
+            openfile += " " + png_file;
+        }
+
+        string command = "open" + openfile;
+        system(command.c_str());
     }
+    return;
+}
+
+void write_show_puzzle_blocling_graph_debug(FrameInterlocking *frame_interlock)
+{
+    if(frame_interlock && frame_interlock->tree_ && frame_interlock->tree_->present_node_)
+    {
+        InterlockSDChecking checker;
+        Vector3d vec[3] = {
+                Vector3d(1, 0, 0),
+                Vector3d(0, 1, 0),
+                Vector3d(0, 0, 1)};
+        string caption[3] = {"X Direction", "Y Direction", "Z Direction"};
+        string openfile;
+        for(int id = 0; id < 3; id++)
+        {
+            std::shared_ptr<DirectedGraph> graph = frame_interlock->tree_->present_node_->graph[id];
+            string dot_file = "tmp_" + std::to_string(id) + ".dot";
+            string png_file = "tmp_" + std::to_string(id) + ".png";
+            graph->output_dot(dot_file, caption[id]);
+            string command = "dot -Tpng " + dot_file + " -o " + png_file;
+            system(command.c_str());
+            openfile += " " + png_file;
+        }
+
+        string command = "open" + openfile;
+        system(command.c_str());
+    }
+}
+
+void write_show_puzzle_blocking_graph_simplified(std::shared_ptr<FrameInterface> interf)
+{
+    if(interf)
+    {
+        std::shared_ptr<Assembly> assembly = interf->output_assembly();
+        InterlockSDChecking checker;
+        Vector3d vec[3] = {
+                Vector3d(1, 0, 0),
+                Vector3d(0, 1, 0),
+                Vector3d(0, 0, 1)};
+        string caption[3] = {"X Direction", "Y Direction", "Z Direction"};
+        string openfile;
+        for(int id = 0; id < 3; id++)
+        {
+            std::shared_ptr<DirectedGraph> graph =  checker.simplified_sd_graph(vec[id], *assembly);
+            string dot_file = "tmp_" + std::to_string(id) + ".dot";
+            string png_file = "tmp_" + std::to_string(id) + ".png";
+            graph->output_dot(dot_file, caption[id]);
+            string command = "dot -Tpng " + dot_file + " -o " + png_file;
+            system(command.c_str());
+            openfile += " " + png_file;
+        }
+
+        string command = "open" + openfile;
+        system(command.c_str());
+    }
+    return;
+}
+
+void generate_key()
+{
+    if(frame_interlock)
+    {
+        frame_interlock->tree_->generate_key(frame_interlock->tree_->root_.get());
+        para.interlock_children_id = 0;
+        if(frame_interlock->tree_->root_->children.size() > 0)
+        {
+            frame_interlock->tree_->present_node_ = frame_interlock->tree_->root_->children[0].get();
+            frame_interface = frame_interlock->output_present_frame();
+            draw_frame_mesh();
+        }
+    }
+
+}
+
+void graph_test()
+{
+    UndirectedGraph graph(18);
+//    graph.add_edge(0, 1);
+//    graph.add_edge(0, 2);
+//    graph.add_edge(0, 3);
+//    graph.add_edge(1, 2);
+//    graph.add_edge(3, 4);
+//    graph.add_edge(0, 1);
+//    graph.add_edge(0, 2);
+//    graph.add_edge(1, 3);
+//    graph.add_edge(1, 4);
+//    graph.add_edge(1, 6);
+//    graph.add_edge(1, 2);
+//    graph.add_edge(3, 5);
+//    graph.add_edge(4, 5);
+
+    MatrixXd mat(26, 2);
+    mat << 1, 2,
+            2, 3,
+            2, 4,
+            2, 5,
+            2, 6,
+            3, 4,
+            5, 6,
+            5, 7,
+            6, 7,
+            7, 8,
+            7, 11,
+            8, 12,
+            8, 14,
+            8, 15,
+            8, 11,
+            8, 9,
+            9, 10,
+            9, 11,
+            10, 11,
+            10, 16,
+            10, 17,
+            10, 18,
+            12, 13,
+            13, 14,
+            13, 15,
+            17, 18;
+    for(int id = 0; id < 26; id++)
+    {
+        graph.add_edge(mat(id, 0) - 1, mat(id ,1) - 1);
+    }
+
+    std::map<int, bool> cutpoints;
+    graph.tarjan_cut_points(cutpoints);
+    for(auto it: cutpoints)
+    {
+        std::cout << it.first << " ";
+    }
+    std::cout << std::endl;
     return;
 }
 

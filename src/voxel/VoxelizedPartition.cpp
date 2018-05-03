@@ -22,13 +22,14 @@ void VoxelizedPartition::input(VoxelizedPuzzle *puzzle, VPuzRemainVolumePartitio
     outside_partition_dat_ = outside;
 }
 
-void VoxelizedPartition::output(vector<vector<pEmt>>  &remain_volume_voxel_lists) {
+void VoxelizedPartition::output(vector<FinalPartiResult> &results) {
 
     //std::cout << "find_inner_partition" << std::endl;
+
     find_inner_partition(outside_partition_dat_.relation);
 
-    VPuzFilter<std::shared_ptr<vector<pEmt>>> filter;
-    vector<VPuzFE<std::shared_ptr<vector<pEmt>>>> candidate_list;
+    VPuzFilter<FinalPartiResult> filter;
+    vector<VPuzFE<FinalPartiResult>> candidate_list;
 
     for(VPuzInnerPartitionDat inner_dat : inside_partition_dats_)
     {
@@ -49,12 +50,11 @@ void VoxelizedPartition::output(vector<vector<pEmt>>  &remain_volume_voxel_lists
 
         if(group_A_.size() >= minimum_voxel_in_one_piece && group_A_.size() <= maximum_voxel_in_one_piece)
         {
-            std::shared_ptr<vector<pEmt>> group_B = std::make_shared<vector<pEmt >>();
-            if(compute_remaining_volume(*group_B))
-//            compute_remaining_volume(*group_B);
+            VPuzFE <FinalPartiResult> ve;
+            if(compute_remaining_volume(ve.data_.remain_part_voxels))
             {
-                VPuzFE < std::shared_ptr<vector<pEmt>>> ve;
-                ve.data_ = group_B;
+                ve.data_.new_part_voxels = group_A_;
+                ve.data_.direction = disassembled_direction;
                 ve.weight = 0;
                 for(int id = 0; id < group_A_.size(); id++)
                     ve.weight -= puzzle_->get_accessibility(group_A_[id]->order_);
@@ -66,10 +66,11 @@ void VoxelizedPartition::output(vector<vector<pEmt>>  &remain_volume_voxel_lists
     }
     filter.max_candidates_num_ = maximum_final_plan;
     filter.insert(candidate_list);
-    for(auto ptr : filter.candidate_)
+    for(auto element : filter.candidate_)
     {
-        remain_volume_voxel_lists.push_back(*ptr.data_);
+        results.push_back(element.data_);
     }
+    return;
 }
 
 void VoxelizedPartition::find_inner_partition(int relation)
@@ -383,7 +384,8 @@ bool VoxelizedPartition::maintain_disassemblability(int relation, VPuzRemainVolu
                 pEmt em = part->in_part(pos);
                 if(em == nullptr)
                 {
-                    break;
+                    //break;
+                    continue;
                 }
 
                 auto find_it = visited.find(em->order_);

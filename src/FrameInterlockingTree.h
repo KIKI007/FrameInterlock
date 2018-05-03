@@ -6,9 +6,12 @@
 #define FRAMEINTERLOCK_FRAMEINTERLOCKINGTREE_H
 
 #include "voxel/VoxelizedPuzzle.h"
+#include "voxel/VoxelizedPartition.h"
+
 #include "FrameMesh.h"
 #include "FrameInterface.h"
 #include "graph/DirectedGraph.h"
+
 class TreeNode
 {
 public:
@@ -20,7 +23,7 @@ public:
 
     std::map<int, int> pillar_visited_order;
 
-    std::map<int, bool> pillar_in_candidate;
+    vector<FramePillar *> disassembly_order;
 
 public:
 
@@ -30,7 +33,7 @@ public:
 
     TreeNode *brother;
 
-    std::shared_ptr<DirectedGraph> graph;
+    std::shared_ptr<DirectedGraph> graph[3];
 };
 
 class FrameInterlockingTree
@@ -42,11 +45,29 @@ public:
 
 public:
 
-    bool generate_children(TreeNode *node){return false;}
+    bool generate_children(TreeNode *node);
 
-    void generate_key(TreeNode *node);
+    bool generate_children(TreeNode *node, FramePillar *cpillar);
+
+    bool generate_key(TreeNode *node);
 
     std::shared_ptr<FrameInterface> output_frame(TreeNode *node);
+
+public:
+
+    void get_pillars_fixed_voxels(vecVector3i &new_fixed_voxels,
+                                  vecVector3i &remain_fixed_voxels,
+                                  int joint_id,
+                                  int new_part_id,
+                                  const std::map<int, int> &visited);
+
+    void split_graph(const DirectedGraph& in_graph,
+                     DirectedGraph& out_graph,
+                     FramePillar* pillar,
+                     TreeNode *node,
+                     int nrm);
+
+    void select_candidates(TreeNode *node);
 
 public:
 

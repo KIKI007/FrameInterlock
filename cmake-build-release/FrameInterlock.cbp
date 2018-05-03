@@ -614,6 +614,9 @@
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Utility.h">
 			<Option target="FrameInterlock_bin"/>
 		</Unit>
+		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/PuzzleCandidateFilter.h">
+			<Option target="FrameInterlock_bin"/>
+		</Unit>
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VPuzzleGraph.cpp">
 			<Option target="FrameInterlock_bin"/>
 		</Unit>
@@ -672,6 +675,9 @@
 			<Option target="FrameInterlock_bin"/>
 		</Unit>
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/InterlockSDChecking.h">
+			<Option target="FrameInterlock_bin"/>
+		</Unit>
+		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/UndirectedGraph.cpp">
 			<Option target="FrameInterlock_bin"/>
 		</Unit>
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/UndirectedGraph.h">

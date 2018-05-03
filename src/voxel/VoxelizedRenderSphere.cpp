@@ -119,8 +119,8 @@ void VoxelizedRenderSphere::rendering(MatrixXd &V, MatrixXi &F, MatrixXd &C)
 
 void VoxelizedRenderSphere::add_color_by_groupID(MatrixXd &C) {
 
-    compute_parts_num();
-    colorcoder_->request(part_num_ + 2);
+
+    colorcoder_->request(compute_max_part_id() + 2);
 
     int iC = 0;
     for(auto unit : render_lists)
@@ -161,8 +161,8 @@ bool VoxelizedRenderSphere::loadCylinderX(VoxelizedRenderUnit &cylinderX)
         for(int id = 0; id < cylinderX.V.rows(); id++)
         {
             cylinderX.V(id, 0) *= scale;
-            cylinderX.V(id, 1) *= 0.5;
-            cylinderX.V(id, 2) *= 0.5;
+            cylinderX.V(id, 1) *= 0.5 * cylinder_length;
+            cylinderX.V(id, 2) *= 0.5 * cylinder_length;
         }
         return true;
     }
@@ -182,8 +182,8 @@ bool VoxelizedRenderSphere::loadCylinderY(VoxelizedRenderUnit &cylinderY)
         for(int id = 0; id < cylinderY.V.rows(); id++)
         {
             cylinderY.V(id, 1) *= scale;
-            cylinderY.V(id, 2) *= 0.5;
-            cylinderY.V(id, 0) *= 0.5;
+            cylinderY.V(id, 2) *= 0.5 * cylinder_length;
+            cylinderY.V(id, 0) *= 0.5 * cylinder_length;
         }
         return true;
     }
@@ -203,8 +203,8 @@ bool VoxelizedRenderSphere::loadCylinderZ(VoxelizedRenderUnit &cylinderZ)
         for(int id = 0; id < cylinderZ.V.rows(); id++)
         {
             cylinderZ.V(id, 2) *= scale;
-            cylinderZ.V(id, 1) *= 0.5;
-            cylinderZ.V(id, 0) *= 0.5;
+            cylinderZ.V(id, 1) *= 0.5 * cylinder_length;
+            cylinderZ.V(id, 0) *= 0.5 * cylinder_length;
         }
         return true;
     }

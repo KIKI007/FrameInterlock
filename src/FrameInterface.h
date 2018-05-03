@@ -17,7 +17,7 @@ struct FramePillar
     //0 +X  1 -X    2 +Y    3 -Y   4 +Z    5 -Z
     int pos_in_cube_face[2];
 
-    std::shared_ptr<VoxelizedInterface> cube[2];
+    VoxelizedInterface* cube[2];
 
     int cube_id[2];
 
@@ -52,23 +52,25 @@ public:
 
 public:
 
-    void draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_frame, bool is_draw_joints);
+    void draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_frame, bool is_draw_joints, bool is_draw_joints_sphere);
 
     void draw_frame_mesh(FrameInterfaceRenderUnit &unit);
 
-    void draw_joints(vector<FrameInterfaceRenderUnit> &render_list);
+    void draw_joints(vector<FrameInterfaceRenderUnit> &render_list, bool is_draw_joints_sphere);
 
 public:
 
     void create_void_joints();
 
-    void fill_one_face_of_joints(std::shared_ptr<VoxelizedInterface> joint, int nrm, int index);
+    void fill_one_face_of_joints(VoxelizedInterface* joint, int nrm, int index);
 
     void assigned_pillar_to_each_face(vector<vector<std::shared_ptr<FramePillar>>> &pillar_in_cube_face, int cube_voxel_num);
 
     void remove_duplicate_pillar(vector<vector<std::shared_ptr<FramePillar>>> &pillar_in_cube_face);
 
     void init_joints();
+
+    std::shared_ptr<Assembly> output_assembly();
 
 public:
 

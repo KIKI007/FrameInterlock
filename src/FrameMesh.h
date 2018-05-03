@@ -20,7 +20,9 @@ using Eigen::RowVector3i;
 typedef std::vector<std::vector<double>> MeshVertices;
 typedef std::vector<std::vector<int >> MeshFaces;
 
-typedef std::vector<Eigen::Vector3d,Eigen::aligned_allocator<Eigen::Vector3d>> vecVector3i;
+typedef std::vector<Eigen::Vector3i,Eigen::aligned_allocator<Eigen::Vector3i>> vecVector3i;
+
+typedef std::vector<Eigen::Vector3d,Eigen::aligned_allocator<Eigen::Vector3d>> vecVector3d;
 
 struct FrameUnit
 {
@@ -37,7 +39,7 @@ public:
 
 public:
 
-    void set_vertices(vecVector3i &points);
+    void set_vertices(vecVector3d &points);
 
     void add_edge(int e0, int e1);
 
@@ -59,7 +61,7 @@ public:
 
     std::shared_ptr<UndirectedGraph> graph_;
 
-    vecVector3i points_;
+    vecVector3d points_;
 };
 
 

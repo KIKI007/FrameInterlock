@@ -52,7 +52,8 @@ void FrameInterlocking::init_tree()
         root_->puzzles.push_back(puzzle);
     }
 
-    root_->graph = std::make_shared<DirectedGraph>(DirectedGraph(1));
+    for(int kd = 0; kd < 3; kd++)
+        root_->graph[kd] = std::make_shared<DirectedGraph>(DirectedGraph(1));
 
     tree_->root_ = root_;
     tree_->present_node_ = root_.get();
@@ -78,7 +79,6 @@ void FrameInterlocking::select_key_pillar()
     }
 
     tree_->root_->candidate_pillar.push_back(key);
-    tree_->root_->pillar_in_candidate.insert(std::make_pair(key->index, true));
 }
 
 

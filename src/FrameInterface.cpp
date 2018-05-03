@@ -56,25 +56,39 @@ void FrameInterface::draw_frame_mesh(FrameInterfaceRenderUnit &frame_unit)
     frame_unit.visible = true;
 }
 
-void FrameInterface::draw_joints(vector<FrameInterfaceRenderUnit> &render_list)
+void FrameInterface::draw_joints(vector<FrameInterfaceRenderUnit> &render_list, bool is_draw_joints_sphere)
 {
     for(int id = 0; id < joint_voxels_.size(); id++)
     {
         std::shared_ptr<VoxelizedInterface> voxel_interface = joint_voxels_[id];
         FrameInterfaceRenderUnit unit;
-        VoxelizedRenderCube renderCube(*voxel_interface);
-        renderCube.hx = renderCube.hy = renderCube.hz = cube_size_;
-        renderCube.rendering(unit.V, unit.F, unit.C);
+
+        if(is_draw_joints_sphere)
+        {
+            VoxelizedRenderSphere render_sphere(*voxel_interface);
+            render_sphere.sphere_radius = cube_size_ / 2 * 0.7;
+            render_sphere.cylinder_length = cube_size_;
+            render_sphere.hwdith = cube_size_;
+            render_sphere.rendering(unit.V, unit.F, unit.C);
+        }
+        else
+        {
+            VoxelizedRenderCube render_cube(*voxel_interface);
+            render_cube.hx = render_cube.hy = render_cube.hz = cube_size_;
+            render_cube.rendering(unit.V, unit.F, unit.C);
+        }
+
         unit.dV = frame_mesh_->points_[id]
                   - Vector3d(cube_size_ * voxel_interface->Nx /2,
                              cube_size_ * voxel_interface->Ny /2,
                              cube_size_ * voxel_interface->Nz /2);
+
         unit.visible = true;
         render_list.push_back(unit);
     }
 }
 
-void FrameInterface::draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_frame, bool is_draw_joints)
+void FrameInterface::draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_frame, bool is_draw_joints,  bool is_draw_joints_sphere)
 {
 
     vector<FrameInterfaceRenderUnit> render_unit;
@@ -88,7 +102,7 @@ void FrameInterface::draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_fr
 
     if(is_draw_joints)
     {
-        draw_joints(render_unit);
+        draw_joints(render_unit, is_draw_joints_sphere);
     }
 
     //render
@@ -185,9 +199,9 @@ void FrameInterface::init_joints()
         pillars_[id]->index = id;
         for(int kd = 0; kd < 2; kd++)
         {
-            std::shared_ptr<VoxelizedInterface> joints = pillars_[id]->cube[kd];
+            VoxelizedInterface* joint = pillars_[id]->cube[kd];
             int nrm = pillars_[id]->pos_in_cube_face[kd];
-            fill_one_face_of_joints(joints, nrm, pillars_[id]->index);
+            fill_one_face_of_joints(joint, nrm, pillars_[id]->index);
         }
     }
 }
@@ -231,13 +245,13 @@ void FrameInterface::assigned_pillar_to_each_face(vector<vector<std::shared_ptr<
                             if(kd == 0)
                             {
                                 pillar->end_points_cood[kd] = normal * cube_voxel_num / 2.0 * cube_size_ + v0;
-                                pillar->cube[kd] = joint_voxels_[e0];
+                                pillar->cube[kd] = joint_voxels_[e0].get();
                                 pillar->cube_id[kd] = e0;
                             }
                             else
                             {
                                 pillar->end_points_cood[kd] = normal * cube_voxel_num / 2.0 * cube_size_+ v1;
-                                pillar->cube[kd] = joint_voxels_[e1];
+                                pillar->cube[kd] = joint_voxels_[e1].get();
                                 pillar->cube_id[kd] = e1;
                             }
                         }
@@ -260,7 +274,7 @@ void FrameInterface::assigned_pillar_to_each_face(vector<vector<std::shared_ptr<
     }
 }
 
-void FrameInterface::fill_one_face_of_joints(std::shared_ptr<VoxelizedInterface> joint, int nrm, int index)
+void FrameInterface::fill_one_face_of_joints(VoxelizedInterface* joint, int nrm, int index)
 {
     int X[2], Y[2], Z[2];
     X[0] = Y[0] = Z[0] = 1;
@@ -482,8 +496,8 @@ void FrameInterface::read_fpuz(string file_name)
         f1 = pillar_connection[id].second;
         e0 = f0 / 6;
         e1 = f1 / 6;
-        pillar->cube[0] = joint_voxels_[e0];
-        pillar->cube[1] = joint_voxels_[e1];
+        pillar->cube[0] = joint_voxels_[e0].get();
+        pillar->cube[1] = joint_voxels_[e1].get();
         pillar->index = id;
         pillar->pos_in_cube_face[0] = f0;
         pillar->pos_in_cube_face[1] = f1;
@@ -506,8 +520,8 @@ void FrameInterface::add_pillar(int f0, int f1)
     int e0, e1;
     e0 = f0 / 6;
     e1 = f1 / 6;
-    pillar->cube[0] = joint_voxels_[e0];
-    pillar->cube[1] = joint_voxels_[e1];
+    pillar->cube[0] = joint_voxels_[e0].get();
+    pillar->cube[1] = joint_voxels_[e1].get();
     pillar->index = pillars_.size();
     pillar->pos_in_cube_face[0] = f0;
     pillar->pos_in_cube_face[1] = f1;
@@ -515,8 +529,8 @@ void FrameInterface::add_pillar(int f0, int f1)
     pillar->end_points_cood[1] = frame_mesh_->points_[e1] + Vector3d(dX[f1 % 6], dY[f1 % 6], dZ[f1 % 6]) * num_voxel_in_joint / 2 * cube_size_;
     pillars_.push_back(pillar);
 
-    fill_one_face_of_joints(joint_voxels_[e0], f0 % 6, pillar->index);
-    fill_one_face_of_joints(joint_voxels_[e1], f1 % 6, pillar->index);
+    fill_one_face_of_joints(joint_voxels_[e0].get(), f0 % 6, pillar->index);
+    fill_one_face_of_joints(joint_voxels_[e1].get(), f1 % 6, pillar->index);
 }
 
 FrameInterface::FrameInterface(const FrameInterface &interface)
@@ -568,7 +582,7 @@ FrameInterface::FrameInterface(const FrameInterface &interface)
         {
             pillar->end_points_cood[kd] = interface.pillars_[id]->end_points_cood[kd];
             pillar->cube_id[kd] = interface.pillars_[id]->cube_id[kd];
-            pillar->cube[kd] = joint_voxels_[pillar->cube_id[kd]];
+            pillar->cube[kd] = joint_voxels_[pillar->cube_id[kd]].get();
             pillar->pos_in_cube_face[kd] = interface.pillars_[id]->pos_in_cube_face[kd];
             pillar->angle_from_face_normal[kd] = interface.pillars_[id]->angle_from_face_normal[kd];
         }
@@ -576,4 +590,94 @@ FrameInterface::FrameInterface(const FrameInterface &interface)
     }
 
     return;
+}
+
+
+std::shared_ptr<Assembly> FrameInterface::output_assembly() {
+    if(pillars_.size() == 0)
+    return nullptr;
+
+    int ix, iy, iz;
+    int nix, niy, niz;
+    int ID, nID;
+
+
+    /* allocate space for assembly class */
+    std::shared_ptr<Assembly> assembly_;
+    int pillar_num = pillars_.size();
+    assembly_ = std::make_shared<Assembly>(Assembly(pillar_num + 1));
+
+
+    /* Matrix for recording joints between different part */
+    //voxel model only have 6 normal directions:
+    //000001b: ( 1,  0,  0)
+    //000010b: (-1,  0,  0)
+    //000100b: ( 0,  1,  0)
+    //001000b: ( 0, -1,  0)
+    //010000b: ( 0,  0,  1)
+    //100000b: ( 0,  0, -1)
+    MatrixXi Joint(pillar_num + 1, pillar_num + 1);
+    Joint.setZero();
+
+    /* compute joint between different part */
+    // Going through all voxels.
+    // Checking its up, down, left, right, front, back.
+    int dX[6] = {1, -1,  0,  0, 0,  0};
+    int dY[6] = {0,  0,  1, -1, 0,  0};
+    int dZ[6] = {0,  0,  0,  0, 1, -1};
+
+    for(int JointID = 0; JointID < joint_voxels_.size(); JointID++)
+    {
+        VoxelizedInterface *interface = joint_voxels_[JointID].get();
+        for(ix = 0; ix < interface->Nx; ix++)
+        {
+            for(iy = 0; iy < interface->Ny; iy++)
+            {
+                for(iz = 0; iz < interface->Nz; iz++)
+                {
+                    ID = (*(interface->voxel_))[ix][iy][iz];
+                    if(ID != -1)
+                    {
+                        for(int id = 0; id < 6; id++)
+                        {
+                            //(nix, niy, niz) is adjacent voxel of (ix, iy, iz)
+                            nix = ix + dX[id];
+                            niy = iy + dY[id];
+                            niz = iz + dZ[id];
+
+                            //check whether is outside of the model
+                            if(nix < 0 || niy < 0 || niz < 0) continue;
+                            if(nix >= interface->Nx || niy >= interface->Ny || niz >= interface->Nz) continue;
+
+                            //create joint in the matrix
+                            nID = (*(interface->voxel_))[nix][niy][niz];
+                            if(nID != -1 && ID < nID)
+                            {
+                                Joint(ID, nID) |= (1 << id);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    //create joint in the assembly.
+    for(int id = 0; id < pillar_num + 1; id++)
+    {
+        for(int jd = id + 1; jd < pillar_num + 1; jd++)
+        {
+            vecVector3d nrms;
+            if(Joint(id, jd) & 1) nrms.push_back(Vector3d(1, 0, 0));
+            if(Joint(id, jd) & 2) nrms.push_back(Vector3d(-1, 0, 0));
+            if(Joint(id, jd) & 4) nrms.push_back(Vector3d(0, 1, 0));
+            if(Joint(id, jd) & 8) nrms.push_back(Vector3d(0, -1, 0));
+            if(Joint(id, jd) & 16) nrms.push_back(Vector3d(0, 0, 1));
+            if(Joint(id, jd) & 32) nrms.push_back(Vector3d(0, 0, -1));
+            if(nrms.size() > 0) assembly_->add_contact(id, jd, nrms);
+        }
+    }
+
+    return assembly_;
 }

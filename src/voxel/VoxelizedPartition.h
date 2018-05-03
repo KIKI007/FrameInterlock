@@ -29,6 +29,13 @@ struct VPuzInnerPartitionDat
     vector<pEmt> fixs;
 };
 
+struct FinalPartiResult
+{
+    vector<pEmt> new_part_voxels;
+    vector<pEmt> remain_part_voxels;
+    int direction;
+};
+
 
 class VoxelizedPartition {
 public:
@@ -37,7 +44,7 @@ public:
 
     void input(VoxelizedPuzzle *puzzle, VPuzRemainVolumePartitionDat &outside);
 
-    void output(vector<vector<pEmt>>  &remain_volume_voxel_lists);
+    void output(vector<FinalPartiResult> &results);
 
 public:
 

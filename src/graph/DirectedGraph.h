@@ -54,6 +54,12 @@ public:
 
     void virtual add_edge(int idA, int idB)
     {
+        for(auto u : nodeLists_[idA]->neighborList_)
+        {
+            if(u.node.lock()->index_ == idB)
+                return;
+        }
+
         DirectedGraphEdge edge;
         edge.weight = 0;
         edge.node = nodeLists_[idB];
@@ -72,6 +78,24 @@ public:
         edge.list = list;
         edge.weight = 0;
         edge.node = nodeLists_[idB];
+        nodeLists_[idA]->neighborList_.push_back(edge);
+        return;
+    }
+
+    void virtual add_edge(int idA, int idB, pEmt voxel)
+    {
+        for(auto u : nodeLists_[idA]->neighborList_)
+        {
+            if(u.node.lock()->index_ == idB && u.list) {
+                u.list->push_back(voxel);
+                return;
+            }
+        }
+        DirectedGraphEdge edge;
+        edge.list = std::make_shared<VoxelsList>();
+        edge.list->push_back(voxel);
+        edge.node = nodeLists_[idB];
+        edge.weight = 0;
         nodeLists_[idA]->neighborList_.push_back(edge);
         return;
     }

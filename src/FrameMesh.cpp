@@ -10,7 +10,7 @@ FrameMesh::FrameMesh(std::shared_ptr<ColorCoding> colorcode, double radius)
     radius_ = radius;
 }
 
-void FrameMesh::set_vertices(vecVector3i &points)
+void FrameMesh::set_vertices(vecVector3d &points)
 {
     clear();
     points_ = points;

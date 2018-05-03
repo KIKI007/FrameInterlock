@@ -14,6 +14,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o"
   "CMakeFiles/FrameInterlock_bin.dir/src/graph/DirectedGraphSSC.cpp.o"
   "CMakeFiles/FrameInterlock_bin.dir/src/graph/InterlockSDChecking.cpp.o"
+  "CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.o"
   "FrameInterlock_bin.pdb"
   "FrameInterlock_bin"
 )
