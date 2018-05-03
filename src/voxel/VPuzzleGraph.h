@@ -130,7 +130,7 @@ public:
 
 public:
 
-    void remove_duplicate(vector<VoxelElement *> &gvoxel, vector<VoxelElement *> &group);
+    void remove_duplicate(vector<pEmt> &group_voxels);
 
 public:
 

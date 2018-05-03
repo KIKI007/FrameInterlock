@@ -49,6 +49,13 @@ public:
 
     bool generate_children(TreeNode *node, FramePillar *cpillar);
 
+    void generate_vpuzzlegraph(VPuzzleGraph &graph, TreeNode *node, FramePillar *cpillar);
+
+    void seperate_concept_design(int kd,
+                                 VPuzRemainVolumePartitionDat& concept,
+                                 VPuzRemainVolumePartitionDat& plan,
+                                 FramePillar *cpillar);
+
     bool generate_key(TreeNode *node);
 
     std::shared_ptr<FrameInterface> output_frame(TreeNode *node);

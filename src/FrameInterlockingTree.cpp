@@ -141,133 +141,174 @@ bool FrameInterlockingTree::generate_children(TreeNode *node)
     }
 }
 
+void FrameInterlockingTree::seperate_concept_design(int kd,
+                                                    VPuzRemainVolumePartitionDat &concept,
+                                                    VPuzRemainVolumePartitionDat &plan,
+                                                    FramePillar *cpillar)
+{
+    plan.relation = concept.relation;
+    //group A
+    for(int jd = 0; jd < concept.groupA.size(); jd++)
+    {
+        pEmt em = concept.groupA[jd];
+        if(em->joint_id_ == cpillar->cube_id[kd])
+            plan.groupA.push_back(em);
+    }
+
+    //group B
+    for(int jd = 0; jd < concept.groupB.size(); jd++)
+    {
+        pEmt em = concept.groupB[jd];
+        if(em->joint_id_ == cpillar->cube_id[kd])
+            plan.groupB.push_back(em);
+    }
+}
+
+
 bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpillar) {
 
     if(node) {
-        //
+        VPuzzleGraph graph;
+
+        //generate graph
+        generate_vpuzzlegraph(graph, node, cpillar);
+
+        vector<VPuzRemainVolumePartitionDat> concept_partition_plans;
+        graph.do_separation(concept_partition_plans);
+
+        int voxel_num = interface->voxel_num_;
+
+        for(int id = 0; id < concept_partition_plans.size(); id++)
+        {
+
+            VPuzRemainVolumePartitionDat concept = concept_partition_plans[id];
+            VPuzRemainVolumePartitionDat plan[2];
+            vector<FinalPartiResult> final_parti_result[2];
+            for(int kd = 0; kd < 2; kd++)
+            {
+                seperate_concept_design(kd, concept, plan[kd], cpillar);
+
+                VoxelizedPuzzle* puzzle = node->puzzles[cpillar->cube_id[kd]].get();
+                int part_num_voxels = voxel_num * voxel_num * voxel_num/ map_joint_pillars_[cpillar->cube_id[kd]].size();
+
+                VoxelizedPartition partioner(part_num_voxels, part_num_voxels);
+                partioner.input(puzzle, plan[kd]);
+                partioner.output(final_parti_result[kd]);
+            }
+
+            for(int id = 0; id < final_parti_result[0].size(); id++)
+            {
+                for(int jd = 0; jd < final_parti_result[1].size(); jd++)
+                {
+                    if(final_parti_result[0][id].direction == final_parti_result[1][jd].direction)
+                    {
+
+                        //Puzzle
+                        std::shared_ptr<TreeNode> child_node = std::make_shared<TreeNode>();
+
+                        child_node->puzzles = node->puzzles;
+                        for(int kd = 0; kd < 2; kd++)
+                        {
+                            int joint_id = cpillar->cube_id[kd];
+                            std::shared_ptr<VoxelizedPuzzle> child_puzzle =
+                                    std::make_shared<VoxelizedPuzzle>(VoxelizedPuzzle(*node->puzzles[joint_id]));
+                            if(kd == 0)
+                                child_puzzle->partition_part(final_parti_result[0][id].new_part_voxels, cpillar->index);
+                            else
+                                child_puzzle->partition_part(final_parti_result[1][jd].new_part_voxels, cpillar->index);
+                            child_node->puzzles[joint_id] = child_puzzle;
+                        }
+
+                        //Relation
+                        child_node->parent = node;
+                        child_node->num_pillar_finished = node->num_pillar_finished + 1;
+                        child_node->brother = nullptr;
+
+                        //Graph
+                        for(int kd = 0; kd < 3; kd++)
+                        {
+                            child_node->graph[kd] = std::make_shared<DirectedGraph>();
+                            split_graph(*node->graph[kd], *child_node->graph[kd], cpillar, child_node.get(), kd);
+                        }
+
+                        //order
+                        child_node->pillar_visited_order[cpillar->index] = child_node->num_pillar_finished - 1;
+                        child_node->disassembly_order.push_back(cpillar);
+
+
+                        //push into node
+                        node->children.push_back(child_node);
+                    }
+                }
+            }
+        }
     }
-    return  true;
-//        VPuzzleGraphInput input;
-//        for(int kd = 0; kd < 3; kd++)
-//            input.graph[kd] = *node->graph[kd];
-//        input.num_pillar = interface->pillars_.size();
-//        input.cpillar = cpillar;
-//
-//        VPuzzleGraph Graph;
-//        Graph.set_input(input);
-//
-//        vector<VPuzRemainVolumePartitionDat> outer_plan;
-//        Graph.do_separation(outer_plan);
-//
-//        std::map<int, int> visited;
-//        for(int id = 0; id < node->disassembly_order.size(); id++)
-//        {
-//            visited.insert(std::make_pair(node->disassembly_order[id]->index, true));
-//        }
-//        visited.insert(std::make_pair(cpillar->index, true));
-//
-//        //get pillar's fixed voxel coordinates
-//        vecVector3i remain_fixed_voxels[2];
-//        vecVector3i new_fixed_voxels[2];
-//        for(int kd = 0; kd < 2; kd++)
-//        {
-//            get_pillars_fixed_voxels(new_fixed_voxels[kd],
-//                                     remain_fixed_voxels[kd],
-//                                     cpillar->cube_id[kd],
-//                                     cpillar->index,
-//                                     visited);
-//        }
-//
-//        //create key
-//
-//        int voxel_num = interface->voxel_num_;
-//        vector<FinalPartiResult> final_parti_result[2];
-//        for(int kd = 0; kd < 2; kd++)
-//        {
-//            VoxelizedPuzzle* puzzle = node->puzzles[cpillar->cube_id[kd]].get();
-//
-//            //create plan
-//            VPuzRemainVolumePartitionDat plan = ;
-//            for(int id = 0; id < new_fixed_voxels[kd].size(); id++)
-//            {
-//                plan.groupA.push_back(puzzle->map_ip_[puzzle->V2I(new_fixed_voxels[kd][id])]);
-//            }
-//            for(int id = 0; id < remain_fixed_voxels[kd].size(); id++)
-//            {
-//                plan.groupB.push_back(puzzle->map_ip_[puzzle->V2I(remain_fixed_voxels[kd][id])]);
-//            }
-//            plan.relation = relation;
-//
-//            int part_num_voxels = voxel_num * voxel_num * voxel_num/ map_joint_pillars_[key_pillar->cube_id[kd]].size();
-//            VoxelizedPartition partioner(part_num_voxels, part_num_voxels);
-//            partioner.maximum_inner_partition_plan_ = 1000;
-//
-//            partioner.input(puzzle, plan);
-//            partioner.output(final_parti_result[kd]);
-//        }
-//
-//        for(int id = 0; id < final_parti_result[0].size(); id++)
-//        {
-//            for(int jd = 0; jd < final_parti_result[1].size(); jd++)
-//            {
-//                if(final_parti_result[0][id].direction == final_parti_result[1][jd].direction)
-//                {
-//
-//                    //Puzzle
-//                    std::shared_ptr<TreeNode> child_node = std::make_shared<TreeNode>();
-//
-//                    child_node->puzzles = node->puzzles;
-//                    for(int kd = 0; kd < 2; kd++)
-//                    {
-//                        int joint_id = key_pillar->cube_id[kd];
-//                        std::shared_ptr<VoxelizedPuzzle> child_puzzle =
-//                                std::make_shared<VoxelizedPuzzle>(VoxelizedPuzzle(*node->puzzles[joint_id]));
-//                        if(kd == 0)
-//                            child_puzzle->partition_part(final_parti_result[0][id].new_part_voxels, key_pillar->index);
-//                        else
-//                            child_puzzle->partition_part(final_parti_result[1][jd].new_part_voxels, key_pillar->index);
-//                        child_node->puzzles[joint_id] = child_puzzle;
-//                    }
-//
-//                    //Relation
-//                    child_node->parent = node;
-//                    child_node->num_pillar_finished = node->num_pillar_finished + 1;
-//                    child_node->brother = nullptr;
-//
-//                    //Graph
-//                    for(int kd = 0; kd < 3; kd++)
-//                    {
-//                        child_node->graph[kd] = std::make_shared<DirectedGraph>();
-//                        split_graph(*node->graph[kd], *child_node->graph[kd], key_pillar, child_node.get(), kd);
-//                    }
-//
-//                    //order
-//                    child_node->pillar_visited_order[key_pillar->index] = child_node->num_pillar_finished - 1;
-//                    child_node->disassembly_order.push_back(key_pillar);
-//
-//
-//                    //push into node
-//                    node->children.push_back(child_node);
-//                }
-//            }
-//        }
-//
-//        if(node->children.size() > 0)
-//        {
-//            TreeNode* last_child_node = node->children.back().get();
-//            select_candidates(last_child_node);
-//            for(int id = 0; id < node->children.size() - 1; id++)
-//            {
-//                node->children[id]->brother = node->children[id + 1].get();
-//
-//                //select candidate
-//                node->children[id]->candidate_pillar = last_child_node->candidate_pillar;
-//            }
-//            node->children.back()->brother = nullptr;
-//        }
-//    }
-//
-//    return true;
+
+    if(node->children.size() > 0)
+    {
+        TreeNode* last_child_node = node->children.back().get();
+        select_candidates(last_child_node);
+        for(int id = 0; id < node->children.size() - 1; id++)
+        {
+            node->children[id]->brother = node->children[id + 1].get();
+
+            //select candidate
+            node->children[id]->candidate_pillar = last_child_node->candidate_pillar;
+        }
+        node->children.back()->brother = nullptr;
+    }
+
+    if(node->children.size() > 0)
+        return true;
+    else
+        return false;
+}
+
+void FrameInterlockingTree::generate_vpuzzlegraph(VPuzzleGraph &graph, TreeNode *node, FramePillar *cpillar)
+{
+    VPuzzleGraphInput input;
+    for(int kd = 0; kd < 3; kd++)
+        input.graph[kd] = *node->graph[kd];
+
+    input.num_pillar = interface->pillars_.size();
+    input.cpillar = cpillar;
+
+    std::map<int, int> visited;
+    for(int id = 0; id < node->disassembly_order.size(); id++)
+    {
+        visited.insert(std::make_pair(node->disassembly_order[id]->index, true));
+    }
+    visited.insert(std::make_pair(cpillar->index, true));
+
+    //get pillar's fixed voxel coordinates
+    vecVector3i remain_fixed_voxels[2];
+    vecVector3i new_fixed_voxels[2];
+    for(int kd = 0; kd < 2; kd++)
+    {
+        get_pillars_fixed_voxels(new_fixed_voxels[kd],
+                                 remain_fixed_voxels[kd],
+                                 cpillar->cube_id[kd],
+                                 cpillar->index,
+                                 visited);
+    }
+
+    vector<pEmt> voxel_must_be_new_part;
+    vector<pEmt> voxel_must_be_remain_part;
+    for(int kd = 0; kd < 2; kd++) {
+        VoxelizedPuzzle *puzzle = node->puzzles[cpillar->cube_id[kd]].get();
+        //create plan
+        for (int id = 0; id < new_fixed_voxels[kd].size(); id++) {
+            voxel_must_be_new_part.push_back(puzzle->map_ip_[puzzle->V2I(new_fixed_voxels[kd][id])]);
+        }
+        for (int id = 0; id < remain_fixed_voxels[kd].size(); id++) {
+            voxel_must_be_remain_part.push_back(puzzle->map_ip_[puzzle->V2I(remain_fixed_voxels[kd][id])]);
+        }
+    }
+
+    input.voxels_must_be_remain_part = voxel_must_be_new_part;
+    input.voxels_must_be_remain_part = voxel_must_be_remain_part;
+
+    graph.set_input(input);
 }
 
 std::shared_ptr<FrameInterface> FrameInterlockingTree::output_frame(TreeNode *node) {
@@ -474,5 +515,6 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
 
     return;
 }
+
 
 

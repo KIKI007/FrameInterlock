@@ -444,9 +444,10 @@ void VPuzzleGraph::compute_remain_volume_partition_plans(vector<VPuzRemainVolume
             plan.relation = plan_cycleXYZ.relation;
             for(int id = 0; id < input_.voxels_must_be_new_part.size(); id++)
                 plan.groupA.push_back(input_.voxels_must_be_new_part[id]);
+            remove_duplicate(plan.groupA);
             for(int id = 0; id < input_.voxels_must_be_remain_part.size(); id++)
                 plan.groupB.push_back(input_.voxels_must_be_remain_part[id]);
-
+            remove_duplicate(plan.groupB);
             output.push_back(plan);
         }
     }
@@ -574,20 +575,22 @@ bool VPuzzleGraph::random_compute_voxel_partition_plan(VPuzRemainVolumePartition
     return true;
 }
 
-void VPuzzleGraph::remove_duplicate(vector<VoxelElement *> &gvoxel, vector<VoxelElement *> &group)
+void VPuzzleGraph::remove_duplicate(vector<pEmt> &group_voxels)
 {
-    for(int id = 0; id < gvoxel.size(); id++)
+    vector<pEmt> new_group;
+    for(int id = 0; id < group_voxels.size(); id++)
     {
         bool is_duplicate = false;
         for(int jd = 0; jd < id; jd++) {
-            if (gvoxel[id] == gvoxel[jd])
+            if (group_voxels[id] == group_voxels[jd])
             {
                 is_duplicate = true;
                 break;
             }
         }
-        if(!is_duplicate) group.push_back(gvoxel[id]);
+        if(!is_duplicate) new_group.push_back(group_voxels[id]);
     }
+    group_voxels = new_group;
 }
 
 void VPuzzleGraph::compute_input_in_out_data(int XYZ)
