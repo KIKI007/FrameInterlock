@@ -50,6 +50,7 @@ void FrameInterlocking::init_tree()
                                                                   array,
                                                                   frame_interface_->colorcoder_));
         root_->puzzles.push_back(puzzle);
+        root_->num_voxel_left_in_joints.push_back(voxel_num * voxel_num * voxel_num);
     }
 
     for(int kd = 0; kd < 3; kd++)

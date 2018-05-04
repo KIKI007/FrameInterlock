@@ -168,6 +168,7 @@ VoxelizedPuzzle::VoxelizedPuzzle(const VoxelizedPuzzle &A) {
 
     voxel_.clear();
     map_ip_.clear();
+    joint_id_ = A.joint_id_;
     for (int id = 0; id < A.voxel_.size(); id++) {
         shared_pEmt p = std::make_shared<VoxelElement>(VoxelElement(*A.voxel_[id]));
         voxel_.push_back(p);

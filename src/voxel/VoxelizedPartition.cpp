@@ -435,7 +435,7 @@ bool VoxelizedPartition::maintain_disassemblability(int relation, VPuzRemainVolu
                 }
                 break;
             }
-            case PuzzleConnection_NULL:
+            case PuzzleConnection_IOIO:
             {
                 VPuzRemainVolumePartitionDat dat;
                 if(attach_more_voxels(XYZ, 1, dat)) {

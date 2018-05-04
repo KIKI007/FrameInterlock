@@ -34,6 +34,8 @@ public:
 
     DirectedGraph graph[3];
 
+    std::map<int, int> pillar_in_orders;
+
     FramePillar* cpillar;
 
     vector<pEmt> voxels_must_be_new_part;

@@ -321,6 +321,21 @@ void write_show_puzzle_blocking_graph_simplified(std::shared_ptr<FrameInterface>
     return;
 }
 
+void generate_children()
+{
+    if(frame_interlock)
+    {
+        frame_interlock->tree_->generate_children(frame_interlock->tree_->present_node_);
+        para.interlock_children_id = 0;
+        if(frame_interlock->tree_->present_node_->children.size() > 0)
+        {
+            frame_interlock->tree_->present_node_ = frame_interlock->tree_->present_node_->children[0].get();
+            frame_interface = frame_interlock->output_present_frame();
+            draw_frame_mesh();
+        }
+    }
+}
+
 void generate_key()
 {
     if(frame_interlock)

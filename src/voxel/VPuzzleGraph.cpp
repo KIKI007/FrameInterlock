@@ -76,7 +76,7 @@ void VPuzzleGraph::compute_two_loops_candidate_voxels(int XYZ)
         int P0 = input_.in_ID_[XYZ][i0];
         for(int i1 = 0; i1 < input_.out_ID_[XYZ].size(); i1++)
         {
-            int P1 = input_.out_ID_[XYZ].size();
+            int P1 = input_.out_ID_[XYZ][i1];
             if(dist_graph[XYZ](P1, P0) != -1)
             {
                 for(int i2 = 0; i2 < input_.in_ID_[XYZ].size(); i2++)
@@ -512,7 +512,10 @@ bool VPuzzleGraph::random_compute_voxel_partition_plan(VPuzRemainVolumePartition
 
     auto random_pick_voxel = [&](vector<pEmt> &candidate) -> pEmt
     {
-        return candidate[rand() % candidate.size()];
+        if(candidate.size() >= 2)
+            return candidate[rand() % candidate.size()];
+        else
+            return candidate.front();
     };
 
     auto erase_used_voxel_from_list = [&](vector<GroupVoxels> &list, pEmt voxel, int gid) -> bool
@@ -633,12 +636,13 @@ void VPuzzleGraph::compute_input_in_data(int XYZ, const DirectedGraphEdge& edge,
         //determine its joint id
         //if it is belonged to remain
         int joint_id = (*edge.list).front()->joint_id_;
+        int node_id = input_.pillar_in_orders[edge.node.lock()->index_];
         if(partition_joints[joint_id] == false)
         {
             //must belong to remain
-            input_.in_ID_[XYZ].push_back(edge.node.lock()->index_);
+            input_.in_ID_[XYZ].push_back(node_id);
             input_.in_voxels[XYZ].push_back(edge.list.get());
-            input_.in_voxels_type_->push_back(REMAIN_PART);
+            input_.in_voxels_type_[XYZ].push_back(REMAIN_PART);
             return;
         }
 
@@ -652,11 +656,14 @@ void VPuzzleGraph::compute_input_in_data(int XYZ, const DirectedGraphEdge& edge,
 
         for(int id = 0; id < 3; id++)
         {
-            std::shared_ptr<VoxelsList> list = std::make_shared<VoxelsList>(voxels_of_types[id]);
-            voxel_lists.push_back(list);
-            input_.in_ID_[XYZ].push_back(edge.node.lock()->index_);
-            input_.in_voxels[XYZ].push_back(list.get());
-            input_.in_voxels_type_->push_back(VoxelsListType(id));
+            if(!voxels_of_types[id].empty())
+            {
+                std::shared_ptr<VoxelsList> list = std::make_shared<VoxelsList>(voxels_of_types[id]);
+                voxel_lists.push_back(list);
+                input_.in_ID_[XYZ].push_back(node_id);
+                input_.in_voxels[XYZ].push_back(list.get());
+                input_.in_voxels_type_[XYZ].push_back(VoxelsListType(id));
+            }
         }
     }
 }
@@ -668,12 +675,14 @@ void VPuzzleGraph::compute_input_out_data(int XYZ,const DirectedGraphEdge& edge,
         //determine its joint id
         //if it is belonged to remain
         int joint_id = (*edge.list).front()->joint_id_;
+        int node_id = input_.pillar_in_orders[edge.node.lock()->index_];
+
         if(partition_joints[joint_id] == false)
         {
             //must belong to remain
-            input_.out_ID_[XYZ].push_back(edge.node.lock()->index_);
+            input_.out_ID_[XYZ].push_back(node_id);
             input_.out_voxels[XYZ].push_back(edge.list.get());
-            input_.out_voxels_type->push_back(REMAIN_PART);
+            input_.out_voxels_type[XYZ].push_back(REMAIN_PART);
             return;
         }
 
@@ -687,11 +696,14 @@ void VPuzzleGraph::compute_input_out_data(int XYZ,const DirectedGraphEdge& edge,
 
         for(int id = 0; id < 3; id++)
         {
-            std::shared_ptr<VoxelsList> list = std::make_shared<VoxelsList>(voxels_of_types[id]);
-            voxel_lists.push_back(list);
-            input_.out_ID_[XYZ].push_back(edge.node.lock()->index_);
-            input_.out_voxels[XYZ].push_back(list.get());
-            input_.out_voxels_type->push_back(VoxelsListType(id));
+            if(!voxels_of_types[id].empty())
+            {
+                std::shared_ptr<VoxelsList> list = std::make_shared<VoxelsList>(voxels_of_types[id]);
+                voxel_lists.push_back(list);
+                input_.out_ID_[XYZ].push_back(node_id);
+                input_.out_voxels[XYZ].push_back(list.get());
+                input_.out_voxels_type[XYZ].push_back(VoxelsListType(id));
+            }
         }
     }
 }

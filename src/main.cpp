@@ -74,6 +74,7 @@ int main() {
         children_choose->setSpinnable(true);
 
         viewer.ngui->addButton("generate_key", []{generate_key();});
+        viewer.ngui->addButton("generate children", []{generate_children();});
         viewer.ngui->addButton("Draw Full Graph", [](){
             if (frame_interface)
                 write_show_puzzle_blocking_graph(frame_interface);

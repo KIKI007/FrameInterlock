@@ -25,6 +25,8 @@ public:
 
     vector<FramePillar *> disassembly_order;
 
+    vector<int> num_voxel_left_in_joints;
+
 public:
 
     vector<std::shared_ptr<TreeNode>> children;
