@@ -15,6 +15,16 @@
 #include <iostream>
 #include <map>
 
+enum AssemblingDirection
+{
+    posX = 0,
+    negX = 1,
+    posY = 2,
+    negY = 3,
+    posZ = 4,
+    negZ = 5,
+};
+
 struct VoxelBFSNode
 {
 public:
@@ -42,7 +52,7 @@ public:
     VoxelizedPartition(int minimum, int maximum);
 public:
 
-    void input(VoxelizedPuzzle *puzzle, VPuzRemainVolumePartitionDat &outside);
+    void input(VoxelizedPuzzle *puzzle, VPuzRemainVolumePartitionDat &outside, AssemblingDirection direction);
 
     void output(vector<FinalPartiResult> &results);
 
@@ -75,6 +85,8 @@ private:
     VPuzRemainVolumePartitionDat outside_partition_dat_;
 
     vector<VPuzInnerPartitionDat> inside_partition_dats_;
+
+    AssemblingDirection part_disassembly_direction_;
 
 public:
 

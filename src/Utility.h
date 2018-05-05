@@ -199,7 +199,7 @@ void init()
     shared_ptr = LIBIGL_PATH;
     shared_ptr += "/tutorial/shared/";
 
-    para.render_num_joint_voxel = 4;
+    para.render_num_joint_voxel = 3;
     para.render_joint_size_ = 0.05;
     para.render_pillar_radius = 0.05;
     para.render_joint_knots = true;

@@ -63,9 +63,15 @@ public:
 
     bool generate_key(TreeNode *node);
 
-    void generate_key_plan(TreeNode *node, FramePillar *key_pillar, vector<VPuzRemainVolumePartitionDat> &plan)
+    void generate_key_plan(TreeNode *node, FramePillar *key_pillar, vector<VPuzRemainVolumePartitionDat> &plan);
 
     std::shared_ptr<FrameInterface> output_frame(TreeNode *node);
+
+public:
+
+    void accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, int *part_num_voxels);
+
+    void sort_children(TreeNode *node);
 
 public:
 

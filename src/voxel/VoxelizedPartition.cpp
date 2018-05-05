@@ -16,10 +16,11 @@ VoxelizedPartition::VoxelizedPartition(int minimum, int maximum)
     maximum_failure_time_ = 1;
 }
 
-void VoxelizedPartition::input(VoxelizedPuzzle *puzzle, VPuzRemainVolumePartitionDat &outside)
+void VoxelizedPartition::input(VoxelizedPuzzle *puzzle, VPuzRemainVolumePartitionDat &outside, AssemblingDirection direction)
 {
     puzzle_ = puzzle;
     outside_partition_dat_ = outside;
+    part_disassembly_direction_ = direction;
 }
 
 void VoxelizedPartition::output(vector<FinalPartiResult> &results) {
@@ -348,7 +349,8 @@ bool VoxelizedPartition::connect_group_A_anchor_voxels(VPuzRemainVolumePartition
 bool VoxelizedPartition::maintain_disassemblability(int relation, VPuzRemainVolumePartitionDat &full_partition_dat, int &disassembled_direction)
 {
     pPart  part = puzzle_->parts_.back().get();
-    vector<VPuzRemainVolumePartitionDat> disassemblable_plan;
+
+    VPuzRemainVolumePartitionDat disassemblable_plan;
     std::unordered_map<int, int> visited;
 
     //Group A
@@ -411,75 +413,23 @@ bool VoxelizedPartition::maintain_disassemblability(int relation, VPuzRemainVolu
         else return true;
     };
 
-    for(int XYZ = 0; XYZ < 3; XYZ++)
+    int XYZ = part_disassembly_direction_ / 2;
+    int sign = part_disassembly_direction_ % 2;
+    if(attach_more_voxels(XYZ, sign == 0 ? 1 : -1, disassemblable_plan))
     {
-        switch(relation &(0b11))
+        disassemblable_plan.relation = 1 << (2 * XYZ + sign);
+        full_partition_dat = disassemblable_plan;
+        for(pEmt voxel: full_partition_dat.groupA)
         {
-            case PuzzleConnection_IN_OUT:
-            {
-                VPuzRemainVolumePartitionDat dat;
-                if(attach_more_voxels(XYZ, 1, dat))
-                {
-                    dat.relation = 1 << (2 * XYZ);
-                    disassemblable_plan.push_back(dat);
-                }
-                break;
-            }
-            case PuzzleConnection_OUT_IN:
-            {
-                VPuzRemainVolumePartitionDat dat;
-                if(attach_more_voxels(XYZ, -1, dat))
-                {
-                    dat.relation = 1 << (2 * XYZ + 1);
-                    disassemblable_plan.push_back(dat);
-                }
-                break;
-            }
-            case PuzzleConnection_IOIO:
-            {
-                VPuzRemainVolumePartitionDat dat;
-                if(attach_more_voxels(XYZ, 1, dat)) {
-                    dat.relation = 1 << (2 * XYZ);
-                    disassemblable_plan.push_back(dat);
-                }
-
-                if(attach_more_voxels(XYZ, -1, dat)) {
-                    dat.relation = 1 << (2 * XYZ + 1);
-                    disassemblable_plan.push_back(dat);
-                }
-                break;
-            }
+            insert_into_group_A(voxel);
         }
-        relation >>= 2;
+        disassembled_direction = full_partition_dat.relation;
+        return true;
     }
-
-    if(disassemblable_plan.empty())
+    else
+    {
         return false;
-
-    vector<VPuzFE <VPuzRemainVolumePartitionDat>> list;
-    for(int id = 0; id < disassemblable_plan.size(); id++)
-    {
-        VPuzFE <VPuzRemainVolumePartitionDat> ve;
-        ve.data_ = disassemblable_plan[id];
-        int weight = (part->elist_.size() - disassemblable_plan[id].groupA.size());
-        ve.weight =  (int)std::pow((double)weight, 2);
-        list.push_back(ve);
     }
-
-    VPuzFilter<VPuzRemainVolumePartitionDat> filter;
-    filter.max_candidates_num_ = 1;
-    filter.insert(list);
-
-    full_partition_dat.groupA = filter.candidate_.front().data_.groupA;
-    full_partition_dat.groupB = filter.candidate_.front().data_.groupB;
-    for(pEmt voxel: full_partition_dat.groupA)
-    {
-        insert_into_group_A(voxel);
-    }
-
-    disassembled_direction = filter.candidate_.front().data_.relation;
-
-    return true;
 }
 
 bool VoxelizedPartition::expand_group_A_to_minimum_pieces(VPuzRemainVolumePartitionDat &full_partition_dat, int &disassembled_direction)
