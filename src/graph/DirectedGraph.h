@@ -62,6 +62,7 @@ public:
 
         DirectedGraphEdge edge;
         edge.weight = 0;
+        edge.list = nullptr;
         edge.node = nodeLists_[idB];
         nodeLists_[idA]->neighborList_.push_back(edge);
     }

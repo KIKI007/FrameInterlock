@@ -622,7 +622,12 @@ bool VoxelizedPartition::compute_remaining_volume(vector<pEmt> &group_B) {
         }
     }
 
-    return is_remaining_volume_connected(group_B);
+    if(group_B.empty())
+        return  true;
+    else
+    {
+        return is_remaining_volume_connected(group_B);
+    }
 }
 
 void VoxelizedPartition::merge_inside_outside_partition_dat(VPuzInnerPartitionDat &inner_dat, VPuzRemainVolumePartitionDat &full_partition_dat)

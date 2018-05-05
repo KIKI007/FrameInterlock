@@ -47,11 +47,11 @@ public:
 public:
 
     vector<int> in_ID_[3];
-    vector<VoxelsList *> in_voxels[3];
+    vector<std::shared_ptr<VoxelsList>> in_voxels[3];
     vector<VoxelsListType> in_voxels_type_[3];
 
     vector<bool> out_ID_[3];
-    vector<VoxelsList *> out_voxels[3];
+    vector<std::shared_ptr<VoxelsList>> out_voxels[3];
     vector<VoxelsListType> out_voxels_type[3];
 };
 
@@ -141,8 +141,6 @@ public:
     MatrixXi dist_graph[3];
 
     Vector3i size_;
-
-    vector<std::shared_ptr<VoxelsList>> voxel_lists;
 
 public:
 

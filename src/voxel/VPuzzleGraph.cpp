@@ -82,9 +82,10 @@ void VPuzzleGraph::compute_two_loops_candidate_voxels(int XYZ)
                 for(int i2 = 0; i2 < input_.in_ID_[XYZ].size(); i2++)
                 {
                     int P2 = input_.in_ID_[XYZ][i2];
-                    for (int i3 = 0; i3 < input_.out_ID_->size(); i3++)
+                    for (int i3 = 0; i3 < input_.out_ID_[XYZ].size(); i3++)
                     {
                         int P3 = input_.out_ID_[XYZ][i3];
+                        std::cout << i0 << ", " << i1 << ", " << i2 << ", " << i3 << std::endl;
                         if(dist_graph[XYZ](P3, P2) != -1)
                         {
                             if(dist_graph[XYZ](P1, P2) != -1 &&
@@ -121,14 +122,15 @@ void VPuzzleGraph::add_into_double_filter(int XYZ,
     if(input_.in_voxels_type_[XYZ][i2] == NEW_PART) return;
     if(input_.out_voxels_type[XYZ][i3] == NEW_PART) return;
 
-    joint.anchor_voxels_list.push_back(input_.in_voxels[XYZ][i0]);
-    joint.anchor_voxels_list.push_back(input_.out_voxels[XYZ][i1]);
-    joint.anchor_voxels_list.push_back(input_.in_voxels[XYZ][i2]);
-    joint.anchor_voxels_list.push_back(input_.out_voxels[XYZ][i3]);
+    joint.anchor_voxels_list.push_back(input_.in_voxels[XYZ][i0].get());
+    joint.anchor_voxels_list.push_back(input_.out_voxels[XYZ][i1].get());
+    joint.anchor_voxels_list.push_back(input_.in_voxels[XYZ][i2].get());
+    joint.anchor_voxels_list.push_back(input_.out_voxels[XYZ][i3].get());
     joint.type = PuzzleConnection_IOIO;
 
     element.data_ = joint;
     //******************* Weight Calculation *************************//
+    std::cout << "weight" << std::endl;
     element.weight = 0;
     element.weight +=    std::pow(input_.in_voxels[XYZ][i0]->size(), 2)
                          + std::pow(input_.out_voxels[XYZ][i1]->size(), 2)
@@ -178,8 +180,8 @@ void VPuzzleGraph::add_into_in_out_filter(int XYZ, int i0, int i1, int P0, int P
     if(input_.in_voxels_type_[XYZ][i0] == REMAIN_PART) return;
     if(input_.out_voxels_type[XYZ][i1] == NEW_PART) return;
 
-    joint.anchor_voxels_list.push_back(input_.in_voxels[XYZ][i0]);
-    joint.anchor_voxels_list.push_back(input_.out_voxels[XYZ][i1]);
+    joint.anchor_voxels_list.push_back(input_.in_voxels[XYZ][i0].get());
+    joint.anchor_voxels_list.push_back(input_.out_voxels[XYZ][i1].get());
     joint.type = PuzzleConnection_IN_OUT;
 
     element.data_ = joint;
@@ -202,8 +204,8 @@ void VPuzzleGraph::add_into_out_in_filter(int XYZ, int i0, int i1, int P0, int P
     if(input_.out_voxels_type[XYZ][i1] == REMAIN_PART) return;
     if(input_.in_voxels_type_[XYZ][i0] == NEW_PART) return;
 
-    joint.anchor_voxels_list.push_back(input_.out_voxels[XYZ][i1]);
-    joint.anchor_voxels_list.push_back(input_.in_voxels[XYZ][i0]);
+    joint.anchor_voxels_list.push_back(input_.out_voxels[XYZ][i1].get());
+    joint.anchor_voxels_list.push_back(input_.in_voxels[XYZ][i0].get());
     joint.type = PuzzleConnection_OUT_IN;
 
     element.data_ = joint;
@@ -641,7 +643,7 @@ void VPuzzleGraph::compute_input_in_data(int XYZ, const DirectedGraphEdge& edge,
         {
             //must belong to remain
             input_.in_ID_[XYZ].push_back(node_id);
-            input_.in_voxels[XYZ].push_back(edge.list.get());
+            input_.in_voxels[XYZ].push_back(edge.list);
             input_.in_voxels_type_[XYZ].push_back(REMAIN_PART);
             return;
         }
@@ -656,12 +658,11 @@ void VPuzzleGraph::compute_input_in_data(int XYZ, const DirectedGraphEdge& edge,
 
         for(int id = 0; id < 3; id++)
         {
-            if(!voxels_of_types[id].empty())
+            if(voxels_of_types[id].size() > 0)
             {
-                std::shared_ptr<VoxelsList> list = std::make_shared<VoxelsList>(voxels_of_types[id]);
-                voxel_lists.push_back(list);
+                std::shared_ptr<VoxelsList> list = std::make_shared<vector<pEmt>>(vector<pEmt>(voxels_of_types[id]));
                 input_.in_ID_[XYZ].push_back(node_id);
-                input_.in_voxels[XYZ].push_back(list.get());
+                input_.in_voxels[XYZ].push_back(list);
                 input_.in_voxels_type_[XYZ].push_back(VoxelsListType(id));
             }
         }
@@ -681,7 +682,7 @@ void VPuzzleGraph::compute_input_out_data(int XYZ,const DirectedGraphEdge& edge,
         {
             //must belong to remain
             input_.out_ID_[XYZ].push_back(node_id);
-            input_.out_voxels[XYZ].push_back(edge.list.get());
+            input_.out_voxels[XYZ].push_back(edge.list);
             input_.out_voxels_type[XYZ].push_back(REMAIN_PART);
             return;
         }
@@ -696,12 +697,11 @@ void VPuzzleGraph::compute_input_out_data(int XYZ,const DirectedGraphEdge& edge,
 
         for(int id = 0; id < 3; id++)
         {
-            if(!voxels_of_types[id].empty())
+            if(voxels_of_types[id].size() > 0)
             {
-                std::shared_ptr<VoxelsList> list = std::make_shared<VoxelsList>(voxels_of_types[id]);
-                voxel_lists.push_back(list);
+                std::shared_ptr<VoxelsList> list = std::make_shared<vector<pEmt>>(vector<pEmt>(voxels_of_types[id]));
                 input_.out_ID_[XYZ].push_back(node_id);
-                input_.out_voxels[XYZ].push_back(list.get());
+                input_.out_voxels[XYZ].push_back(list);
                 input_.out_voxels_type[XYZ].push_back(VoxelsListType(id));
             }
         }
