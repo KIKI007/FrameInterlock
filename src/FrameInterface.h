@@ -34,6 +34,7 @@ struct FrameInterfaceRenderUnit{
     MatrixXd C;
     RowVector3i dF;
     RowVector3d dV;
+    int pillar_index;
     bool visible;
 };
 
@@ -54,11 +55,15 @@ public:
 
     void draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_frame, bool is_draw_joints, bool is_draw_joints_sphere);
 
-    void draw_frame_mesh(FrameInterfaceRenderUnit &unit);
+    void draw_frame_mesh(vector<FrameInterfaceRenderUnit> &unit);
 
     void draw_joints(vector<FrameInterfaceRenderUnit> &render_list, bool is_draw_joints_sphere);
 
+    void draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &unit);
+
 public:
+
+
 
     void create_void_joints();
 
@@ -68,7 +73,7 @@ public:
 
     void remove_duplicate_pillar(vector<vector<std::shared_ptr<FramePillar>>> &pillar_in_cube_face);
 
-    void init_joints();
+    void init_joints_from_frame_mesh();
 
     std::shared_ptr<Assembly> output_assembly();
 
@@ -81,6 +86,8 @@ public:
     void write_fpuz(string file_name);
 
     void read_fpuz(string file_name);
+
+    void write_obj(string file_name, bool is_draw_frame, bool is_draw_joints);
 
 public:
 

@@ -6,6 +6,10 @@
 #define UNDERSTAND_INTERLOCK_VOXELIZEDRENDERCUBE_H
 
 #include "VoxelizedInterface.h"
+#include <Eigen/StdVector>
+#include "igl/writeOBJ.h"
+typedef std::vector<MatrixXd, Eigen::aligned_allocator<MatrixXd>> vecMatrixXd;
+typedef std::vector<MatrixXi, Eigen::aligned_allocator<MatrixXi>> vecMatrixXi;
 
 class VoxelizedRenderCube : public VoxelizedInterface {
 
@@ -25,6 +29,8 @@ public:
 public:
 
     void rendering(MatrixXd &V, MatrixXi &F, MatrixXd &C);
+
+    void rendering(vecMatrixXd &V, vecMatrixXi &F, vecMatrixXd &C, vector<int> &index);
 
     void add_color_by_groupID(MatrixXd &C);
 

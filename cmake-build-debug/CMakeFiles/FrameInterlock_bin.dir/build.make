@@ -105,9 +105,33 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o.provides: CMakeFiles/
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o.provides.build: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o
 
 
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/FrameInterfaceAnimation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.cpp
+
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.cpp > CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.i
+
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.cpp -o CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.s
+
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o.requires:
+
+.PHONY : CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o.requires
+
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o.provides: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o.requires
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o.provides.build
+.PHONY : CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o.provides
+
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o.provides.build: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o
+
+
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o: ../src/FrameInterlocking.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.i: cmake_force
@@ -131,7 +155,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o.provides.build: CM
 
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o: ../src/FrameInterlockingTree.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlockingTree.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.i: cmake_force
@@ -155,7 +179,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o.provides.build
 
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o: ../src/FrameMesh.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameMesh.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.i: cmake_force
@@ -179,7 +203,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o.provides.build: CMakeFiles
 
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/main.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.i: cmake_force
@@ -203,7 +227,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/main.cpp.o.provides.build: CMakeFiles/Fram
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.o: ../src/Voxel/VPuzzleGraph.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VPuzzleGraph.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.i: cmake_force
@@ -227,7 +251,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VPuzzleGraph.cpp.o.provides.build: C
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o: ../src/Voxel/VoxelizedInterface.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedInterface.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.i: cmake_force
@@ -251,7 +275,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedInterface.cpp.o.provides.bu
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.o: ../src/Voxel/VoxelizedPart.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPart.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.i: cmake_force
@@ -275,7 +299,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPart.cpp.o.provides.build: 
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.o: ../src/Voxel/VoxelizedPartition.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPartition.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.i: cmake_force
@@ -299,7 +323,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPartition.cpp.o.provides.bu
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.o: ../src/Voxel/VoxelizedPuzzle.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedPuzzle.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.i: cmake_force
@@ -323,7 +347,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedPuzzle.cpp.o.provides.build
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o: ../src/Voxel/VoxelizedRenderCube.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedRenderCube.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.i: cmake_force
@@ -347,7 +371,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderCube.cpp.o.provides.b
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o: ../src/Voxel/VoxelizedRenderSphere.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedRenderSphere.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.i: cmake_force
@@ -371,7 +395,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/Voxel/VoxelizedRenderSphere.cpp.o.provides
 
 CMakeFiles/FrameInterlock_bin.dir/src/graph/DirectedGraphSSC.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/graph/DirectedGraphSSC.cpp.o: ../src/graph/DirectedGraphSSC.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/graph/DirectedGraphSSC.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/graph/DirectedGraphSSC.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/graph/DirectedGraphSSC.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraphSSC.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/graph/DirectedGraphSSC.cpp.i: cmake_force
@@ -395,7 +419,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/graph/DirectedGraphSSC.cpp.o.provides.buil
 
 CMakeFiles/FrameInterlock_bin.dir/src/graph/InterlockSDChecking.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/graph/InterlockSDChecking.cpp.o: ../src/graph/InterlockSDChecking.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/graph/InterlockSDChecking.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/graph/InterlockSDChecking.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/graph/InterlockSDChecking.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/InterlockSDChecking.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/graph/InterlockSDChecking.cpp.i: cmake_force
@@ -419,7 +443,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/graph/InterlockSDChecking.cpp.o.provides.b
 
 CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.o: CMakeFiles/FrameInterlock_bin.dir/flags.make
 CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.o: ../src/graph/UndirectedGraph.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.o -c /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/UndirectedGraph.cpp
 
 CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.i: cmake_force
@@ -445,6 +469,7 @@ CMakeFiles/FrameInterlock_bin.dir/src/graph/UndirectedGraph.cpp.o.provides.build
 FrameInterlock_bin_OBJECTS = \
 "CMakeFiles/FrameInterlock_bin.dir/src/Assembly.cpp.o" \
 "CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o" \
+"CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o" \
 "CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o" \
 "CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o" \
 "CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o" \
@@ -465,6 +490,7 @@ FrameInterlock_bin_EXTERNAL_OBJECTS =
 
 FrameInterlock_bin: CMakeFiles/FrameInterlock_bin.dir/src/Assembly.cpp.o
 FrameInterlock_bin: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o
+FrameInterlock_bin: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o
 FrameInterlock_bin: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o
 FrameInterlock_bin: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o
 FrameInterlock_bin: CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o
@@ -485,7 +511,7 @@ FrameInterlock_bin: nanogui/ext_build/glfw/src/libglfw3.a
 FrameInterlock_bin: libglew.a
 FrameInterlock_bin: nanogui/libnanogui.a
 FrameInterlock_bin: CMakeFiles/FrameInterlock_bin.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable FrameInterlock_bin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable FrameInterlock_bin"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/FrameInterlock_bin.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -495,6 +521,7 @@ CMakeFiles/FrameInterlock_bin.dir/build: FrameInterlock_bin
 
 CMakeFiles/FrameInterlock_bin.dir/requires: CMakeFiles/FrameInterlock_bin.dir/src/Assembly.cpp.o.requires
 CMakeFiles/FrameInterlock_bin.dir/requires: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o.requires
+CMakeFiles/FrameInterlock_bin.dir/requires: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o.requires
 CMakeFiles/FrameInterlock_bin.dir/requires: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o.requires
 CMakeFiles/FrameInterlock_bin.dir/requires: CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o.requires
 CMakeFiles/FrameInterlock_bin.dir/requires: CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o.requires

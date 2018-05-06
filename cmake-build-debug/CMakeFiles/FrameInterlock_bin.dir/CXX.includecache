@@ -40,6 +40,14 @@ fstream
 map
 -
 
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.cpp
+FrameInterfaceAnimation.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.h
+
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.h
+FrameInterface.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterface.h
+
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.cpp
 FrameInterlocking.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.h
@@ -111,6 +119,8 @@ FrameInterlocking.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.h
 graph/InterlockSDChecking.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/InterlockSDChecking.h
+FrameInterfaceAnimation.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.h
 
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/PuzzleCandidateFilter.h
 VoxelElement.h
@@ -243,6 +253,10 @@ VoxelizedRenderCube.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedRenderCube.h
 VoxelizedInterface.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedInterface.h
+Eigen/StdVector
+-
+igl/writeOBJ.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/igl/writeOBJ.h
 
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Voxel/VoxelizedRenderSphere.cpp
 VoxelizedRenderSphere.h
@@ -407,6 +421,10 @@ boost/multi_array.hpp
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedRenderCube.h
 VoxelizedInterface.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedInterface.h
+Eigen/StdVector
+-
+igl/writeOBJ.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/igl/writeOBJ.h
 
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedRenderSphere.h
 VoxelizedInterface.h

@@ -23,37 +23,152 @@ void FrameInterface::set_jonts(std::vector<std::shared_ptr<VoxelizedInterface>> 
     joint_voxels_ = joint_voxels;
 }
 
-void FrameInterface::draw_frame_mesh(FrameInterfaceRenderUnit &frame_unit)
+void FrameInterface::draw_frame_mesh(vector<FrameInterfaceRenderUnit> &frame_unit)
 {
-    FrameMesh render_mesh(colorcoder_, radius_);
-    vecVector3d points;
     for(int id = 0; id < pillars_.size(); id++)
     {
-        points.push_back(pillars_[id]->end_points_cood[0]);
-        points.push_back(pillars_[id]->end_points_cood[1]);
-    }
-
-    render_mesh.set_vertices(points);
-    for(int id = 0; id < pillars_.size(); id++)
-    {
-        render_mesh.add_edge(2 * id, 2 * id + 1);
-    }
-
-    render_mesh.draw(frame_unit.V, frame_unit.F, frame_unit.C);
-
-    int num_pillar = pillars_.size();
-    int num_face_pillar = frame_unit.C.rows() / num_pillar;
-    colorcoder_->request(num_pillar);
-    for(int id = 0; id < pillars_.size(); id++)
-    {
-        for(int jd = 0; jd < num_face_pillar; jd++)
+        if(id == 98)
         {
-            frame_unit.C.row(id * num_face_pillar + jd) = colorcoder_->get(pillars_[id]->index);
+            std::cout << "stop" << std::endl;
+        }
+        FrameInterfaceRenderUnit unit;
+        draw_pillar(pillars_[id].get(), unit);
+        unit.visible = true;
+        frame_unit.push_back(unit);
+    }
+    return;
+}
+
+
+void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &unit)
+{
+    auto get_face_vertices = [&](vecVector3d &points, FramePillar *pillar, int k)
+    {
+        points.clear();
+        VoxelizedInterface *voxel_interface = joint_voxels_[pillar->cube_id[k]].get();
+        int face_id = pillar->pos_in_cube_face[k];
+        Vector3d center = pillar->end_points_cood[k];
+        Vector3d dX((double)cube_size_ * voxel_interface->Nx /2, 0, 0);
+        Vector3d dY(0, (double)cube_size_ * voxel_interface->Ny /2, 0);
+        Vector3d dZ(0, 0, (double)cube_size_ * voxel_interface->Nz /2);
+        switch(face_id)
+        {
+            case 0:
+            {
+                //+X
+                points.push_back(center - dY - dZ);
+                points.push_back(center - dY + dZ);
+                points.push_back(center + dY + dZ);
+                points.push_back(center + dY - dZ);
+                break;
+            }
+            case 1:
+            {
+                //-X
+                points.push_back(center - dY - dZ);
+                points.push_back(center + dY - dZ);
+                points.push_back(center + dY + dZ);
+                points.push_back(center - dY + dZ);
+                break;
+            }
+            case 2:
+            {
+                //+Y
+                points.push_back(center - dX - dZ);
+                points.push_back(center + dX - dZ);
+                points.push_back(center + dX + dZ);
+                points.push_back(center - dX + dZ);
+                break;
+            }
+            case 3:
+            {
+                //-Y
+                points.push_back(center - dX - dZ);
+                points.push_back(center - dX + dZ);
+                points.push_back(center + dX + dZ);
+                points.push_back(center + dX - dZ);
+                break;
+            }
+            case 4:
+            {
+                //+Z
+                points.push_back(center - dX - dY);
+                points.push_back(center - dX + dY);
+                points.push_back(center + dX + dY);
+                points.push_back(center + dX - dY);
+                break;
+            }
+            case 5:
+            {
+                //-Z
+                points.push_back(center - dX - dY);
+                points.push_back(center + dX - dY);
+                points.push_back(center + dX + dY);
+                points.push_back(center - dX + dY);
+                break;
+            }
+        }
+    };
+
+    auto add_quad_into_mesh = [&](int v0, int v1, int v2, int v3, vecVector3i &faces)
+    {
+        faces.push_back(Vector3i(v0, v1, v2));
+        faces.push_back(Vector3i(v2, v3, v0));
+    };
+
+    vecVector3d points[2];
+    unit.V = MatrixXd(8, 3);
+    for(int kd = 0; kd < 2; kd++)
+    {
+        get_face_vertices(points[kd], pillar, kd);
+        for(int jd = 0; jd < 4; jd++)
+        {
+            unit.V.row(kd * 4 + jd) = points[kd][jd].transpose();
         }
     }
 
-    frame_unit.dV = RowVector3d(0, 0, 0);
-    frame_unit.visible = true;
+    int conn[4];
+    Vector3d center_vec = pillar->end_points_cood[1] - pillar->end_points_cood[0];
+    double eps = 1e-5;
+    for(int id = 0; id < 4; id++)
+    {
+        Vector3d p0 = points[0][id];
+        for(int jd = 0; jd < 4; jd++)
+        {
+            Vector3d p1 = points[1][jd];
+            if((p0 - p1).cross(center_vec).norm() < eps)
+            {
+                conn[id] = jd + 4;
+                break;
+            }
+        }
+    }
+
+
+    vecVector3i faces;
+    //create bottom
+    for(int kd = 0; kd < 2; kd++)
+    {
+        add_quad_into_mesh(4 * kd , 4 * kd + 1, 4 * kd + 2, 4 * kd + 3, faces);
+    }
+
+    //create outside
+    for(int id = 0; id < 4; id++)
+    {
+        add_quad_into_mesh((id + 1)%4, id, conn[id] , conn[(id + 1) % 4], faces);
+    }
+
+    unit.F = MatrixXi(faces.size(), 3);
+    unit.C = MatrixXd(faces.size(), 3);
+    colorcoder_->request(pillars_.size() + 2);
+    for(int id = 0; id < faces.size(); id++) {
+        unit.F.row(id) = faces[id];
+        unit.C.row(id) = colorcoder_->get(pillar->index);
+    }
+    unit.dV = Vector3d(0, 0, 0);
+    unit.pillar_index = pillar->index;
+
+    return;
 }
 
 void FrameInterface::draw_joints(vector<FrameInterfaceRenderUnit> &render_list, bool is_draw_joints_sphere)
@@ -61,43 +176,59 @@ void FrameInterface::draw_joints(vector<FrameInterfaceRenderUnit> &render_list, 
     for(int id = 0; id < joint_voxels_.size(); id++)
     {
         std::shared_ptr<VoxelizedInterface> voxel_interface = joint_voxels_[id];
-        FrameInterfaceRenderUnit unit;
-
         if(is_draw_joints_sphere)
         {
+            FrameInterfaceRenderUnit unit;
             VoxelizedRenderSphere render_sphere(*voxel_interface);
             render_sphere.sphere_radius = cube_size_ / 2 * 0.7;
             render_sphere.cylinder_length = cube_size_;
             render_sphere.hwdith = cube_size_;
             render_sphere.rendering(unit.V, unit.F, unit.C);
+
+            unit.dV = frame_mesh_->points_[id]
+                      - Vector3d(cube_size_ * voxel_interface->Nx /2,
+                                 cube_size_ * voxel_interface->Ny /2,
+                                 cube_size_ * voxel_interface->Nz /2);
+            unit.visible = true;
+            render_list.push_back(unit);
         }
         else
         {
+            vecMatrixXd Vs;
+            vecMatrixXd Cs;
+            vecMatrixXi Fs;
+            vector<int> indexs;
             VoxelizedRenderCube render_cube(*voxel_interface);
             render_cube.hx = render_cube.hy = render_cube.hz = cube_size_;
-            render_cube.rendering(unit.V, unit.F, unit.C);
+            render_cube.rendering(Vs, Fs, Cs, indexs);
+            for(int jd = 0; jd < Vs.size(); jd++)
+            {
+                FrameInterfaceRenderUnit unit;
+                unit.V = Vs[jd];
+                unit.F = Fs[jd];
+                unit.C = Cs[jd];
+                unit.dV = frame_mesh_->points_[id]
+                          - Vector3d(cube_size_ * voxel_interface->Nx /2,
+                                     cube_size_ * voxel_interface->Ny /2,
+                                     cube_size_ * voxel_interface->Nz /2);
+                unit.visible = true;
+                unit.pillar_index = indexs[jd];
+                render_list.push_back(unit);
+            }
         }
-
-        unit.dV = frame_mesh_->points_[id]
-                  - Vector3d(cube_size_ * voxel_interface->Nx /2,
-                             cube_size_ * voxel_interface->Ny /2,
-                             cube_size_ * voxel_interface->Nz /2);
-
-        unit.visible = true;
-        render_list.push_back(unit);
     }
+    return;
 }
 
 void FrameInterface::draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_frame, bool is_draw_joints,  bool is_draw_joints_sphere)
 {
-
     vector<FrameInterfaceRenderUnit> render_unit;
 
     if(is_draw_frame)
     {
-        FrameInterfaceRenderUnit frame_unit;
+        vector<FrameInterfaceRenderUnit> frame_unit;
         draw_frame_mesh(frame_unit);
-        render_unit.push_back(frame_unit);
+        render_unit = frame_unit;
     }
 
     if(is_draw_joints)
@@ -165,7 +296,7 @@ void FrameInterface::create_void_joints() {
     }
 }
 
-void FrameInterface::init_joints()
+void FrameInterface::init_joints_from_frame_mesh()
 {
     create_void_joints();
 
@@ -499,8 +630,10 @@ void FrameInterface::read_fpuz(string file_name)
         pillar->cube[0] = joint_voxels_[e0].get();
         pillar->cube[1] = joint_voxels_[e1].get();
         pillar->index = id;
-        pillar->pos_in_cube_face[0] = f0;
-        pillar->pos_in_cube_face[1] = f1;
+        pillar->pos_in_cube_face[0] = f0 % 6;
+        pillar->pos_in_cube_face[1] = f1 % 6;
+        pillar->cube_id[0] = e0;
+        pillar->cube_id[1] = e1;
         pillar->end_points_cood[0] = points[e0] + Vector3d(dX[f0 % 6], dY[f0 % 6], dZ[f0 % 6]) * num_voxel_in_joint / 2 * cube_size_;
         pillar->end_points_cood[1] = points[e1] + Vector3d(dX[f1 % 6], dY[f1 % 6], dZ[f1 % 6]) * num_voxel_in_joint / 2 * cube_size_;
         pillars_.push_back(pillar);
@@ -523,10 +656,12 @@ void FrameInterface::add_pillar(int f0, int f1)
     pillar->cube[0] = joint_voxels_[e0].get();
     pillar->cube[1] = joint_voxels_[e1].get();
     pillar->index = pillars_.size();
-    pillar->pos_in_cube_face[0] = f0;
-    pillar->pos_in_cube_face[1] = f1;
-    pillar->end_points_cood[0] = frame_mesh_->points_[e0] + Vector3d(dX[f0 % 6], dY[f0 % 6], dZ[f0 % 6]) *  num_voxel_in_joint / 2 * cube_size_;
-    pillar->end_points_cood[1] = frame_mesh_->points_[e1] + Vector3d(dX[f1 % 6], dY[f1 % 6], dZ[f1 % 6]) * num_voxel_in_joint / 2 * cube_size_;
+    pillar->pos_in_cube_face[0] = f0 % 6;
+    pillar->pos_in_cube_face[1] = f1 % 6;
+    pillar->cube_id[0] = e0;
+    pillar->cube_id[1] = e1;
+    pillar->end_points_cood[0] = frame_mesh_->points_[e0] + Vector3d(dX[f0 % 6], dY[f0 % 6], dZ[f0 % 6]) *  (double)num_voxel_in_joint / 2 * cube_size_;
+    pillar->end_points_cood[1] = frame_mesh_->points_[e1] + Vector3d(dX[f1 % 6], dY[f1 % 6], dZ[f1 % 6]) * (double )num_voxel_in_joint / 2 * cube_size_;
     pillars_.push_back(pillar);
 
     fill_one_face_of_joints(joint_voxels_[e0].get(), f0 % 6, pillar->index);
@@ -681,3 +816,45 @@ std::shared_ptr<Assembly> FrameInterface::output_assembly() {
 
     return assembly_;
 }
+
+void FrameInterface::write_obj(string file_name, bool is_draw_frame, bool is_draw_joints)
+{
+    if(file_name != "")
+    {
+        vector<int> pillars_element_count;
+        pillars_element_count.resize(pillars_.size(), 0);
+
+        vector<FrameInterfaceRenderUnit> render_unit;
+        if(is_draw_frame)
+        {
+            vector<FrameInterfaceRenderUnit> frame_unit;
+            draw_frame_mesh(frame_unit);
+            render_unit = frame_unit;
+        }
+
+        if(is_draw_joints)
+        {
+            draw_joints(render_unit, false);
+        }
+
+        //render
+        for(FrameInterfaceRenderUnit &unit : render_unit)
+        {
+            if(unit.visible)
+            {
+                int index = unit.pillar_index;
+                int eid = pillars_element_count[index] ++;
+                string name = file_name + "part_" + std::to_string(index) + "_elrement_" + std::to_string(eid) + ".obj";
+                for (int id = 0; id < unit.V.rows(); id++) {
+                    unit.V.row(id) = unit.V.row(id) + unit.dV;
+                }
+                igl::writeOBJ(name, unit.V, unit.F);
+            }
+        }
+    }
+
+    return;
+}
+
+
+

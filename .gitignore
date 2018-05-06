@@ -1,5 +1,5 @@
-cmake-build-release/
-cmake-build-debug/
+cmake-build-release/*
+cmake-build-debug/*
 
 # Prerequisites
 *.d
@@ -36,3 +36,4 @@ cmake-build-debug/
 *.xml
 .idea/workspace.xml
 .idea/workspace.xml
+*.make

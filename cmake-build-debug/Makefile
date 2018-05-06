@@ -315,6 +315,33 @@ src/FrameInterface.cpp.s:
 	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.s
 .PHONY : src/FrameInterface.cpp.s
 
+src/FrameInterfaceAnimation.o: src/FrameInterfaceAnimation.cpp.o
+
+.PHONY : src/FrameInterfaceAnimation.o
+
+# target to build an object file
+src/FrameInterfaceAnimation.cpp.o:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o
+.PHONY : src/FrameInterfaceAnimation.cpp.o
+
+src/FrameInterfaceAnimation.i: src/FrameInterfaceAnimation.cpp.i
+
+.PHONY : src/FrameInterfaceAnimation.i
+
+# target to preprocess a source file
+src/FrameInterfaceAnimation.cpp.i:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.i
+.PHONY : src/FrameInterfaceAnimation.cpp.i
+
+src/FrameInterfaceAnimation.s: src/FrameInterfaceAnimation.cpp.s
+
+.PHONY : src/FrameInterfaceAnimation.s
+
+# target to generate assembly for a file
+src/FrameInterfaceAnimation.cpp.s:
+	$(MAKE) -f CMakeFiles/FrameInterlock_bin.dir/build.make CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.s
+.PHONY : src/FrameInterfaceAnimation.cpp.s
+
 src/FrameInterlocking.o: src/FrameInterlocking.cpp.o
 
 .PHONY : src/FrameInterlocking.o
@@ -720,6 +747,9 @@ help:
 	@echo "... src/FrameInterface.o"
 	@echo "... src/FrameInterface.i"
 	@echo "... src/FrameInterface.s"
+	@echo "... src/FrameInterfaceAnimation.o"
+	@echo "... src/FrameInterfaceAnimation.i"
+	@echo "... src/FrameInterfaceAnimation.s"
 	@echo "... src/FrameInterlocking.o"
 	@echo "... src/FrameInterlocking.i"
 	@echo "... src/FrameInterlocking.s"

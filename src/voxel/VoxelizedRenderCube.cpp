@@ -71,8 +71,6 @@ void VoxelizedRenderCube::rendering(MatrixXd &V, MatrixXi &F, MatrixXd &C)
 
     return;
 }
-
-
 void VoxelizedRenderCube::add_color_by_groupID(MatrixXd &C)
 {
     colorcoder_->request(compute_max_part_id() + 2);
@@ -130,6 +128,107 @@ void VoxelizedRenderCube::add_color_by_accessibility(MatrixXd &C)
         for(int jd = 0; jd < 12; jd++)
         {
             C.row(id * 12 + jd) = Color.row(id);
+        }
+    }
+    return;
+}
+
+void VoxelizedRenderCube::rendering(vecMatrixXd &Vs, vecMatrixXi &Fs, vecMatrixXd &Cs, vector<int> &indexs)
+{
+    colorcoder_->request(compute_max_part_id() + 2);
+    //create a single cube
+    MatrixXd cubeV(8, 3);
+    cubeV <<    0, 0, 0,
+            0, 0, hz,
+            0, hy, 0,
+            0, hy, hz,
+            hx, 0, 0,
+            hx, 0, hz,
+            hx, hy, 0,
+            hx, hy, hz;
+
+    MatrixXi cubeF(12, 3);
+    cubeF <<1, 7, 5,
+            1, 3, 7,
+            1, 4, 3,
+            1, 2, 4,
+            3, 8, 7,
+            3, 4, 8,
+            5, 7, 8,
+            5, 8, 6,
+            1, 5, 6,
+            1, 6, 2,
+            2, 6, 8,
+            2, 8, 4;
+
+    auto create_part = [&](int index)
+    {
+        int part_voxels = 0;
+
+        for (int ix = 0; ix < Nx; ix++)
+        {
+            for (int iy = 0; iy < Ny; iy++)
+            {
+                for (int iz = 0; iz < Nz; iz++)
+                {
+                    if ((*voxel_)[ix][iy][iz] == index)
+                        part_voxels++;
+                }
+            }
+        }
+
+        MatrixXd V = MatrixXd(part_voxels * 8, 3);
+        MatrixXi F = MatrixXi(part_voxels * 12, 3);
+        int prev_voxel = 0;
+        for (int ix = 0; ix < Nx; ix++)
+        {
+            for (int iy = 0; iy < Ny; iy++)
+            {
+                for (int iz = 0; iz < Nz; iz++)
+                {
+                    if ((*voxel_)[ix][iy][iz] == index)
+                    {
+                        MatrixXd tV = cubeV;
+                        Vector3d trans(ix * hx, iy * hy, iz * hz);
+                        for (int id = 0; id < 8; id++)
+                            tV.row(id) += trans;
+                        MatrixXi tF = cubeF;
+                        for (int id = 0; id < 12; id++)
+                        {
+                            for (int jd = 0; jd < 3; jd++)
+                                tF(id, jd) = cubeF(id, jd) - 1 + 8 * prev_voxel;
+                        }
+                        V.block(8 * prev_voxel, 0, 8, 3) = tV;
+                        F.block(12 * prev_voxel, 0, 12, 3) = tF;
+                        prev_voxel++;
+                    }
+                }
+            }
+        }
+
+        Vs.push_back(V);
+        Fs.push_back(F);
+
+        MatrixXd C = MatrixXd(F.rows(), 3);
+        for(int id = 0; id < F.rows(); id++)
+        {
+            C.row(id) = colorcoder_->get(index);
+        }
+        Cs.push_back(C);
+        indexs.push_back(index);
+    };
+
+    std::map<int, bool> visited;
+    for (int ix = 0; ix < Nx; ix++) {
+        for (int iy = 0; iy < Ny; iy++) {
+            for (int iz = 0; iz < Nz; iz++) {
+                int index = (*voxel_)[ix][iy][iz];
+                if(index != -1 && visited.find(index) == visited.end())
+                {
+                    create_part(index);
+                    visited.insert(std::make_pair(index, true));
+                }
+            }
         }
     }
     return;

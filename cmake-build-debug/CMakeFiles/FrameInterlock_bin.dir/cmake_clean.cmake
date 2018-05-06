@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/FrameInterlock_bin.dir/src/Assembly.cpp.o"
   "CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o"
+  "CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o"
   "CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o"
   "CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o"
   "CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o"

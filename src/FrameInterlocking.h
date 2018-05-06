@@ -22,8 +22,6 @@ public:
 
 public:
 
-
-
     std::shared_ptr<FrameInterface> generate_interlocking();
 
     std::shared_ptr<FrameInterface> output_present_frame();

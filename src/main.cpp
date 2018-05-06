@@ -7,6 +7,7 @@ string shared_ptr;
 std::shared_ptr<ColorCoding> colorcoder;
 std::shared_ptr<FrameInterface> frame_interface;
 std::shared_ptr<FrameInterlocking> frame_interlock;
+std::shared_ptr<FrameInterfaceAnimation> frame_animation;
 
 int main() {
     init();
@@ -16,7 +17,6 @@ int main() {
         viewer.ngui->addWindow(Eigen::Vector2i(220, 10), "Frame Render");
         viewer.ngui->addGroup("Parameter");
         viewer.ngui->addVariable("Joint size", para.render_joint_size_);
-        viewer.ngui->addVariable("Pillar radius", para.render_pillar_radius);
         viewer.ngui->addVariable("Joint num voxel", para.render_num_joint_voxel);
 
         viewer.ngui->addGroup("Render Option");
@@ -49,8 +49,10 @@ int main() {
 
         viewer.ngui->addGroup("I/O");
         viewer.ngui->addButton("Read .obj", [](){read_mesh_file();});
+        viewer.ngui->addButton("Write .obj", [](){write_frame_obj();});
         viewer.ngui->addButton("Read .fpuz", [](){read_fpuz();});
         viewer.ngui->addButton("Write .fpuz", [](){write_fpuz();});
+
 
         viewer.ngui->addGroup("Render");
         viewer.ngui->addButton("Draw", [](){draw_frame_mesh();});
@@ -75,6 +77,10 @@ int main() {
 
         viewer.ngui->addButton("generate_key", []{generate_key();});
         viewer.ngui->addButton("generate children", []{generate_children();});
+        viewer.ngui->addButton("automatic", []{automatic_generate();});
+        viewer.ngui->addButton("go back", go_back);
+
+        viewer.ngui->addGroup("Graph");
         viewer.ngui->addButton("Draw Full Graph", [](){
             if (frame_interface)
                 write_show_puzzle_blocking_graph(frame_interface);
@@ -87,6 +93,50 @@ int main() {
         {
             if (frame_interface)
                 write_show_puzzle_blocling_graph_debug(frame_interlock.get());
+        });
+        viewer.ngui->addGroup("Animation");
+        viewer.ngui->addVariable<bool>("Animation", [&](bool value){
+            if(value)
+            {
+                if(init_animation())
+                {
+                    para.is_animation = true;
+                }
+                else
+                {
+                    para.is_animation = false;
+                }
+            }
+            else
+            {
+                para.is_animation = value;
+            }
+            }, [](){return para.is_animation;});
+
+        auto slider = viewer.ngui->addVariable<double>("ratio", [&](double ratio)
+        {
+            if(para.is_animation)
+            {
+                para.animation_ratio = ratio;
+                draw_animation();
+            }
+        }, [&](){return para.animation_ratio;});
+        slider->setSpinnable(true);
+        slider->setMinMaxValues(0, 1);
+        slider->setValueIncrement(0.005);
+
+        viewer.ngui->addButton("Animation", []()
+        {
+            if(para.is_animation)
+            {
+                for(int id = 0; id < 100; id++)
+                {
+                    para.animation_ratio = id / 100.0;
+                    draw_animation();
+
+                    usleep(100000);
+                }
+            }
         });
 
         viewer.screen->performLayout();

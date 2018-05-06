@@ -27,6 +27,8 @@ public:
 
     vector<int> num_voxel_left_in_joints;
 
+    vecVector3d disassembling_directions;
+
 public:
 
     vector<std::shared_ptr<TreeNode>> children;
@@ -67,9 +69,11 @@ public:
 
     std::shared_ptr<FrameInterface> output_frame(TreeNode *node);
 
+    void compute_legal_disassembling_direction(TreeNode *node, FramePillar *pillar, vector<int> &legal_nrm);
+
 public:
 
-    void accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, int *part_num_voxels);
+    void accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, int *part_num_voxels, Vector3d direction);
 
     void sort_children(TreeNode *node);
 

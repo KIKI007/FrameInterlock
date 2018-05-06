@@ -590,6 +590,12 @@
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterface.h">
 			<Option target="FrameInterlock_bin"/>
 		</Unit>
+		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.cpp">
+			<Option target="FrameInterlock_bin"/>
+		</Unit>
+		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.h">
+			<Option target="FrameInterlock_bin"/>
+		</Unit>
 		<Unit filename="/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.cpp">
 			<Option target="FrameInterlock_bin"/>
 		</Unit>

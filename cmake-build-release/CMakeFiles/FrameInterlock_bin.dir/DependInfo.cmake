@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/Assembly.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/src/Assembly.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterface.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/src/FrameInterface.cpp.o"
+  "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlocking.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlockingTree.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/src/FrameInterlockingTree.cpp.o"
   "/Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameMesh.cpp" "/Users/ziqwang/Documents/GitHub/FrameInterlock/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/src/FrameMesh.cpp.o"

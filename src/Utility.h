@@ -15,6 +15,7 @@
 #include "FrameInterface.h"
 #include "FrameInterlocking.h"
 #include "graph/InterlockSDChecking.h"
+#include "FrameInterfaceAnimation.h"
 
 using std::string;
 using Eigen::MatrixXd;
@@ -25,6 +26,8 @@ extern std::string shared_ptr;
 extern std::shared_ptr<ColorCoding> colorcoder;
 extern std::shared_ptr<FrameInterface> frame_interface;
 extern std::shared_ptr<FrameInterlocking> frame_interlock;
+extern std::shared_ptr<FrameInterfaceAnimation> frame_animation;
+
 
 struct Parameter
 {
@@ -53,6 +56,10 @@ struct Parameter
     int render_add_pillar_f1;
 
     int interlock_children_id;
+
+    bool is_animation;
+
+    double animation_ratio;
 }para;
 
 void draw_frame_mesh()
@@ -137,6 +144,7 @@ void add_pillar()
         if(para.render_add_pillar_f0 >= 0 && para.render_add_pillar_f1 >= 0)
         {
             frame_interface->add_pillar(para.render_add_pillar_f0, para.render_add_pillar_f1);
+            draw_frame_mesh();
         }
     }
 }
@@ -187,7 +195,7 @@ void read_mesh_file()
             frame_interface.reset();
             frame_interface = std::make_shared<FrameInterface>(FrameInterface(para.render_pillar_radius, para.render_joint_size_, para.render_num_joint_voxel, colorcoder));
             frame_interface->set_frame_mesh(frameMesh);
-            frame_interface->init_joints();
+            frame_interface->init_joints_from_frame_mesh();
             frame_interlock = std::make_shared<FrameInterlocking>(FrameInterlocking(frame_interface));
             draw_frame_mesh();
         }
@@ -200,8 +208,7 @@ void init()
     shared_ptr += "/tutorial/shared/";
 
     para.render_num_joint_voxel = 3;
-    para.render_joint_size_ = 0.05;
-    para.render_pillar_radius = 0.05;
+    para.render_joint_size_ = 0.01;
     para.render_joint_knots = true;
     para.render_frame_mesh = true;
     para.render_show_pillar_index = false;
@@ -212,6 +219,8 @@ void init()
     para.render_add_pillar_f0 = -1;
     para.render_add_pillar_f1 = -1;
     para.interlock_children_id = 0;
+    para.is_animation = false;
+    para.animation_ratio = 0;
 
     Vector3d colorTable[10] = {
             Vector3d(0.9, 0.2, 0.2),   //  1: Red
@@ -234,8 +243,48 @@ void init()
 
     colorcoder = std::make_shared<ColorCoding>(ColorCoding(render_colorTab));
     frame_interlock = nullptr;
+    frame_animation = nullptr;
 }
 
+void go_back()
+{
+    if(frame_interlock)
+    {
+        if(frame_interlock->tree_->present_node_)
+        {
+            TreeNode *present = frame_interlock->tree_->present_node_;
+            if(present ->parent)
+            {
+                frame_interlock->tree_->present_node_ = present->parent;
+                frame_interface = frame_interlock->output_present_frame();
+                draw_frame_mesh();
+            }
+        }
+    }
+    return;
+}
+
+void write_frame_obj()
+{
+    if(frame_interface)
+    {
+        string path = "";
+        path = igl::file_dialog_save();
+        if(path != "")
+        {
+
+            for(int id = path.size() - 1; id >= 0; id--)
+            {
+                if(path[id - 1] == '/')
+                {
+                    path.erase(id, path.size());
+                    break;
+                }
+            }
+            frame_interface->write_obj(path, para.render_frame_mesh, para.render_joint_knots);
+        }
+    }
+}
 void write_show_puzzle_blocking_graph(std::shared_ptr<FrameInterface> interf)
 {
     if(interf)
@@ -264,6 +313,7 @@ void write_show_puzzle_blocking_graph(std::shared_ptr<FrameInterface> interf)
     }
     return;
 }
+
 
 void write_show_puzzle_blocling_graph_debug(FrameInterlocking *frame_interlock)
 {
@@ -334,6 +384,16 @@ void generate_children()
             draw_frame_mesh();
         }
     }
+}
+
+void automatic_generate()
+{
+    if(frame_interlock)
+    {
+        frame_interface = frame_interlock->generate_interlocking();
+        draw_frame_mesh();
+    }
+    return;
 }
 
 void generate_key()
@@ -409,6 +469,56 @@ void graph_test()
     }
     std::cout << std::endl;
     return;
+}
+
+bool init_animation()
+{
+    if(frame_interface && frame_interlock)
+    {
+
+        TreeNode *present = frame_interlock->tree_->present_node_;
+        if(present == nullptr)
+            return  false;
+        if(present->num_pillar_finished != frame_interface->pillars_.size())
+            return false;
+
+        frame_interface->cube_size_ = para.render_joint_size_;
+        frame_interface->radius_ = para.render_pillar_radius;
+        frame_animation = std::make_shared<FrameInterfaceAnimation>(FrameInterfaceAnimation(*frame_interface));
+        vector<int> sequences;
+
+        for(int id = 0; id < present->disassembly_order.size(); id++)
+            sequences.push_back(present->disassembly_order[id]->index);
+        frame_animation->set_disassembling_sequences(sequences);
+        vecVector3d directions = present->disassembling_directions;
+        frame_animation->set_disassembling_direction(directions);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void close_animation()
+{
+    frame_animation.reset();
+}
+
+void draw_animation()
+{
+    if(para.is_animation && frame_animation)
+    {
+        MatrixXd V;
+        MatrixXi F;
+        MatrixXd C;
+        frame_animation->draw_animation(V, F, C, para.animation_ratio);
+        viewer.data.clear();
+        viewer.data.set_mesh(V, F);
+        viewer.data.set_colors(C);
+        viewer.draw();
+        glfwSwapBuffers(viewer.window);
+    }
 }
 
 #endif //FRAMEINTERLOCK_UTILITY_H

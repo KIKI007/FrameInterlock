@@ -85,7 +85,6 @@ void VPuzzleGraph::compute_two_loops_candidate_voxels(int XYZ)
                     for (int i3 = 0; i3 < input_.out_ID_[XYZ].size(); i3++)
                     {
                         int P3 = input_.out_ID_[XYZ][i3];
-                        std::cout << i0 << ", " << i1 << ", " << i2 << ", " << i3 << std::endl;
                         if(dist_graph[XYZ](P3, P2) != -1)
                         {
                             if(dist_graph[XYZ](P1, P2) != -1 &&
@@ -130,7 +129,6 @@ void VPuzzleGraph::add_into_double_filter(int XYZ,
 
     element.data_ = joint;
     //******************* Weight Calculation *************************//
-    std::cout << "weight" << std::endl;
     element.weight = 0;
     element.weight +=    std::pow(input_.in_voxels[XYZ][i0]->size(), 2)
                          + std::pow(input_.out_voxels[XYZ][i1]->size(), 2)
