@@ -42,7 +42,8 @@ void FrameInterface::draw_frame_mesh(vector<FrameInterfaceRenderUnit> &frame_uni
 
 void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &unit)
 {
-    auto get_face_vertices = [&](vecVector3d &points, FramePillar *pillar, int k)
+
+    auto get_face_vertices = [&](vecVector3d &points, Vector3d &direction, FramePillar *pillar, int k)
     {
         points.clear();
         VoxelizedInterface *voxel_interface = joint_voxels_[pillar->cube_id[k]].get();
@@ -60,6 +61,7 @@ void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &
                 points.push_back(center - dY + dZ);
                 points.push_back(center + dY + dZ);
                 points.push_back(center + dY - dZ);
+                direction = dX * 2;
                 break;
             }
             case 1:
@@ -69,6 +71,7 @@ void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &
                 points.push_back(center + dY - dZ);
                 points.push_back(center + dY + dZ);
                 points.push_back(center - dY + dZ);
+                direction = -dX * 2;
                 break;
             }
             case 2:
@@ -78,6 +81,7 @@ void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &
                 points.push_back(center + dX - dZ);
                 points.push_back(center + dX + dZ);
                 points.push_back(center - dX + dZ);
+                direction = dY * 2;
                 break;
             }
             case 3:
@@ -87,6 +91,7 @@ void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &
                 points.push_back(center - dX + dZ);
                 points.push_back(center + dX + dZ);
                 points.push_back(center + dX - dZ);
+                direction = -dY * 2;
                 break;
             }
             case 4:
@@ -96,6 +101,7 @@ void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &
                 points.push_back(center - dX + dY);
                 points.push_back(center + dX + dY);
                 points.push_back(center + dX - dY);
+                direction = dZ * 2;
                 break;
             }
             case 5:
@@ -105,6 +111,7 @@ void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &
                 points.push_back(center + dX - dY);
                 points.push_back(center + dX + dY);
                 points.push_back(center - dX + dY);
+                direction = -dZ * 2;
                 break;
             }
         }
@@ -116,46 +123,119 @@ void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &
         faces.push_back(Vector3i(v2, v3, v0));
     };
 
+    auto add_tri_into_mesh = [&](int v0, int v1, int v2, vecVector3i &faces)
+    {
+        faces.push_back(Vector3i(v0, v1, v2));
+    };
+
     vecVector3d points[2];
-    unit.V = MatrixXd(8, 3);
+    Vector3d direction[2];
     for(int kd = 0; kd < 2; kd++)
     {
-        get_face_vertices(points[kd], pillar, kd);
-        for(int jd = 0; jd < 4; jd++)
-        {
-            unit.V.row(kd * 4 + jd) = points[kd][jd].transpose();
-        }
+        get_face_vertices(points[kd], direction[kd], pillar, kd);
     }
 
-    int conn[4];
-    Vector3d center_vec = pillar->end_points_cood[1] - pillar->end_points_cood[0];
     double eps = 1e-5;
+    auto four_points_in_one_plane =[&](Vector3d p0, Vector3d p1, Vector3d p2, Vector3d p3)->bool
+    {
+        Eigen::Matrix3d mat;
+        mat.col(0) = p1 - p0;
+        mat.col(1) = p2 - p0;
+        mat.col(2) = p3 - p0;
+        if(std::abs(mat.determinant()) < eps)
+            return true;
+        else
+            return false;
+    };
+
+    int conn[4] = {0, 0, 0, 0};
+
+    bool find_correspond = false;
     for(int id = 0; id < 4; id++)
     {
         Vector3d p0 = points[0][id];
+        Vector3d p1 = points[0][(id + 1) % 4];
         for(int jd = 0; jd < 4; jd++)
         {
-            Vector3d p1 = points[1][jd];
-            if((p0 - p1).cross(center_vec).norm() < eps)
+            Vector3d p2 = points[1][jd];
+            Vector3d p3 = points[1][(jd + 3) % 4];
+            if((p0 - p1).cross(p2 - p3).norm() < eps && (p0 -p2).cross(p1- p3).norm() <eps)
             {
-                conn[id] = jd + 4;
+                for(int kd = 0; kd < 4; kd++)
+                    conn[(id + kd)%4] = (jd - kd + 4) % 4 + 4;
+                find_correspond = true;
                 break;
             }
         }
+        if(find_correspond)
+            break;
     }
-
-
     vecVector3i faces;
-    //create bottom
-    for(int kd = 0; kd < 2; kd++)
-    {
-        add_quad_into_mesh(4 * kd , 4 * kd + 1, 4 * kd + 2, 4 * kd + 3, faces);
-    }
 
-    //create outside
-    for(int id = 0; id < 4; id++)
+    if(direction[0].cross(direction[1]).norm() < eps)
     {
-        add_quad_into_mesh((id + 1)%4, id, conn[id] , conn[(id + 1) % 4], faces);
+        unit.V = MatrixXd(8, 3);
+        for(int id = 0; id < 2; id++)
+        {
+            for(int jd = 0; jd < 4; jd++)
+                unit.V.row(id * 4 + jd) = points[id][jd].transpose();
+        }
+
+        //create bottom
+        for(int kd = 0; kd < 2; kd++)
+        {
+            add_quad_into_mesh(4 * kd , 4 * kd + 1, 4 * kd + 2, 4 * kd + 3, faces);
+        }
+
+        //create outside
+        for(int id = 0; id < 4; id++)
+        {
+            add_quad_into_mesh((id + 1)%4, id, conn[id] , conn[(id + 1) % 4], faces);
+        }
+    }
+    else
+    {
+        Vector3d edgevec = direction[1].cross(direction[0]);
+        vecVector3d plist;
+        for(int id = 0; id < 4; id++)
+        {
+            Vector3d p0 = points[0][id];
+            Vector3d p1 = points[0][(id + 1)%4];
+            if((p1 - p0).cross(edgevec).norm() < eps && (p1 - p0).dot(edgevec) > 0)
+            {
+                for(int kd = 0; kd < 4; kd++)
+                {
+                    plist.push_back(points[0][(id + kd)%4]);
+                }
+                for(int kd = 0; kd < 4; kd++)
+                {
+                    plist.push_back(points[1][conn[(id + kd)%4] - 4]);
+                }
+                for(int kd = 0; kd < 4; kd++)
+                {
+                    plist.push_back(points[0][(id + kd)%4] + direction[0]);
+                }
+                break;
+            }
+        }
+
+        unit.V = MatrixXd(plist.size(), 3);
+        for(int id = 0; id < plist.size(); id++)
+            unit.V.row(id) = plist[id];
+
+        add_quad_into_mesh(0, 1, 2, 3, faces);
+        add_quad_into_mesh(4, 7, 6, 5, faces);
+        add_quad_into_mesh(2, 6, 7, 3, faces);
+
+        add_quad_into_mesh(0, 8, 9, 1, faces);
+        add_quad_into_mesh(8, 11, 10, 9, faces);
+        add_quad_into_mesh(10, 11, 4 ,5, faces);
+
+        add_quad_into_mesh(0, 3, 11, 8, faces);
+        add_quad_into_mesh(3, 7, 4, 11, faces);
+
+        add_quad_into_mesh(1, 9, 10, 2, faces);
+        add_quad_into_mesh(10, 5, 6, 2, faces);
     }
 
     unit.F = MatrixXi(faces.size(), 3);

@@ -216,8 +216,8 @@ void init()
     para.render_show_joint_face_index = false;
     para.render_show_joint_index = false;
     para.render_foucus_joint_index = -1;
-    para.render_add_pillar_f0 = -1;
-    para.render_add_pillar_f1 = -1;
+    para.render_add_pillar_f0 = 306;
+    para.render_add_pillar_f1 = 190;
     para.interlock_children_id = 0;
     para.is_animation = false;
     para.animation_ratio = 0;

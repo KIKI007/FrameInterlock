@@ -2,14 +2,13 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/Utility.h" line="330" />
-    <bookmark url="file://$PROJECT_DIR$/src/FrameInterface.cpp" line="162" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
+      <config projectName="FrameInterlock" targetName="glfw_objects" />
       <config projectName="FrameInterlock" targetName="nanogui-obj" />
       <config projectName="FrameInterlock" targetName="FrameInterlock_bin" />
       <config projectName="FrameInterlock" targetName="glew" />
-      <config projectName="FrameInterlock" targetName="glfw_objects" />
       <config projectName="FrameInterlock" targetName="glfw" />
       <config projectName="FrameInterlock" targetName="nanogui" />
     </generated>
@@ -22,57 +21,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d1b2171-43b6-42b3-a689-5a22fd6f4b50" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrameInterfaceAnimation.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/FrameInterlock_bin.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/glew.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/glew.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/FrameInterlock.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/FrameInterlock.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/FrameInterlock_bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/FrameInterlock_bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/nanogui/CMakeFiles/nanogui-obj.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/nanogui/CMakeFiles/nanogui-obj.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/nanogui/CMakeFiles/nanogui.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/nanogui/CMakeFiles/nanogui.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/nanogui/ext_build/glfw/src/CMakeFiles/glfw.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/nanogui/ext_build/glfw/src/CMakeFiles/glfw.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/nanogui/ext_build/glfw/src/CMakeFiles/glfw_objects.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/nanogui/ext_build/glfw/src/CMakeFiles/glfw_objects.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/FrameInterlock_bin.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/glew.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/glew.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/FrameInterlock.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/FrameInterlock.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/FrameInterlock_bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/nanogui/CMakeFiles/nanogui-obj.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/nanogui/CMakeFiles/nanogui-obj.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/nanogui/CMakeFiles/nanogui.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/nanogui/CMakeFiles/nanogui.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/nanogui/ext_build/glfw/src/CMakeFiles/glfw.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/nanogui/ext_build/glfw/src/CMakeFiles/glfw.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/nanogui/ext_build/glfw/src/CMakeFiles/glfw_objects.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/nanogui/ext_build/glfw/src/CMakeFiles/glfw_objects.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/tmp_1.dot" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/tmp_1.dot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-release/tmp_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/tmp_1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrameInterface.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterface.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrameInterface.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterface.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrameInterlocking.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterlocking.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FrameInterlockingTree.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterlockingTree.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Utility.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utility.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/voxel/VPuzzleGraph.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/voxel/VPuzzleGraph.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
@@ -82,40 +34,6 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="FrameInterlockingTree.h" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.h">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="196">
-                    <caret line="23" column="43" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="43" />
-                    <folding>
-                      <element signature="e#137#171#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="VoxelizedPartition.h" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPartition.h">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1054">
-                    <caret line="71" selection-start-line="71" selection-end-line="71" />
-                    <folding>
-                      <element signature="e#143#171#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FavoritesManager">
@@ -128,8 +46,8 @@
       <file leaf-file-name="FrameInterlockingTree.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-11">
-              <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+            <state relative-caret-position="638">
+              <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
               <folding>
                 <element signature="e#42#76#0" expanded="true" />
               </folding>
@@ -140,7 +58,7 @@
       <file leaf-file-name="VoxelizedPartition.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPartition.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1148">
+            <state relative-caret-position="345">
               <caret line="139" column="39" selection-start-line="139" selection-start-column="35" selection-end-line="139" selection-end-column="39" />
             </state>
           </provider>
@@ -149,7 +67,7 @@
       <file leaf-file-name="VPuzzleGraph.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/voxel/VPuzzleGraph.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1374">
+            <state relative-caret-position="1056">
               <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
               <folding>
                 <element signature="e#131#157#0" expanded="true" />
@@ -161,7 +79,7 @@
       <file leaf-file-name="VoxelizedRenderCube.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
+            <state relative-caret-position="1310">
               <caret line="221" selection-start-line="221" selection-end-line="221" />
             </state>
           </provider>
@@ -170,7 +88,7 @@
       <file leaf-file-name="VPuzzleGraph.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/voxel/VPuzzleGraph.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1400">
+            <state relative-caret-position="711">
               <caret line="101" column="57" selection-start-line="101" selection-start-column="57" selection-end-line="101" selection-end-column="57" />
               <folding>
                 <element signature="e#42#67#0" expanded="true" />
@@ -182,8 +100,8 @@
       <file leaf-file-name="FrameInterface.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FrameInterface.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="71" column="22" lean-forward="true" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
+            <state relative-caret-position="-15">
+              <caret line="38" column="2" lean-forward="true" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="2" />
               <folding>
                 <element signature="e#123#160#0" expanded="true" />
               </folding>
@@ -194,8 +112,8 @@
       <file leaf-file-name="FrameInterface.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FrameInterface.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="158" column="13" selection-start-line="158" selection-start-column="13" selection-end-line="158" selection-end-column="13" />
+            <state relative-caret-position="528">
+              <caret line="238" column="5" lean-forward="true" selection-start-line="238" selection-start-column="5" selection-end-line="238" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -203,7 +121,7 @@
       <file leaf-file-name="DenseCoeffsBase.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../libigl/external/nanogui/ext/eigen/Eigen/src/Core/DenseCoeffsBase.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
+            <state relative-caret-position="10868">
               <caret line="494" selection-start-line="494" selection-end-line="494" />
             </state>
           </provider>
@@ -212,8 +130,8 @@
       <file leaf-file-name="Utility.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Utility.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="146" selection-start-line="146" selection-end-line="146" />
+            <state relative-caret-position="501">
+              <caret line="231" column="51" lean-forward="true" selection-start-line="231" selection-start-column="51" selection-end-line="231" selection-end-column="51" />
               <folding>
                 <element signature="e#108#127#0" expanded="true" />
               </folding>
@@ -224,7 +142,7 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-77">
+            <state relative-caret-position="396">
               <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
             </state>
           </provider>
@@ -234,7 +152,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clear</find>
       <find>c</find>
       <find>pillar-&gt;index</find>
       <find>compute_parts_num</find>
@@ -264,6 +181,7 @@
       <find>add_mes</find>
       <find>f0</find>
       <find>add_pillar_f0</find>
+      <find>-1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -329,6 +247,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -365,12 +284,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VPuzzleGraph.h" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="CMakeSettings" />
@@ -425,28 +344,30 @@
       <updated>1524407354338</updated>
       <workItem from="1524407356692" duration="3289000" />
       <workItem from="1524510639445" duration="115405000" />
-      <workItem from="1525540044809" duration="25290000" />
+      <workItem from="1525540044809" duration="25596000" />
+      <workItem from="1525697836294" duration="171000" />
+      <workItem from="1525719467848" duration="7533000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143984000" />
+    <option name="totallyTimeSpent" value="151994000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2048" height="1152" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4972299" visible="true" weight="0.1830291" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49565217" visible="true" weight="0.1830291" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Messages" order="7" visible="true" weight="0.32961932" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32961932" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.098421544" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2525534" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32961932" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2525534" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32969698" />
-      <window_info id="Favorites" order="2" sideWeight="0.50277007" side_tool="true" visible="true" weight="0.1830291" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925718" />
+      <window_info id="Favorites" order="2" sideWeight="0.5043478" side_tool="true" visible="true" weight="0.1830291" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -457,20 +378,20 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2525534" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49813664" visible="true" weight="0.1830291" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2525534" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32961932" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925718" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32961932" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32969698" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.098421544" />
       <window_info id="Favorites" order="2" sideWeight="0.50186336" side_tool="true" visible="true" weight="0.1830291" />
@@ -495,28 +416,14 @@
           <line>195</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/FrameInterface.cpp</url>
-          <line>31</line>
-          <option name="timeStamp" value="235" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/FrameInterface.cpp</url>
-          <line>661</line>
-          <option name="timeStamp" value="239" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/FrameInterface.cpp</url>
-          <line>669</line>
-          <option name="timeStamp" value="241" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="242" />
+      <option name="time" value="248" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="this-&gt;pillars_[2].__ptr_-&gt;end_points_cood[1].m_storage.m_data.array" />
         <watch expression="pillar.__ptr_-&gt;end_points_cood[0]" />
+        <watch expression="eps" />
       </configuration>
     </watches-manager>
   </component>
@@ -609,9 +516,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="33" column="23" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="23" />
-          <folding>
-            <element signature="e#149#180#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -633,9 +537,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1117">
           <caret line="84" column="27" selection-start-line="84" selection-start-column="27" selection-end-line="84" selection-end-column="27" />
-          <folding>
-            <element signature="e#125#141#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -719,9 +620,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="968">
           <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="e#113#138#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -746,9 +644,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="2" selection-start-column="2" selection-end-column="2" />
-          <folding>
-            <element signature="e#133#158#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -777,9 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
           <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="e#136#162#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -787,16 +679,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="650">
           <caret line="232" column="29" selection-start-line="232" selection-start-column="29" selection-end-line="232" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPartition.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-          <folding>
-            <element signature="e#143#171#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -831,26 +713,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="23" column="43" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="43" />
-          <folding>
-            <element signature="e#137#171#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPartition.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1148">
-          <caret line="139" column="39" selection-start-line="139" selection-start-column="35" selection-end-line="139" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/voxel/VPuzzleGraph.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1374">
+        <state relative-caret-position="1056">
           <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
           <folding>
             <element signature="e#131#157#0" expanded="true" />
@@ -858,26 +723,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.cpp">
+    <entry file="file://$PROJECT_DIR$/../libigl/external/nanogui/ext/eigen/Eigen/src/Core/DenseCoeffsBase.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-11">
-          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        <state relative-caret-position="10868">
+          <caret line="494" selection-start-line="494" selection-end-line="494" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="37" column="22" lean-forward="true" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
           <folding>
-            <element signature="e#42#76#0" expanded="true" />
+            <element signature="e#137#171#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.cpp">
+    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPartition.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="221" selection-start-line="221" selection-end-line="221" />
+        <state relative-caret-position="1562">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <element signature="e#143#171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Utility.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="231" column="51" lean-forward="true" selection-start-line="231" selection-start-column="51" selection-end-line="231" selection-end-column="51" />
+          <folding>
+            <element signature="e#108#127#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/voxel/VPuzzleGraph.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1400">
+        <state relative-caret-position="711">
           <caret line="101" column="57" selection-start-line="101" selection-start-column="57" selection-end-line="101" selection-end-column="57" />
           <folding>
             <element signature="e#42#67#0" expanded="true" />
@@ -885,44 +777,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../libigl/external/nanogui/ext/eigen/Eigen/src/Core/DenseCoeffsBase.h">
+    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="494" selection-start-line="494" selection-end-line="494" />
+        <state relative-caret-position="1310">
+          <caret line="221" selection-start-line="221" selection-end-line="221" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+    <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-77">
-          <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
+        <state relative-caret-position="638">
+          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="e#42#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPartition.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="139" column="39" selection-start-line="139" selection-start-column="35" selection-end-line="139" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FrameInterface.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="71" column="22" lean-forward="true" selection-start-line="71" selection-start-column="22" selection-end-line="71" selection-end-column="22" />
+        <state relative-caret-position="-15">
+          <caret line="38" column="2" lean-forward="true" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="2" />
           <folding>
             <element signature="e#123#160#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Utility.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="146" selection-start-line="146" selection-end-line="146" />
-          <folding>
-            <element signature="e#108#127#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FrameInterface.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="158" column="13" selection-start-line="158" selection-start-column="13" selection-end-line="158" selection-end-column="13" />
+        <state relative-caret-position="528">
+          <caret line="238" column="5" lean-forward="true" selection-start-line="238" selection-start-column="5" selection-end-line="238" selection-end-column="5" />
         </state>
       </provider>
     </entry>
