@@ -178,6 +178,7 @@ void FrameInterlockingTree::generate_key_plan(TreeNode *node,
 
     //set key relation
     int relation = 0b110111;
+    //int relation = 0;
 
     //compute key conceptual partition plan
     for (int kd = 0; kd < 2; kd++)

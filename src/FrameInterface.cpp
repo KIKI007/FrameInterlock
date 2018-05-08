@@ -27,10 +27,6 @@ void FrameInterface::draw_frame_mesh(vector<FrameInterfaceRenderUnit> &frame_uni
 {
     for(int id = 0; id < pillars_.size(); id++)
     {
-        if(id == 98)
-        {
-            std::cout << "stop" << std::endl;
-        }
         FrameInterfaceRenderUnit unit;
         draw_pillar(pillars_[id].get(), unit);
         unit.visible = true;
@@ -348,8 +344,6 @@ void FrameInterface::draw(MatrixXd &V, MatrixXi &F, MatrixXd &C, bool is_draw_fr
 
     return;
 }
-
-
 
 
 
