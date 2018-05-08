@@ -77,23 +77,17 @@ void VPuzzleGraph::compute_two_loops_candidate_voxels(int XYZ)
         for(int i1 = 0; i1 < input_.out_ID_[XYZ].size(); i1++)
         {
             int P1 = input_.out_ID_[XYZ][i1];
-            if(dist_graph[XYZ](P1, P0) != -1)
+            for(int i2 = 0; i2 < input_.in_ID_[XYZ].size(); i2++)
             {
-                for(int i2 = 0; i2 < input_.in_ID_[XYZ].size(); i2++)
+                int P2 = input_.in_ID_[XYZ][i2];
+                for (int i3 = 0; i3 < input_.out_ID_[XYZ].size(); i3++)
                 {
-                    int P2 = input_.in_ID_[XYZ][i2];
-                    for (int i3 = 0; i3 < input_.out_ID_[XYZ].size(); i3++)
+                    int P3 = input_.out_ID_[XYZ][i3];
+                    if(dist_graph[XYZ](P1, P2) != -1 &&
+                       dist_graph[XYZ](P3, P0) != -1)
+                        //requirement for making (P0, P1, P, P2, P3) in a strong connected component.
                     {
-                        int P3 = input_.out_ID_[XYZ][i3];
-                        if(dist_graph[XYZ](P3, P2) != -1)
-                        {
-                            if(dist_graph[XYZ](P1, P2) != -1 &&
-                                    dist_graph[XYZ](P3, P0) != -1)
-                                //requirement for making (P0, P1, P, P2, P3) in a strong connected component.
-                            {
-                                add_into_double_filter(XYZ, i0, i1, i2, i3, P0, P1, P2, P3, list_double);
-                            }
-                        }
+                        add_into_double_filter(XYZ, i0, i1, i2, i3, P0, P1, P2, P3, list_double);
                     }
                 }
             }
@@ -635,20 +629,30 @@ void VPuzzleGraph::compute_input_in_data(int XYZ, const DirectedGraphEdge& edge,
     {
         //determine its joint id
         //if it is belonged to remain
-        int joint_id = (*edge.list).front()->joint_id_;
         int node_id = input_.pillar_in_orders[edge.node.lock()->index_];
-        if(partition_joints[joint_id] == false)
+
+        vector<pEmt> list;
+        std::shared_ptr<vector<pEmt>> must_be_remain_list = std::make_shared<vector<pEmt>>();
+        for(pEmt em : *edge.list)
         {
+            int joint_id = em->joint_id_;
             //must belong to remain
+            if(partition_joints[joint_id] == false)
+                must_be_remain_list->push_back(em);
+            else
+                list.push_back(em);
+        }
+
+        if(!must_be_remain_list->empty())
+        {
             input_.in_ID_[XYZ].push_back(node_id);
-            input_.in_voxels[XYZ].push_back(edge.list);
+            input_.in_voxels[XYZ].push_back(must_be_remain_list);
             input_.in_voxels_type_[XYZ].push_back(REMAIN_PART);
-            return;
         }
 
         vector<pEmt> voxels_of_types[3];
 
-        for(pEmt em : *edge.list)
+        for(pEmt em : list)
         {
             VoxelsListType type = check_voxel_type(em);
             voxels_of_types[type].push_back(em);
@@ -673,21 +677,30 @@ void VPuzzleGraph::compute_input_out_data(int XYZ,const DirectedGraphEdge& edge,
     {
         //determine its joint id
         //if it is belonged to remain
-        int joint_id = (*edge.list).front()->joint_id_;
         int node_id = input_.pillar_in_orders[edge.node.lock()->index_];
 
-        if(partition_joints[joint_id] == false)
+        vector<pEmt> list;
+        std::shared_ptr<vector<pEmt>> must_be_remain_list = std::make_shared<vector<pEmt>>();
+        for(pEmt em : *edge.list)
         {
+            int joint_id = em->joint_id_;
             //must belong to remain
+            if(partition_joints[joint_id] == false)
+                must_be_remain_list->push_back(em);
+            else
+                list.push_back(em);
+        }
+
+        if(!must_be_remain_list->empty())
+        {
             input_.out_ID_[XYZ].push_back(node_id);
-            input_.out_voxels[XYZ].push_back(edge.list);
+            input_.out_voxels[XYZ].push_back(must_be_remain_list);
             input_.out_voxels_type[XYZ].push_back(REMAIN_PART);
-            return;
         }
 
         vector<pEmt> voxels_of_types[3];
 
-        for(pEmt em : *edge.list)
+        for(pEmt em : list)
         {
             VoxelsListType type = check_voxel_type(em);
             voxels_of_types[type].push_back(em);

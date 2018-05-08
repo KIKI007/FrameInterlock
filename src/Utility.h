@@ -173,7 +173,7 @@ void read_fpuz(){
     if(path != "") {
         frame_interface.reset();
         frame_interface = std::make_shared<FrameInterface>(FrameInterface(para.render_pillar_radius, para.render_joint_size_, -1, colorcoder));
-        frame_interface->read_fpuz(path);
+        frame_interface->read_fpuz(path, para.render_joint_size_);
         frame_interlock = std::make_shared<FrameInterlocking>(FrameInterlocking(frame_interface));
         draw_frame_mesh();
     }
@@ -189,6 +189,42 @@ void read_mesh_file()
         MeshFaces F;
         if(igl::readOBJ(path, V, F))
         {
+
+            auto normalized_mesh = [&](MeshVertices &vertices)
+            {
+                Vector3d center(0, 0, 0);
+                for(vector<double> vec : vertices)
+                {
+                    for(int kd = 0; kd < 3; kd++)
+                        center[kd] += vec[kd];
+                }
+
+                center/= vertices.size();
+                for(vector<double> &vec : vertices)
+                {
+                    for(int kd = 0; kd < 3; kd++)
+                        vec[kd] -= center[kd];
+                }
+
+                double max_cood[3] = {0, 0, 0};
+                for(vector<double> vec: vertices)
+                {
+                    for(int kd = 0; kd < 3; kd++)
+                        if(max_cood[kd] < vec[kd])
+                            max_cood[kd] = vec[kd];
+                }
+                double max_length = std::max(max_cood[0], std::max(max_cood[1], max_cood[2]));
+                for(vector<double> &vec : vertices)
+                {
+                    for(int kd = 0; kd < 3; kd++)
+                        vec[kd] /= max_length;
+                }
+
+                return;
+            };
+
+            normalized_mesh(V);
+
             std::shared_ptr<FrameMesh> frameMesh = std::make_shared<FrameMesh>(FrameMesh(colorcoder, para.render_pillar_radius));
             frameMesh->set_mesh(V, F);
 
@@ -208,7 +244,7 @@ void init()
     shared_ptr += "/tutorial/shared/";
 
     para.render_num_joint_voxel = 3;
-    para.render_joint_size_ = 0.01;
+    para.render_joint_size_ = 0.1;
     para.render_joint_knots = true;
     para.render_frame_mesh = true;
     para.render_show_pillar_index = false;

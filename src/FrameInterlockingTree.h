@@ -38,6 +38,8 @@ public:
     TreeNode *brother;
 
     std::shared_ptr<DirectedGraph> graph[3];
+
+    int relation;
 };
 
 class FrameInterlockingTree
@@ -71,6 +73,8 @@ public:
 
     void compute_legal_disassembling_direction(TreeNode *node, FramePillar *pillar, vector<int> &legal_nrm);
 
+    void filter_remaining_volume_partition_plan(vector<VPuzRemainVolumePartitionDat> &outer_plan);
+
 public:
 
     void accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, int *part_num_voxels, Vector3d direction);
@@ -100,6 +104,8 @@ public:
     TreeNode *present_node_;
 
 public:
+
+    int max_number_of_children_;
 
     FrameInterface *interface;
 

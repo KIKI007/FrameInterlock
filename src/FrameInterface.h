@@ -85,7 +85,7 @@ public:
 
     void write_fpuz(string file_name);
 
-    void read_fpuz(string file_name);
+    void read_fpuz(string file_name, double &cube_size);
 
     void write_obj(string file_name, bool is_draw_frame, bool is_draw_joints);
 

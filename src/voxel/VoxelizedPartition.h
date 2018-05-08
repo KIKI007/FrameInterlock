@@ -72,6 +72,7 @@ public:
 
     bool is_remaining_volume_connected(const vector<pEmt> &vlist);
 
+
 public:
 
     bool insert_into_group_A(pEmt em);

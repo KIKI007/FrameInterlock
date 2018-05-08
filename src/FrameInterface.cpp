@@ -597,7 +597,7 @@ void FrameInterface::write_fpuz(string file_name)
     std::ofstream fout(file_name);
     if(fout.fail()) return;
     int vertices_num = frame_mesh_->points_.size();
-    fout << vertices_num << std::endl;
+    fout << vertices_num << " " << cube_size_ << std::endl;
     for(int id = 0; id < frame_mesh_->points_.size(); id++)
     {
         fout << frame_mesh_->points_[id].transpose() << std::endl;
@@ -633,12 +633,13 @@ void FrameInterface::write_fpuz(string file_name)
     fout.close();
 }
 
-void FrameInterface::read_fpuz(string file_name)
+void FrameInterface::read_fpuz(string file_name, double &cube_size)
 {
     std::ifstream fin(file_name);
     if(fin.fail()) return;
     int vertices_num;
-    fin >> vertices_num;
+    fin >> vertices_num >> cube_size;
+    cube_size_ = cube_size;
 
     vecVector3d points;
     for(int id = 0; id < vertices_num; id++)

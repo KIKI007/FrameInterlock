@@ -68,6 +68,7 @@ int main() {
                     frame_interface = frame_interlock->tree_->output_frame(parent->children[id].get());
                     draw_frame_mesh();
                     para.interlock_children_id = id;
+                    std::cout << parent->children[id]->relation << std::endl;
                 }
             }
         },[&](){

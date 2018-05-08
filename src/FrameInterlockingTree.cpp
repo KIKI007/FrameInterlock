@@ -61,8 +61,86 @@ void FrameInterlockingTree::accept_partition_plan(TreeNode *node,
 
 void FrameInterlockingTree::sort_children(TreeNode *node)
 {
+
     if(node->children.size() > 0)
     {
+        int X[2], Y[2], Z[2];
+        std::sort(node->children.begin(), node->children.end(), [&](std::shared_ptr<TreeNode> A, std::shared_ptr<TreeNode> B)
+        {
+            auto create_search_space = [&](int face)
+            {
+                X[0] = Y[0] = Z[0] = 0;
+                X[1] = interface->voxel_num_ - 1;
+                Y[1] = interface->voxel_num_ - 1;
+                Z[1] = interface->voxel_num_ - 1;
+                switch(face)
+                {
+                    case 0:
+                    {
+                        X[0] = X[1] = interface->voxel_num_ - 1;
+                        break;
+                    }
+                    case 1:
+                    {
+                        X[0] = X[1] = 0;
+                        break;
+                    }
+                    case 2:
+                    {
+                        Y[0] = Y[1] = interface->voxel_num_ - 1;
+                        break;
+                    }
+                    case 3:
+                    {
+                        Y[0] = Y[1] = 0;
+                        break;
+                    }
+                    case 4:
+                    {
+                        Z[0] = Z[1] = interface->voxel_num_ - 1;
+                        break;
+                    }
+                    case 5:
+                    {
+                        Z[0] = Z[1] = 0;
+                        break;
+                    }
+                }
+            };
+
+            auto compute_number_of_voxel = [&](TreeNode *A)->int
+            {
+                int num = 0;
+                for(int kd = 0; kd < 2; kd++)
+                {
+                    FramePillar *pillar = A->disassembly_order.back();
+                    int joint_id = pillar->cube_id[kd];
+                    VoxelizedPuzzle* puzzle = A->puzzles[joint_id].get();
+                    create_search_space(pillar->pos_in_cube_face[kd]);
+                    for(int ix = X[0]; ix <= X[1]; ix++)
+                    {
+                        for(int iy = X[0]; iy <= Y[1]; iy++)
+                        {
+                            for (int iz = Z[0]; iz <= Z[1]; iz++)
+                            {
+                                if(puzzle->get_part_id(Vector3i(ix, iy, iz)) == pillar->index)
+                                {
+                                    num++;
+                                }
+                            }
+                        }
+                    }
+                }
+                return num;
+            };
+
+            int numA = compute_number_of_voxel(A.get());
+            int numB = compute_number_of_voxel(B.get());
+            return numA > numB;
+
+        });
+
+
         TreeNode* last_child_node = node->children.back().get();
         select_candidates(last_child_node);
         for(int id = 0; id < node->children.size() - 1; id++)
@@ -150,7 +228,6 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
                 final_parti.push_back(final_parti_result[0][id]);
                 final_parti.push_back(final_parti_result[1][jd]);
                 accept_partition_plan(node, key_pillar, final_parti, part_num_voxels, Vector3d(0, 1, 0));
-
             }
         }
         sort_children(node);
@@ -164,6 +241,7 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
 
 bool FrameInterlockingTree::generate_children(TreeNode *node)
 {
+    max_number_of_children_ = 50;
     if(node->num_pillar_finished == 0)
     {
         return generate_key(node);
@@ -216,6 +294,7 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
 
         vector<VPuzRemainVolumePartitionDat> concept_partition_plans;
         graph.do_separation(concept_partition_plans);
+        filter_remaining_volume_partition_plan(concept_partition_plans);
 
         int voxel_num = interface->voxel_num_;
         int part_num_voxels[2];
@@ -269,15 +348,16 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
 
             for(int nrm = 0; nrm < 6; nrm++)
             {
-                for(int id = 0; id < final_parti_result[0][nrm].size(); id++)
+                for(int ix = 0; ix < final_parti_result[0][nrm].size(); ix++)
                 {
-                    for(int jd = 0; jd < final_parti_result[1][nrm].size(); jd++)
+                    for(int iy = 0; iy < final_parti_result[1][nrm].size(); iy++)
                     {
                         vector<FinalPartiResult> final_parti;
-                        final_parti.push_back(final_parti_result[0][nrm][id]);
-                        final_parti.push_back(final_parti_result[1][nrm][jd]);
+                        final_parti.push_back(final_parti_result[0][nrm][ix]);
+                        final_parti.push_back(final_parti_result[1][nrm][iy]);
                         accept_partition_plan(node, cpillar, final_parti, part_num_voxels, Vector3d(dX[nrm], dY[nrm], dZ[nrm]));
-                        if(node->children.size() > 1)
+                        node->children.back()->relation = concept.relation;
+                        if(node->children.size() > max_number_of_children_)
                             return true;
                     }
                 }
@@ -627,6 +707,29 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
     return;
 }
 
+void FrameInterlockingTree::filter_remaining_volume_partition_plan(vector<VPuzRemainVolumePartitionDat> &outer_plan)
+{
+    std::sort(outer_plan.begin(), outer_plan.end(), [](const VPuzRemainVolumePartitionDat &A,
+                                                       const VPuzRemainVolumePartitionDat &B)
+    {
+        int relationA = A.relation;
+        int numA = 0;
+        while(relationA)
+        {
+            numA += (relationA & 1 )? 1 : 0;
+            relationA >>= 1;
+        }
+
+        int relationB = B.relation;
+        int numB = 0;
+        while(relationB)
+        {
+            numB += (relationB & 1 )? 1 : 0;
+            relationB >>= 1;
+        }
+        return numA < numB;
+    });
+}
 
 
 
