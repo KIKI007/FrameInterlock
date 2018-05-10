@@ -50,7 +50,7 @@ public:
     vector<std::shared_ptr<VoxelsList>> in_voxels[3];
     vector<VoxelsListType> in_voxels_type_[3];
 
-    vector<bool> out_ID_[3];
+    vector<int> out_ID_[3];
     vector<std::shared_ptr<VoxelsList>> out_voxels[3];
     vector<VoxelsListType> out_voxels_type[3];
 };
@@ -82,10 +82,12 @@ public:
 
     void compute_input_in_data(int XYZ,
                                const DirectedGraphEdge& edge,
+                               int node_id,
                                const vector<bool>& partition_joints);
 
     void compute_input_out_data(int XYZ,
                                 const DirectedGraphEdge& edge,
+                                int node_id,
                                 const vector<bool>& partition_joints);
 
     VoxelsListType check_voxel_type(pEmt em);
@@ -101,6 +103,8 @@ public:
     void add_into_out_in_filter(int XYZ, int i0, int i1, int P0, int P1, vector<VPuzFECycle> &list_in_out);
 
     void add_into_double_filter(int XYZ, int i0, int i1, int i2, int i3, int P0, int P1, int P2, int P3, vector<VPuzFECycle> &list_double);
+
+    bool voxel_equal(pEmt p0, pEmt p1);
 
 public:
 

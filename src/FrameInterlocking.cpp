@@ -50,7 +50,7 @@ void FrameInterlocking::init_tree()
                                                                   array,
                                                                   frame_interface_->colorcoder_));
         root_->puzzles.push_back(puzzle);
-        root_->num_voxel_left_in_joints.push_back(voxel_num * voxel_num * voxel_num);
+        root_->num_pillar_left_in_joints.push_back(tree_->map_joint_pillars_[id].size());
     }
 
     for(int kd = 0; kd < 3; kd++)
@@ -71,14 +71,14 @@ void FrameInterlocking::select_key_pillar()
     FramePillar *key;
     for(std::shared_ptr<FramePillar> pillar: frame_interface_->pillars_)
     {
-        int valueY = pillar->end_points_cood[0][1] + pillar->end_points_cood[1][1];
+        double valueY = pillar->end_points_cood[0][1] + pillar->end_points_cood[1][1];
         if(maxY < valueY)
         {
             maxY = valueY;
             key = pillar.get();
         }
     }
-
+    std::cout << "Key is :\t" << key->index << std::endl;
     tree_->root_->candidate_pillar.push_back(key);
 }
 
@@ -91,6 +91,8 @@ std::shared_ptr<FrameInterface> FrameInterlocking::generate_interlocking()
     int present_num_pillar = 0;
     while(tree_->present_node_ && tree_->present_node_->num_pillar_finished < num_pillar)
     {
+//        if(tree_->present_node_->num_pillar_finished >= 1 && tree_->present_node_->disassembly_order.back()->index == 17)
+//            break;
         tree_->generate_children(tree_->present_node_);
         if(tree_->present_node_->children.size() > 0)
         {
@@ -127,14 +129,15 @@ std::shared_ptr<FrameInterface> FrameInterlocking::generate_interlocking()
     }
 
 
-    if(tree_->present_node_ && tree_->present_node_->num_pillar_finished == num_pillar)
-    {
-        return tree_->output_frame(tree_->present_node_);
-    }
-    else
-    {
-        return nullptr;
-    }
+//    if(tree_->present_node_ && tree_->present_node_->num_pillar_finished == num_pillar)
+//    {
+//        return tree_->output_frame(tree_->present_node_);
+//    }
+//    else
+//    {
+//        return nullptr;
+//    }
+    return tree_->output_frame(tree_->present_node_);
 }
 
 std::shared_ptr<FrameInterface> FrameInterlocking::output_present_frame() {

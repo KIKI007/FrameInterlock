@@ -8,14 +8,13 @@
 void FrameInterlockingTree::accept_partition_plan(TreeNode *node,
                                                   FramePillar *cpillar,
                                                   const vector<FinalPartiResult>& final_parti,
-                                                  int *part_num_voxels,
                                                   Vector3d direction)
 {
     //Puzzle
     std::shared_ptr<TreeNode> child_node = std::make_shared<TreeNode>();
 
     child_node->puzzles = node->puzzles;
-    child_node->num_voxel_left_in_joints = node->num_voxel_left_in_joints;
+    child_node->num_pillar_left_in_joints = node->num_pillar_left_in_joints;
     for(int kd = 0; kd < 2; kd++)
     {
         int joint_id = cpillar->cube_id[kd];
@@ -27,7 +26,7 @@ void FrameInterlockingTree::accept_partition_plan(TreeNode *node,
             child_puzzle->partition_part(final_parti[1].new_part_voxels, cpillar->index);
         child_node->puzzles[joint_id] = child_puzzle;
 
-        child_node->num_voxel_left_in_joints[cpillar->cube_id[kd]] -= part_num_voxels[kd];
+        child_node->num_pillar_left_in_joints[cpillar->cube_id[kd]] -= 1;
     }
 
     //Relation
@@ -54,9 +53,9 @@ void FrameInterlockingTree::accept_partition_plan(TreeNode *node,
     //push into node
     node->children.push_back(child_node);
 
-    for(int id = 0; id < child_node->disassembly_order.size(); id++)
-        std::cout << child_node->disassembly_order[id]->index <<", ";
-    std::cout << std::endl;
+//    for(int id = 0; id < child_node->disassembly_order.size(); id++)
+//        std::cout << child_node->disassembly_order[id]->index <<", ";
+//    std::cout << std::endl;
 }
 
 void FrameInterlockingTree::sort_children(TreeNode *node)
@@ -177,11 +176,18 @@ void FrameInterlockingTree::generate_key_plan(TreeNode *node,
     }
 
     //set key relation
-    int relation = 0b110111;
+    int concept_relation = 0b110111;
+    //int relation = 0;
 
     //compute key conceptual partition plan
     for (int kd = 0; kd < 2; kd++)
     {
+        int relation;
+        if(kd == 0)
+            relation = concept_relation & 0b101010;
+        else
+            relation = concept_relation & 0b010101;
+
         VoxelizedPuzzle *puzzle = node->puzzles[key_pillar->cube_id[kd]].get();
         VPuzRemainVolumePartitionDat plan;
 
@@ -210,12 +216,10 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
         vector<FinalPartiResult> final_parti_result[2];
         for (int kd = 0; kd < 2; kd++) {
             VoxelizedPuzzle *puzzle = node->puzzles[key_pillar->cube_id[kd]].get();
-
-            part_num_voxels[kd] =
-                    voxel_num * voxel_num * voxel_num / map_joint_pillars_[key_pillar->cube_id[kd]].size();
+            part_num_voxels[kd] = get_voxel_number(node, key_pillar->cube_id[kd]);
             VoxelizedPartition partioner(part_num_voxels[kd], part_num_voxels[kd]);
-            partioner.maximum_inner_partition_plan_ = 1000;
 
+            partioner.maximum_inner_partition_plan_ = 1000;
             partioner.input(puzzle, concept_plan[kd], posY);
             partioner.output(final_parti_result[kd]);
         }
@@ -227,7 +231,7 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
                 vector<FinalPartiResult> final_parti;
                 final_parti.push_back(final_parti_result[0][id]);
                 final_parti.push_back(final_parti_result[1][jd]);
-                accept_partition_plan(node, key_pillar, final_parti, part_num_voxels, Vector3d(0, 1, 0));
+                accept_partition_plan(node, key_pillar, final_parti, Vector3d(0, 1, 0));
             }
         }
         sort_children(node);
@@ -241,20 +245,48 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
 
 bool FrameInterlockingTree::generate_children(TreeNode *node)
 {
-    max_number_of_children_ = 50;
+    if(node->num_pillar_finished < 5)
+    {
+        max_number_of_children_ = 10;
+        max_variation_of_voxel_in_joint = 2;
+        balance_inner_relation = false;
+    }
+    else if(node->num_pillar_finished < interface->pillars_.size() - 5)
+    {
+        max_number_of_children_ = 10;
+        max_variation_of_voxel_in_joint = 0;
+        balance_inner_relation = true;
+    }
+    else
+    {
+        max_number_of_children_ = 10;
+        max_variation_of_voxel_in_joint = 0;
+        balance_inner_relation = false;
+    }
+
     if(node->num_pillar_finished == 0)
     {
         return generate_key(node);
     }
     else
     {
+        std::cout << std::endl << std::endl;
+        std::cout << "Generating Part\t" << node->num_pillar_finished + 1 << std::endl;
+        std::cout << "Candidate Pillar:" << std::endl;
+        for(int id = 0; id < node->candidate_pillar.size(); id++)
+            std::cout << node->candidate_pillar[id]->index << " "; std::cout << std::endl << std::endl;
+
         for(int id = 0 ;id < node->candidate_pillar.size(); id++)
         {
+            std::cout << "Picking canididate :\t" << node->candidate_pillar[id]->index << std::endl;
+            std::cout << "Begin..." << std::endl;
             if(generate_children(node, node->candidate_pillar[id]))
             {
                 sort_children(node);
+                std::cout << "Finished..End" << std::endl;
                 return true;
             }
+            std::cout << "Failed.." << std::endl << std::endl;
         }
         return false;
     }
@@ -265,7 +297,18 @@ void FrameInterlockingTree::seperate_concept_design(int kd,
                                                     VPuzRemainVolumePartitionDat &plan,
                                                     FramePillar *cpillar)
 {
-    plan.relation = concept.relation;
+    if(balance_inner_relation == false)
+    {
+        if(kd == 0)
+            plan.relation = concept.relation & 0b101010;
+        else
+            plan.relation = concept.relation & 0b010101;
+    }
+    else
+    {
+        plan.relation = concept.relation;
+    }
+
     //group A
     for(int jd = 0; jd < concept.groupA.size(); jd++)
     {
@@ -302,6 +345,12 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
         vector<int> legal_nrm;
         compute_legal_disassembling_direction(node, cpillar, legal_nrm);
 
+        for(int kd = 0; kd < 2; kd++)
+        {
+            if(node->num_pillar_left_in_joints[cpillar->cube_id[kd]] == 1)
+                balance_inner_relation = true;
+        }
+
         for(int id = 0; id < concept_partition_plans.size(); id++)
         {
             VPuzRemainVolumePartitionDat concept = concept_partition_plans[id];
@@ -312,10 +361,9 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
                 seperate_concept_design(kd, concept, plan[kd], cpillar);
 
                 VoxelizedPuzzle* puzzle = node->puzzles[cpillar->cube_id[kd]].get();
-                part_num_voxels[kd] = voxel_num * voxel_num * voxel_num/ map_joint_pillars_[cpillar->cube_id[kd]].size();
+                part_num_voxels[kd] = get_voxel_number(node, cpillar->cube_id[kd]);
 
-                if(2 * part_num_voxels[kd] > node->num_voxel_left_in_joints[cpillar->cube_id[kd]]) {
-                    part_num_voxels[kd] = node->num_voxel_left_in_joints[cpillar->cube_id[kd]];
+                if(node->num_pillar_left_in_joints[cpillar->cube_id[kd]] == 1) {
                     for(int nrm = 0; nrm < 6; nrm++)
                     {
                         if(legal_nrm[nrm])
@@ -333,7 +381,8 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
                     {
                         if(legal_nrm[nrm])
                         {
-                            VoxelizedPartition partioner(part_num_voxels[kd], part_num_voxels[kd]);
+                            VoxelizedPartition partioner(part_num_voxels[kd] - max_variation_of_voxel_in_joint,
+                                                         part_num_voxels[kd] + max_variation_of_voxel_in_joint);
                             partioner.input(puzzle, plan[kd],AssemblingDirection(nrm));
                             partioner.output(final_parti_result[kd][nrm]);
                         }
@@ -355,7 +404,7 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
                         vector<FinalPartiResult> final_parti;
                         final_parti.push_back(final_parti_result[0][nrm][ix]);
                         final_parti.push_back(final_parti_result[1][nrm][iy]);
-                        accept_partition_plan(node, cpillar, final_parti, part_num_voxels, Vector3d(dX[nrm], dY[nrm], dZ[nrm]));
+                        accept_partition_plan(node, cpillar, final_parti, Vector3d(dX[nrm], dY[nrm], dZ[nrm]));
                         node->children.back()->relation = concept.relation;
                         if(node->children.size() > max_number_of_children_)
                             return true;
@@ -443,25 +492,29 @@ void FrameInterlockingTree::generate_vpuzzlegraph(VPuzzleGraph &graph, TreeNode 
 
     vector<pEmt> voxel_must_be_new_part;
     vector<pEmt> voxel_must_be_remain_part;
-    int part_num_voxels[2];
-    for(int kd = 0; kd < 2; kd++) {
+
+    for(int kd = 0; kd < 2; kd++)
+    {
         VoxelizedPuzzle *puzzle = node->puzzles[cpillar->cube_id[kd]].get();
         //create plan
-        part_num_voxels[kd] = std::powl(interface->voxel_num_, 3)/ map_joint_pillars_[cpillar->cube_id[kd]].size();
 
-        if(2 * part_num_voxels[kd] > node->num_voxel_left_in_joints[cpillar->cube_id[kd]])
+        if(node->num_pillar_left_in_joints[cpillar->cube_id[kd]] == 1)
         {
-            voxel_must_be_new_part = puzzle->parts_.back()->elist_;
+            voxel_must_be_new_part.insert(voxel_must_be_new_part.end(),
+                                          puzzle->parts_.back()->elist_.begin(),
+                                          puzzle->parts_.back()->elist_.end());
         }
         else
         {
-            for (int id = 0; id < new_fixed_voxels[kd].size(); id++) {
+            for (int id = 0; id < new_fixed_voxels[kd].size(); id++)
+            {
                 voxel_must_be_new_part.push_back(puzzle->map_ip_[puzzle->V2I(new_fixed_voxels[kd][id])]);
             }
-        }
 
-        for (int id = 0; id < remain_fixed_voxels[kd].size(); id++) {
-            voxel_must_be_remain_part.push_back(puzzle->map_ip_[puzzle->V2I(remain_fixed_voxels[kd][id])]);
+            for (int id = 0; id < remain_fixed_voxels[kd].size(); id++)
+            {
+                voxel_must_be_remain_part.push_back(puzzle->map_ip_[puzzle->V2I(remain_fixed_voxels[kd][id])]);
+            }
         }
     }
 
@@ -696,6 +749,7 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
     }
     graph.tarjan_cut_points(cut_points);
 
+    node->candidate_pillar.clear();
     for(int id = 0; id < interface->pillars_.size(); id++)
     {
         if(candidates_.find(id) != candidates_.end() && cut_points.find(id) == cut_points.end())
@@ -703,6 +757,13 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
             node->candidate_pillar.push_back(interface->pillars_[id].get());
         }
     }
+
+    std::sort(node->candidate_pillar.begin(), node->candidate_pillar.end(), [&](FramePillar *pA, FramePillar *pB)
+    {
+        double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
+        double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
+        return pAY > pBY;
+    });
 
     return;
 }
@@ -729,6 +790,18 @@ void FrameInterlockingTree::filter_remaining_volume_partition_plan(vector<VPuzRe
         }
         return numA < numB;
     });
+}
+
+int FrameInterlockingTree::get_voxel_number(TreeNode *node, int joint_id) {
+    int num_left_pillar = node->num_pillar_left_in_joints[joint_id];
+    int num_pillar_origin = map_joint_pillars_[joint_id].size();
+    int part_voxel_number = (int)std::pow(interface->voxel_num_, 3) / num_pillar_origin;
+    int r_part_voxel_number = (int)std::pow(interface->voxel_num_, 3) % num_pillar_origin;
+    if(num_left_pillar < r_part_voxel_number)
+        return part_voxel_number + 1;
+    else
+        return part_voxel_number;
+
 }
 
 
