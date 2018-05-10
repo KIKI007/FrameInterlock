@@ -8,21 +8,15 @@ void UndirectedGraph::tarjan_cut_points(std::map<int, bool> &cutpoints)
 {
     tarjan_init();
     int num = nodeLists_.size();
-    int children = 0;
     int root_node = -1;
     for(int id = 0; id < num; id++)
     {
         if(cutpoints.find(id) != cutpoints.end()) continue;
         if(DFN_[id] == 0)
         {
-            if(root_node == -1)
-                root_node = id;
-            children++;
             tarjan_dfs(id, cutpoints);
         }
     }
-
-    if(children >= 2) cutpoints.insert(std::make_pair(root_node, true));
 }
 
 void UndirectedGraph::tarjan_dfs(int u, std::map<int, bool> &cutpoints)
@@ -33,24 +27,29 @@ void UndirectedGraph::tarjan_dfs(int u, std::map<int, bool> &cutpoints)
 
     p = nodeLists_[u];
 
+    int children = 0;
     for(int jd = 0; jd < p->neighborList_.size(); jd++)
     {
         q = p->neighborList_[jd].node.lock();
         int v = q->index_;
         if(!DFN_[v])
         {
+            children++;
             //un-visited node
             PARENT_[v] = u;
             tarjan_dfs(v, cutpoints);
             LOW_[u] = std::min(LOW_[u], LOW_[v]);
             if(PARENT_[u] != -1 && LOW_[v] >= DFN_[u])
                 cutpoints.insert(std::make_pair(u, true));
+            if(PARENT_[u] == -1 && children >= 2)
+            {
+                cutpoints.insert(std::make_pair(u, true));
+            }
         }
         else if(v != PARENT_[u])
         {
             LOW_[u] = std::min(LOW_[u], DFN_[v]);
         }
-
     }
 }
 
