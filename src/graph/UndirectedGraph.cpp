@@ -9,17 +9,20 @@ void UndirectedGraph::tarjan_cut_points(std::map<int, bool> &cutpoints)
     tarjan_init();
     int num = nodeLists_.size();
     int children = 0;
+    int root_node = -1;
     for(int id = 0; id < num; id++)
     {
         if(cutpoints.find(id) != cutpoints.end()) continue;
         if(DFN_[id] == 0)
         {
+            if(root_node == -1)
+                root_node = id;
             children++;
             tarjan_dfs(id, cutpoints);
         }
     }
 
-    if(children >= 2) cutpoints.insert(std::make_pair(0, true));
+    if(children >= 2) cutpoints.insert(std::make_pair(root_node, true));
 }
 
 void UndirectedGraph::tarjan_dfs(int u, std::map<int, bool> &cutpoints)

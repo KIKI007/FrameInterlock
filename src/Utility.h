@@ -244,7 +244,7 @@ void init()
     shared_ptr += "/tutorial/shared/";
 
     para.render_num_joint_voxel = 3;
-    para.render_joint_size_ = 0.01;
+    para.render_joint_size_ = 0.02;
     para.render_joint_knots = true;
     para.render_frame_mesh = true;
     para.render_show_pillar_index = false;

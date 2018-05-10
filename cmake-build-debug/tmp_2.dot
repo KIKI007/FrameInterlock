@@ -1,2 +1,3 @@
 digraph {
-label="Z Direction"}
+label="Z Direction""8, 2, 0" -> "1, 6"
+}

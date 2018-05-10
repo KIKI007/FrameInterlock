@@ -54,9 +54,9 @@ void FrameInterlockingTree::accept_partition_plan(TreeNode *node,
     //push into node
     node->children.push_back(child_node);
 
-    for(int id = 0; id < child_node->disassembly_order.size(); id++)
-        std::cout << child_node->disassembly_order[id]->index <<", ";
-    std::cout << std::endl;
+//    for(int id = 0; id < child_node->disassembly_order.size(); id++)
+//        std::cout << child_node->disassembly_order[id]->index <<", ";
+//    std::cout << std::endl;
 }
 
 void FrameInterlockingTree::sort_children(TreeNode *node)
@@ -177,12 +177,18 @@ void FrameInterlockingTree::generate_key_plan(TreeNode *node,
     }
 
     //set key relation
-    int relation = 0b110111;
+    int concept_relation = 0b110111;
     //int relation = 0;
 
     //compute key conceptual partition plan
     for (int kd = 0; kd < 2; kd++)
     {
+        int relation;
+        if(kd == 0)
+            relation = concept_relation & 0b101010;
+        else
+            relation = concept_relation & 0b010101;
+
         VoxelizedPuzzle *puzzle = node->puzzles[key_pillar->cube_id[kd]].get();
         VPuzRemainVolumePartitionDat plan;
 
@@ -242,20 +248,30 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
 
 bool FrameInterlockingTree::generate_children(TreeNode *node)
 {
-    max_number_of_children_ = 50;
+    max_number_of_children_ = 10;
     if(node->num_pillar_finished == 0)
     {
         return generate_key(node);
     }
     else
     {
+        std::cout << std::endl << std::endl;
+        std::cout << "Generating Part\t" << node->num_pillar_finished + 1 << std::endl;
+        std::cout << "Candidate Pillar:" << std::endl;
+        for(int id = 0; id < node->candidate_pillar.size(); id++)
+            std::cout << node->candidate_pillar[id]->index << " "; std::cout << std::endl << std::endl;
+
         for(int id = 0 ;id < node->candidate_pillar.size(); id++)
         {
+            std::cout << "Picking canididate :\t" << node->candidate_pillar[id]->index << std::endl;
+            std::cout << "Begin..." << std::endl;
             if(generate_children(node, node->candidate_pillar[id]))
             {
                 sort_children(node);
+                std::cout << "Finished..End" << std::endl;
                 return true;
             }
+            std::cout << "Failed.." << std::endl << std::endl;
         }
         return false;
     }
@@ -266,6 +282,12 @@ void FrameInterlockingTree::seperate_concept_design(int kd,
                                                     VPuzRemainVolumePartitionDat &plan,
                                                     FramePillar *cpillar)
 {
+
+    if(kd == 0)
+        plan.relation = concept.relation & 0b101010;
+    else
+        plan.relation = concept.relation & 0b010101;
+
     plan.relation = concept.relation;
     //group A
     for(int jd = 0; jd < concept.groupA.size(); jd++)
@@ -697,6 +719,7 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
     }
     graph.tarjan_cut_points(cut_points);
 
+    node->candidate_pillar.clear();
     for(int id = 0; id < interface->pillars_.size(); id++)
     {
         if(candidates_.find(id) != candidates_.end() && cut_points.find(id) == cut_points.end())
@@ -704,6 +727,13 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
             node->candidate_pillar.push_back(interface->pillars_[id].get());
         }
     }
+
+    std::sort(node->candidate_pillar.begin(), node->candidate_pillar.end(), [&](FramePillar *pA, FramePillar *pB)
+    {
+        double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
+        double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
+        return pAY > pBY;
+    });
 
     return;
 }

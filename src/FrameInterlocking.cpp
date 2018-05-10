@@ -71,14 +71,14 @@ void FrameInterlocking::select_key_pillar()
     FramePillar *key;
     for(std::shared_ptr<FramePillar> pillar: frame_interface_->pillars_)
     {
-        int valueY = pillar->end_points_cood[0][1] + pillar->end_points_cood[1][1];
+        double valueY = pillar->end_points_cood[0][1] + pillar->end_points_cood[1][1];
         if(maxY < valueY)
         {
             maxY = valueY;
             key = pillar.get();
         }
     }
-
+    std::cout << "Key is :\t" << key->index << std::endl;
     tree_->root_->candidate_pillar.push_back(key);
 }
 
