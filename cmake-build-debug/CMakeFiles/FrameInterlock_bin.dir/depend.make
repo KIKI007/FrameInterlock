@@ -1098,6 +1098,8 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/Fram
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/FrameMesh.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/Part.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/graph/DirectedGraph.h
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/graph/DirectedGraphSSC.h
+CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/graph/InterlockSDChecking.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/graph/UndirectedGraph.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/voxel/VoxelElement.h
 CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o: ../src/voxel/VoxelizedInterface.h

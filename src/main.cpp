@@ -46,6 +46,10 @@ int main() {
         viewer.ngui->addVariable("Joints Face 0", para.render_add_pillar_f0);
         viewer.ngui->addVariable("Joints Face 1", para.render_add_pillar_f1);
         viewer.ngui->addButton("Add Pillar", [](){add_pillar();});
+        viewer.ngui->addButton("Delete Pillar", [](){
+            if(frame_interface) frame_interface->delete_pillar(para.render_add_pillar_f0);
+            draw_frame_mesh();
+        });
 
         viewer.ngui->addGroup("I/O");
         viewer.ngui->addButton("Read .obj", [](){read_mesh_file();});

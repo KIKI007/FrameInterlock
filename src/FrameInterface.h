@@ -63,8 +63,6 @@ public:
 
 public:
 
-
-
     void create_void_joints();
 
     void fill_one_face_of_joints(VoxelizedInterface* joint, int nrm, int index);
@@ -75,11 +73,15 @@ public:
 
     void init_joints_from_frame_mesh();
 
+    void reset_joints_to_origin();
+
     std::shared_ptr<Assembly> output_assembly();
 
 public:
 
     void add_pillar(int f0, int f1);
+
+    void delete_pillar(int p0);
 
 public:
 

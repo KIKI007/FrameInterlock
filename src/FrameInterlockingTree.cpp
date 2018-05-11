@@ -205,6 +205,7 @@ void FrameInterlockingTree::generate_key_plan(TreeNode *node,
 bool FrameInterlockingTree::generate_key(TreeNode *node)
 {
     if(node && !node->candidate_pillar.empty()) {
+
         //key only have one candidate_pillar usually
         FramePillar *key_pillar = node->candidate_pillar.front();
 
@@ -255,12 +256,12 @@ bool FrameInterlockingTree::generate_children(TreeNode *node)
     {
         max_number_of_children_ = 10;
         max_variation_of_voxel_in_joint = 0;
-        balance_inner_relation = true;
+        balance_inner_relation = false;
     }
     else
     {
         max_number_of_children_ = 10;
-        max_variation_of_voxel_in_joint = 0;
+        max_variation_of_voxel_in_joint = 2;
         balance_inner_relation = false;
     }
 
@@ -349,6 +350,13 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
         {
             if(node->num_pillar_left_in_joints[cpillar->cube_id[kd]] == 1)
                 balance_inner_relation = true;
+        }
+
+        if(node->num_pillar_finished == interface->pillars_.size() - 1)
+        {
+            VPuzRemainVolumePartitionDat plan;
+            plan.relation = 0;
+            concept_partition_plans.push_back(plan);
         }
 
         for(int id = 0; id < concept_partition_plans.size(); id++)

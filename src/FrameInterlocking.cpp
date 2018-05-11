@@ -7,11 +7,12 @@
 FrameInterlocking::FrameInterlocking(std::shared_ptr<FrameInterface> frame_interface)
 {
     frame_interface_ = frame_interface;
-    init_tree();
 }
 
 void FrameInterlocking::init_tree()
 {
+    //reset frame interface's joints to its original style
+    if(frame_interface_) frame_interface_->reset_joints_to_origin();
 
     tree_ = std::make_shared<FrameInterlockingTree>();
     tree_->interface = frame_interface_.get();
@@ -82,10 +83,12 @@ void FrameInterlocking::select_key_pillar()
     tree_->root_->candidate_pillar.push_back(key);
 }
 
-
 std::shared_ptr<FrameInterface> FrameInterlocking::generate_interlocking()
 {
     std::srand(150);
+
+    init_tree();
+
     int it_times = 0;
     int num_pillar = frame_interface_->pillars_.size();
     int present_num_pillar = 0;

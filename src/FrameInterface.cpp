@@ -10,9 +10,7 @@ FrameInterface::FrameInterface(double radius, double cube_size, int voxel_num, s
     cube_size_ = cube_size;
     voxel_num_ = voxel_num;
     colorcoder_ = colorcoder;
-
     frame_mesh_ = nullptr;
-
 }
 
 void FrameInterface::set_frame_mesh(std::shared_ptr<FrameMesh> frame_mesh) {
@@ -34,7 +32,6 @@ void FrameInterface::draw_frame_mesh(vector<FrameInterfaceRenderUnit> &frame_uni
     }
     return;
 }
-
 
 void FrameInterface::draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &unit)
 {
@@ -668,25 +665,26 @@ void FrameInterface::read_fpuz(string file_name, double &cube_size)
     int num_joints, num_voxel_in_joint;
     fin >> num_joints >> num_voxel_in_joint;
     voxel_num_ = num_voxel_in_joint;
-//    for(int id = 0; id < num_joints; id++)
-//    {
-//        std::shared_ptr<VoxelizedInterface> voxel_interface;
-//        voxel_interface = std::make_shared<VoxelizedInterface>(
-//                VoxelizedInterface(num_voxel_in_joint, num_voxel_in_joint, num_voxel_in_joint, colorcoder_));
-//        for(int iz = 0; iz < num_voxel_in_joint; iz++)
-//        {
-//            for(int iy = 0; iy < num_voxel_in_joint; iy++)
-//            {
-//                for(int ix = 0; ix < num_voxel_in_joint; ix++)
-//                {
-//                    int index = 0;
-//                    fin >> index;
-//                    voxel_interface->set_grid_part_index(Vector3i(ix, iy, iz), index - 1);
-//                }
-//            }
-//        }
-//        joint_voxels_.push_back(voxel_interface);
-//    }
+
+    for(int id = 0; id < num_joints; id++)
+    {
+        std::shared_ptr<VoxelizedInterface> voxel_interface;
+        voxel_interface = std::make_shared<VoxelizedInterface>(
+                VoxelizedInterface(num_voxel_in_joint, num_voxel_in_joint, num_voxel_in_joint, colorcoder_));
+        for(int iz = 0; iz < num_voxel_in_joint; iz++)
+        {
+            for(int iy = 0; iy < num_voxel_in_joint; iy++)
+            {
+                for(int ix = 0; ix < num_voxel_in_joint; ix++)
+                {
+                    int index = 0;
+                    fin >> index;
+                    voxel_interface->set_grid_part_index(Vector3i(ix, iy, iz), index - 1);
+                }
+            }
+        }
+        joint_voxels_.push_back(voxel_interface);
+    }
 
     //build pillar
     int dX[6] = {1, -1, 0 ,0 ,0 ,0};
@@ -707,38 +705,12 @@ void FrameInterface::read_fpuz(string file_name, double &cube_size)
         pillar->pos_in_cube_face[1] = f1 % 6;
         pillar->cube_id[0] = e0;
         pillar->cube_id[1] = e1;
+        pillar->cube[0] = joint_voxels_[e0].get();
+        pillar->cube[1] = joint_voxels_[e1].get();
         pillar->end_points_cood[0] = points[e0] + Vector3d(dX[f0 % 6], dY[f0 % 6], dZ[f0 % 6]) * num_voxel_in_joint / 2 * cube_size_;
         pillar->end_points_cood[1] = points[e1] + Vector3d(dX[f1 % 6], dY[f1 % 6], dZ[f1 % 6]) * num_voxel_in_joint / 2 * cube_size_;
         pillars_.push_back(pillar);
     }
-
-    create_void_joints();
-    for(auto &joint : joint_voxels_)
-    {
-        for(int ix = 0; ix < voxel_num_; ix++)
-        {
-            for(int iy = 0; iy < voxel_num_; iy++)
-            {
-                for(int iz = 0; iz < voxel_num_; iz ++)
-                {
-                    joint->set_grid_part_index(Vector3i(ix, iy, iz), pillars_.size());
-                }
-            }
-        }
-    }
-
-    for(int id = 0; id < pillars_.size(); id++)
-    {
-        for(int kd = 0; kd < 2; kd++)
-        {
-            VoxelizedInterface* joint = joint_voxels_[pillars_[id]->cube_id[kd]].get();
-            pillars_[id]->cube[kd] = joint;
-            int nrm = pillars_[id]->pos_in_cube_face[kd];
-            fill_one_face_of_joints(joint, nrm, pillars_[id]->index);
-        }
-    }
-
-
     fin.close();
 }
 
@@ -954,6 +926,50 @@ void FrameInterface::write_obj(string file_name, bool is_draw_frame, bool is_dra
     }
 
     return;
+}
+
+void FrameInterface::reset_joints_to_origin()
+{
+    joint_voxels_.clear();
+
+    create_void_joints();
+
+    for(auto &joint : joint_voxels_)
+    {
+        for(int ix = 0; ix < voxel_num_; ix++)
+        {
+            for(int iy = 0; iy < voxel_num_; iy++)
+            {
+                for(int iz = 0; iz < voxel_num_; iz ++)
+                {
+                    joint->set_grid_part_index(Vector3i(ix, iy, iz), pillars_.size());
+                }
+            }
+        }
+    }
+
+    for(int id = 0; id < pillars_.size(); id++)
+    {
+        for(int kd = 0; kd < 2; kd++)
+        {
+            VoxelizedInterface* joint = joint_voxels_[pillars_[id]->cube_id[kd]].get();
+            pillars_[id]->cube[kd] = joint;
+            int nrm = pillars_[id]->pos_in_cube_face[kd];
+            fill_one_face_of_joints(joint, nrm, pillars_[id]->index);
+        }
+    }
+}
+
+void FrameInterface::delete_pillar(int p0)
+{
+    for(int id = 0; id < pillars_.size(); id++)
+    {
+        if(pillars_[id]->index == p0)
+        {
+            pillars_.erase(pillars_.begin() + id);
+            return;
+        }
+    }
 }
 
 
