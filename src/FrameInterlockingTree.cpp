@@ -5,7 +5,7 @@
 #include "FrameInterlockingTree.h"
 #include <cmath>
 
-void FrameInterlockingTree::accept_partition_plan(TreeNode *node,
+bool FrameInterlockingTree::accept_partition_plan(TreeNode *node,
                                                   FramePillar *cpillar,
                                                   const vector<FinalPartiResult>& final_parti,
                                                   Vector3d direction)
@@ -50,12 +50,18 @@ void FrameInterlockingTree::accept_partition_plan(TreeNode *node,
     child_node->disassembly_order.push_back(cpillar);
     child_node->disassembling_directions.push_back(direction);
 
+//    int contact_region[2] = {0, 0};
+//    get_pillar_contact_region(child_node.get(), cpillar, contact_region);
+//    if(contact_region[0] <= 1 || contact_region[1] <= 1)
+//        return false;
+
     //push into node
     node->children.push_back(child_node);
 
 //    for(int id = 0; id < child_node->disassembly_order.size(); id++)
 //        std::cout << child_node->disassembly_order[id]->index <<", ";
 //    std::cout << std::endl;
+    return true;
 }
 
 void FrameInterlockingTree::sort_children(TreeNode *node)
@@ -70,7 +76,7 @@ void FrameInterlockingTree::sort_children(TreeNode *node)
             int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num);
             return numA > numB;
         });
-        
+
         TreeNode* last_child_node = node->children.back().get();
         select_candidates(last_child_node);
         for(int id = 0; id < node->children.size() - 1; id++)
@@ -177,23 +183,29 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
 
 bool FrameInterlockingTree::generate_children(TreeNode *node)
 {
-    if(node->num_pillar_finished < 5)
+    if(node->num_pillar_finished < 3)
     {
-        max_number_of_children_ = 10;
-        max_variation_of_voxel_in_joint = 2;
+        max_number_of_children_ = 500;
+        max_variation_of_voxel_in_joint = 0;
         balance_inner_relation = false;
     }
-    else if(node->num_pillar_finished < interface->pillars_.size() - 5)
+//    else if(node->num_pillar_finished < interface->pillars_.size() - 5)
+//    {
+//        max_number_of_children_ = 10;
+//        max_variation_of_voxel_in_joint = 2;
+//        balance_inner_relation = true;
+//    }
+    else if(node->num_pillar_finished < interface->pillars_.size() - 10)
     {
-        max_number_of_children_ = 10;
-        max_variation_of_voxel_in_joint = 2;
-        balance_inner_relation = false;
+        max_number_of_children_ = 500;
+        max_variation_of_voxel_in_joint = 0;
+        balance_inner_relation = true;
     }
     else
     {
-        max_number_of_children_ = 10;
+        max_number_of_children_ = 500;
         max_variation_of_voxel_in_joint = 2;
-        balance_inner_relation = false;
+        balance_inner_relation = true;
     }
 
     if(node->num_pillar_finished == 0)
@@ -351,10 +363,12 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
                         vector<FinalPartiResult> final_parti;
                         final_parti.push_back(final_parti_result[0][nrm][ix]);
                         final_parti.push_back(final_parti_result[1][nrm][iy]);
-                        accept_partition_plan(node, cpillar, final_parti, Vector3d(dX[nrm], dY[nrm], dZ[nrm]));
-                        node->children.back()->relation = concept.relation;
-                        if(node->children.size() > max_number_of_children_)
-                            return true;
+                        if(accept_partition_plan(node, cpillar, final_parti, Vector3d(dX[nrm], dY[nrm], dZ[nrm])))
+                        {
+                            node->children.back()->relation = concept.relation;
+                            if(node->children.size() > max_number_of_children_)
+                                return true;
+                        }
                     }
                 }
             }
@@ -755,7 +769,9 @@ int FrameInterlockingTree::get_pillar_contact_region(TreeNode *node, FramePillar
 {
     int X[2], Y[2], Z[2];
     auto create_search_space = [&](int face){
-        X[0] = Y[0] = Z[0] = 0;
+        X[0] = 0;
+        Y[0] = 0;
+        Z[0] = 0;
         X[1] = interface->voxel_num_ - 1;
         Y[1] = interface->voxel_num_ - 1;
         Z[1] = interface->voxel_num_ - 1;
@@ -763,32 +779,41 @@ int FrameInterlockingTree::get_pillar_contact_region(TreeNode *node, FramePillar
         {
             case 0:
             {
-                X[0] = X[1] = interface->voxel_num_ - 1;
+                //+X
+                X[0] = interface->voxel_num_ - 1;
+                X[1] = interface->voxel_num_ - 1;
                 break;
             }
             case 1:
             {
-                X[0] = X[1] = 0;
+                //-X
+                X[0] = 0;
+                X[1] = 0;
                 break;
             }
             case 2:
             {
-                Y[0] = Y[1] = interface->voxel_num_ - 1;
+                //+Y
+                Y[0] = interface->voxel_num_ - 1;
+                Y[1] = interface->voxel_num_ - 1;
                 break;
             }
             case 3:
             {
-                Y[0] = Y[1] = 0;
+                Y[0] = 0;
+                Y[1] = 0;
                 break;
             }
             case 4:
             {
-                Z[0] = Z[1] = interface->voxel_num_ - 1;
+                Z[0] = interface->voxel_num_ - 1;
+                Z[1] = interface->voxel_num_ - 1;
                 break;
             }
             case 5:
             {
-                Z[0] = Z[1] = 0;
+                Z[0] = 0;
+                Z[1] = 0;
                 break;
             }
         }
@@ -802,7 +827,7 @@ int FrameInterlockingTree::get_pillar_contact_region(TreeNode *node, FramePillar
         int num = 0;
 
         for (int ix = X[0]; ix <= X[1]; ix++) {
-            for (int iy = X[0]; iy <= Y[1]; iy++) {
+            for (int iy = Y[0]; iy <= Y[1]; iy++) {
                 for (int iz = Z[0]; iz <= Z[1]; iz++) {
                     if (puzzle->get_part_id(Vector3i(ix, iy, iz)) == pillar->index) {
                         num++;

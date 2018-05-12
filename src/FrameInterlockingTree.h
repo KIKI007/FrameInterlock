@@ -27,8 +27,6 @@ public:
 
     vector<int> num_pillar_left_in_joints;
 
-    vector<int> pillar_contact_voxels[2];
-
     vecVector3d disassembling_directions;
 
 public:
@@ -83,7 +81,7 @@ public:
 
 public:
 
-    void accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, Vector3d direction);
+    bool accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, Vector3d direction);
 
     void sort_children(TreeNode *node);
 
