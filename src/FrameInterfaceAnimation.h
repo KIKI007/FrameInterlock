@@ -6,6 +6,14 @@
 #define FRAMEINTERLOCK_FRAMEINTERFACEANIMATION_H
 
 #include "FrameInterface.h"
+#include "graph/InterlockSDChecking.h"
+
+struct AnimationMovablePart
+{
+    int part_id;
+    Vector3d move_direction;
+};
+
 class FrameInterfaceAnimation : public FrameInterface{
 public:
 
@@ -38,6 +46,25 @@ public:
     {
         directions_ = directions;
     }
+
+public:
+
+    bool compute_animation_sequences();
+
+    void compute_movable_parts(const vector<DirectGraphNodeValence> &valences,
+                               const std::map<int, bool> &visited,
+                               vector<AnimationMovablePart> &move_part,
+                               int XYZ);
+
+    bool is_collision_free(int index, int nrm, const std::map<int, bool> &visited);
+
+    void merge_into_one_unit(vector<FrameInterfaceRenderUnit> &list, FrameInterfaceRenderUnit &unit);
+
+public:
+
+    void write_animation_script(string path_name);
+
+public:
 
     //ratio from 0 ~ 1
     void draw_animation(MatrixXd &V, MatrixXi &F, MatrixXd &C, double ratio);

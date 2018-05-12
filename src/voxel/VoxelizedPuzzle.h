@@ -65,6 +65,8 @@ public:
 
     int get_num_voxels(){return voxel_.size();}
 
+    double get_sum_accessbility(vector<pEmt> voxels);
+
 public:
 
     void set_voxel_mark(int order, int mark)

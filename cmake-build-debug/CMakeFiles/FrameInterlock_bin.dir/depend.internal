@@ -1099,6 +1099,8 @@ CMakeFiles/FrameInterlock_bin.dir/src/FrameInterfaceAnimation.cpp.o
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameMesh.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/Part.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraph.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/DirectedGraphSSC.h
+ /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/InterlockSDChecking.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/UndirectedGraph.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelElement.h
  /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelizedInterface.h

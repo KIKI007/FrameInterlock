@@ -336,9 +336,9 @@ void VPuzzleGraph::compute_combination_of_cycleXYZ(
                     FEcycleXYZ.weight = 0;
                     for(int XYZ = 0; XYZ < 3; XYZ++)
                     {
-                        for(int id = 0; id < cycleXYZ_dat.cycle_XYZ[XYZ].data_.anchor_voxels_list.size(); id++)
+                        for(int wid = 0; wid < cycleXYZ_dat.cycle_XYZ[XYZ].data_.anchor_voxels_list.size(); wid++)
                         {
-                            FEcycleXYZ.weight += cycleXYZ_dat.cycle_XYZ[XYZ].data_.anchor_voxels_list[id]->size();
+                            FEcycleXYZ.weight += cycleXYZ_dat.cycle_XYZ[XYZ].data_.anchor_voxels_list[wid]->size();
                         }
                     }
 
@@ -351,8 +351,8 @@ void VPuzzleGraph::compute_combination_of_cycleXYZ(
         VPuzFilter<VPuzCycleXYZDat> filter;
         filter.max_candidates_num_ = max_joint_combination / 64;
         filter.insert(canididate_list);
-        for(int id = 0; id < filter.candidate_.size(); id++)
-            plans_cycleXYZ.push_back(filter.candidate_[id].data_);
+        for(int cid = 0; cid < filter.candidate_.size(); cid++)
+            plans_cycleXYZ.push_back(filter.candidate_[cid].data_);
     }
     return;
 }
@@ -603,7 +603,7 @@ void VPuzzleGraph::compute_input_in_out_data(int XYZ)
     for(int id = 0 ;id < nodeU->neighborList_.size(); id++)
     {
         DirectedGraphEdge edge = nodeU->neighborList_[id];
-        compute_input_out_data(XYZ, edge, partition_joints);
+        compute_input_out_data(XYZ, edge, edge.node.lock()->index_, partition_joints);
     }
 
     //in
@@ -615,7 +615,7 @@ void VPuzzleGraph::compute_input_in_out_data(int XYZ)
             if(nodeV->neighborList_[jd].node.lock()->index_ == nodeU->index_)
             {
                 DirectedGraphEdge edge = nodeV->neighborList_[jd];
-                compute_input_in_data(XYZ, edge, partition_joints);
+                compute_input_in_data(XYZ, edge, nodeV->index_, partition_joints);
             }
         }
     }
@@ -623,13 +623,12 @@ void VPuzzleGraph::compute_input_in_out_data(int XYZ)
     return;
 }
 
-void VPuzzleGraph::compute_input_in_data(int XYZ, const DirectedGraphEdge& edge, const vector<bool>& partition_joints)
+void VPuzzleGraph::compute_input_in_data(int XYZ, const DirectedGraphEdge& edge, int node_id, const vector<bool>& partition_joints)
 {
     if(edge.list)
     {
         //determine its joint id
         //if it is belonged to remain
-        int node_id = input_.pillar_in_orders[edge.node.lock()->index_];
 
         vector<pEmt> list;
         std::shared_ptr<vector<pEmt>> must_be_remain_list = std::make_shared<vector<pEmt>>();
@@ -671,13 +670,12 @@ void VPuzzleGraph::compute_input_in_data(int XYZ, const DirectedGraphEdge& edge,
     }
 }
 
-void VPuzzleGraph::compute_input_out_data(int XYZ,const DirectedGraphEdge& edge, const vector<bool>& partition_joints)
+void VPuzzleGraph::compute_input_out_data(int XYZ,const DirectedGraphEdge& edge, int node_id, const vector<bool>& partition_joints)
 {
     if(edge.list)
     {
         //determine its joint id
         //if it is belonged to remain
-        int node_id = input_.pillar_in_orders[edge.node.lock()->index_];
 
         vector<pEmt> list;
         std::shared_ptr<vector<pEmt>> must_be_remain_list = std::make_shared<vector<pEmt>>();
@@ -723,7 +721,7 @@ VoxelsListType VPuzzleGraph::check_voxel_type(pEmt em)
 {
     for(int id = 0; id < input_.voxels_must_be_new_part.size(); id++)
     {
-        if(em == input_.voxels_must_be_new_part[id])
+        if(voxel_equal(em, input_.voxels_must_be_new_part[id]))
         {
             return NEW_PART;
         }
@@ -731,13 +729,20 @@ VoxelsListType VPuzzleGraph::check_voxel_type(pEmt em)
 
     for(int id = 0; id < input_.voxels_must_be_remain_part.size(); id++)
     {
-        if(em == input_.voxels_must_be_remain_part[id])
+        if(voxel_equal(em, input_.voxels_must_be_remain_part[id]))
         {
             return REMAIN_PART;
         }
     }
 
     return BOTH_PART;
+}
+
+bool VPuzzleGraph::voxel_equal(pEmt p0, pEmt p1) {
+    if(p0->pos_ == p1->pos_ && p0->joint_id_ == p1->joint_id_)
+        return true;
+    else
+        return false;
 }
 
 

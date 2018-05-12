@@ -9,9 +9,17 @@
 #include "vector"
 #include <fstream>
 #include <string>
+#include "map"
 #include "../voxel/VoxelElement.h"
 using std::string;
 using std::vector;
+
+struct DirectGraphNodeValence
+{
+    int valence_in;
+    int valence_out;
+    int index;
+};
 
 struct DirectedGraphNode;
 struct DirectedGraphEdge
@@ -98,6 +106,63 @@ public:
         edge.node = nodeLists_[idB];
         edge.weight = 0;
         nodeLists_[idA]->neighborList_.push_back(edge);
+        return;
+    }
+
+    void remove_node(int ID)
+    {
+        for(int id = 0; id < nodeLists_.size(); id++)
+        {
+            DirectedGraphNode *u = nodeLists_[id].get();
+            for(int jd = 0; jd < u->neighborList_.size(); jd++)
+            {
+                DirectedGraphEdge edge = u->neighborList_[jd];
+                if(edge.node.lock()->index_ == ID)
+                {
+                    u->neighborList_.erase(u->neighborList_.begin() + jd);
+                    jd--;
+                }
+            }
+        }
+
+        for(int id = 0; id < nodeLists_.size(); id++)
+        {
+            if(nodeLists_[id]->index_ == ID)
+            {
+                nodeLists_.erase(nodeLists_.begin() + id);
+                id--;
+            }
+        }
+
+        return;
+    }
+
+    void compute_node_valence(vector<DirectGraphNodeValence> &valences)
+    {
+        std::map<int, int> node_index_to_id;
+        for(int id = 0; id < nodeLists_.size(); id++)
+        {
+            DirectGraphNodeValence valence;
+            valence.index = nodeLists_[id]->index_;
+            valence.valence_in = 0;
+            valence.valence_out = 0;
+            node_index_to_id[valence.index] = id;
+            valences.push_back(valence);
+        }
+
+        for(int id = 0; id < nodeLists_.size(); id++)
+        {
+            DirectedGraphNode *u = nodeLists_[id].get();
+            int IDu = node_index_to_id[u->index_];
+            for(int jd = 0; jd < u->neighborList_.size(); jd++)
+            {
+                DirectedGraphNode *v = u->neighborList_[jd].node.lock().get();
+                int IDv = node_index_to_id[v->index_];
+                valences[IDu].valence_out++;
+                valences[IDv].valence_in++;
+            }
+        }
+
         return;
     }
 

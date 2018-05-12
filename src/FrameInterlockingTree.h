@@ -25,7 +25,9 @@ public:
 
     vector<FramePillar *> disassembly_order;
 
-    vector<int> num_voxel_left_in_joints;
+    vector<int> num_pillar_left_in_joints;
+
+    vector<int> pillar_contact_voxels[2];
 
     vecVector3d disassembling_directions;
 
@@ -75,9 +77,13 @@ public:
 
     void filter_remaining_volume_partition_plan(vector<VPuzRemainVolumePartitionDat> &outer_plan);
 
+    int get_voxel_number(TreeNode* node, int joint_id);
+
+    int get_pillar_contact_region(TreeNode *node, FramePillar *pillar, int *contact_voxels);
+
 public:
 
-    void accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, int *part_num_voxels, Vector3d direction);
+    void accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, Vector3d direction);
 
     void sort_children(TreeNode *node);
 
@@ -106,6 +112,10 @@ public:
 public:
 
     int max_number_of_children_;
+
+    int max_variation_of_voxel_in_joint;
+
+    bool balance_inner_relation;
 
     FrameInterface *interface;
 

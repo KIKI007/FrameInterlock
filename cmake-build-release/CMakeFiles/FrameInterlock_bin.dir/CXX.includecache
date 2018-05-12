@@ -47,6 +47,8 @@ FrameInterfaceAnimation.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterfaceAnimation.h
 FrameInterface.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterface.h
+graph/InterlockSDChecking.h
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/InterlockSDChecking.h
 
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/FrameInterlocking.cpp
 FrameInterlocking.h
@@ -277,6 +279,8 @@ fstream
 -
 string
 -
+map
+/Users/ziqwang/Documents/GitHub/FrameInterlock/src/graph/map
 ../voxel/VoxelElement.h
 /Users/ziqwang/Documents/GitHub/FrameInterlock/src/voxel/VoxelElement.h
 

@@ -244,7 +244,7 @@ void init()
     shared_ptr += "/tutorial/shared/";
 
     para.render_num_joint_voxel = 3;
-    para.render_joint_size_ = 0.1;
+    para.render_joint_size_ = 0.02;
     para.render_joint_knots = true;
     para.render_frame_mesh = true;
     para.render_show_pillar_index = false;
@@ -252,8 +252,8 @@ void init()
     para.render_show_joint_face_index = false;
     para.render_show_joint_index = false;
     para.render_foucus_joint_index = -1;
-    para.render_add_pillar_f0 = 306;
-    para.render_add_pillar_f1 = 190;
+    para.render_add_pillar_f0 = -1;
+    para.render_add_pillar_f1 = -1;
     para.interlock_children_id = 0;
     para.is_animation = false;
     para.animation_ratio = 0;
@@ -411,6 +411,7 @@ void generate_children()
 {
     if(frame_interlock)
     {
+        if(frame_interlock->tree_ == nullptr) frame_interlock->init_tree();
         frame_interlock->tree_->generate_children(frame_interlock->tree_->present_node_);
         para.interlock_children_id = 0;
         if(frame_interlock->tree_->present_node_->children.size() > 0)
@@ -436,6 +437,7 @@ void generate_key()
 {
     if(frame_interlock)
     {
+        if(frame_interlock->tree_ == nullptr) frame_interlock->init_tree();
         frame_interlock->tree_->generate_key(frame_interlock->tree_->root_.get());
         para.interlock_children_id = 0;
         if(frame_interlock->tree_->root_->children.size() > 0)
@@ -450,7 +452,7 @@ void generate_key()
 
 void graph_test()
 {
-    UndirectedGraph graph(18);
+//    UndirectedGraph graph(18);
 //    graph.add_edge(0, 1);
 //    graph.add_edge(0, 2);
 //    graph.add_edge(0, 3);
@@ -465,75 +467,102 @@ void graph_test()
 //    graph.add_edge(3, 5);
 //    graph.add_edge(4, 5);
 
-    MatrixXd mat(26, 2);
-    mat << 1, 2,
+//    MatrixXd mat(26, 2);
+//    mat << 1, 2,
+//            2, 3,
+//            2, 4,
+//            2, 5,
+//            2, 6,
+//            3, 4,
+//            5, 6,
+//            5, 7,
+//            6, 7,
+//            7, 8,
+//            7, 11,
+//            8, 12,
+//            8, 14,
+//            8, 15,
+//            8, 11,
+//            8, 9,
+//            9, 10,
+//            9, 11,
+//            10, 11,
+//            10, 16,
+//            10, 17,
+//            10, 18,
+//            12, 13,
+//            13, 14,
+//            13, 15,
+//            17, 18;
+//    for(int id = 0; id < 26; id++)
+//    {
+//        graph.add_edge(mat(id, 0) - 1, mat(id ,1) - 1);
+//    }
+//
+//    std::map<int, bool> cutpoints;
+//    graph.tarjan_cut_points(cutpoints);
+//    for(auto it: cutpoints)
+//    {
+//        std::cout << it.first << " ";
+//    }
+//    std::cout << std::endl;
+
+    DirectedGraph graph(6);
+    MatrixXi mat(6, 2);
+    mat <<  1, 2,
+            1, 3,
             2, 3,
             2, 4,
-            2, 5,
-            2, 6,
             3, 4,
-            5, 6,
-            5, 7,
-            6, 7,
-            7, 8,
-            7, 11,
-            8, 12,
-            8, 14,
-            8, 15,
-            8, 11,
-            8, 9,
-            9, 10,
-            9, 11,
-            10, 11,
-            10, 16,
-            10, 17,
-            10, 18,
-            12, 13,
-            13, 14,
-            13, 15,
-            17, 18;
-    for(int id = 0; id < 26; id++)
+            3, 6;
+    for(int id = 0; id < 6; id++)
     {
         graph.add_edge(mat(id, 0) - 1, mat(id ,1) - 1);
     }
 
-    std::map<int, bool> cutpoints;
-    graph.tarjan_cut_points(cutpoints);
-    for(auto it: cutpoints)
+    vector<DirectGraphNodeValence> valences;
+    graph.compute_node_valence(valences);
+    for(DirectGraphNodeValence valence: valences)
     {
-        std::cout << it.first << " ";
+        std::cout << valence.index + 1 << " " << valence.valence_in << " " << valence.valence_out << std::endl;
     }
-    std::cout << std::endl;
     return;
 }
 
 bool init_animation()
 {
-    if(frame_interface && frame_interlock)
+//    if(frame_interface && frame_interlock)
+//    {
+//        TreeNode *present = frame_interlock->tree_->present_node_;
+//        if(present == nullptr)
+//            return  false;
+//        if(present->num_pillar_finished != frame_interface->pillars_.size())
+//            return false;
+//
+//        frame_interface->cube_size_ = para.render_joint_size_;
+//        frame_interface->radius_ = para.render_pillar_radius;
+//        frame_animation = std::make_shared<FrameInterfaceAnimation>(FrameInterfaceAnimation(*frame_interface));
+//        vector<int> sequences;
+//
+//        for(int id = 0; id < present->disassembly_order.size(); id++)
+//            sequences.push_back(present->disassembly_order[id]->index);
+//        frame_animation->set_disassembling_sequences(sequences);
+//        vecVector3d directions = present->disassembling_directions;
+//        frame_animation->set_disassembling_direction(directions);
+//        return true;
+//    }
+//    else
+
+    if(frame_interface)
     {
-
-        TreeNode *present = frame_interlock->tree_->present_node_;
-        if(present == nullptr)
-            return  false;
-        if(present->num_pillar_finished != frame_interface->pillars_.size())
-            return false;
-
         frame_interface->cube_size_ = para.render_joint_size_;
         frame_interface->radius_ = para.render_pillar_radius;
         frame_animation = std::make_shared<FrameInterfaceAnimation>(FrameInterfaceAnimation(*frame_interface));
-        vector<int> sequences;
+        if(frame_animation->compute_animation_sequences())
+            return true;
+    }
 
-        for(int id = 0; id < present->disassembly_order.size(); id++)
-            sequences.push_back(present->disassembly_order[id]->index);
-        frame_animation->set_disassembling_sequences(sequences);
-        vecVector3d directions = present->disassembling_directions;
-        frame_animation->set_disassembling_direction(directions);
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 void close_animation()
