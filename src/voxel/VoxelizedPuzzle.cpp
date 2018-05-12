@@ -216,6 +216,8 @@ bool VoxelizedPuzzle::is_same(VoxelizedPuzzle *A) {
     return true;
 }
 
+
+
  void VoxelizedPuzzle::partition_part(const vector<pEmt> &new_part_voxels, int new_part_id)
  {
 
@@ -233,9 +235,20 @@ bool VoxelizedPuzzle::is_same(VoxelizedPuzzle *A) {
                                                                        new_part_id,
                                                                        joint_id_,
                                                                        Vector3i(Nx, Ny, Nz)));
+     part->compute_access_map(&map_access_);
      parts_.insert(parts_.end() - 1, part);
      return;
  }
+
+double VoxelizedPuzzle::get_sum_accessbility(vector<pEmt> voxels)
+{
+    double access = 0;
+    for(pEmt em: voxels)
+    {
+        access += map_access_[em->order_];
+    }
+    return access;
+}
 
 //void VoxelizedPuzzle::build_part_connection(VoxelizedPart *vpart)
 ////build connection

@@ -128,18 +128,38 @@ int main() {
         }, [&](){return para.animation_ratio;});
         slider->setSpinnable(true);
         slider->setMinMaxValues(0, 1);
-        slider->setValueIncrement(0.005);
+        slider->setValueIncrement(0.001);
 
         viewer.ngui->addButton("Animation", []()
         {
             if(para.is_animation)
             {
-                for(int id = 0; id < 100; id++)
+                for(int id = 0; id < 1000; id++)
                 {
-                    para.animation_ratio = id / 100.0;
+                    para.animation_ratio = id / 1000.0;
                     draw_animation();
 
-                    usleep(100000);
+                    usleep(50000);
+                }
+            }
+        });
+
+        viewer.ngui->addButton("Output animation.txt", []()
+        {
+            if(para.is_animation)
+            {
+                string path = "";
+                path = igl::file_dialog_save();
+                if (path != "")
+                {
+                    for (int id = path.size() - 1; id >= 0; id--)
+                    {
+                        if (path[id - 1] == '/') {
+                            path.erase(id, path.size());
+                            break;
+                        }
+                    }
+                    frame_animation->write_animation_script(path);
                 }
             }
         });

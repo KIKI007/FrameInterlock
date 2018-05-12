@@ -916,7 +916,7 @@ void FrameInterface::write_obj(string file_name, bool is_draw_frame, bool is_dra
             {
                 int index = unit.pillar_index;
                 int eid = pillars_element_count[index] ++;
-                string name = file_name + "part_" + std::to_string(index) + "_elrement_" + std::to_string(eid) + ".obj";
+                string name = file_name + "part_" + std::to_string(index) + "_element_" + std::to_string(eid) + ".obj";
                 for (int id = 0; id < unit.V.rows(); id++) {
                     unit.V.row(id) = unit.V.row(id) + unit.dV;
                 }

@@ -87,12 +87,12 @@ std::shared_ptr<FrameInterface> FrameInterlocking::generate_interlocking()
 {
     std::srand(150);
 
-    init_tree();
+    if(tree_ == nullptr)
+        init_tree();
 
     int it_times = 0;
     int num_pillar = frame_interface_->pillars_.size();
-    int present_num_pillar = 0;
-    while(tree_->present_node_ && tree_->present_node_->num_pillar_finished < num_pillar - 2)
+    while(tree_->present_node_ && tree_->present_node_->num_pillar_finished < num_pillar)
     {
 //        if(tree_->present_node_->num_pillar_finished >= 1 && tree_->present_node_->disassembly_order.back()->index == 17)
 //            break;

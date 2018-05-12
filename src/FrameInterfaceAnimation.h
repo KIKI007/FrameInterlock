@@ -58,6 +58,12 @@ public:
 
     bool is_collision_free(int index, int nrm, const std::map<int, bool> &visited);
 
+    void merge_into_one_unit(vector<FrameInterfaceRenderUnit> &list, FrameInterfaceRenderUnit &unit);
+
+public:
+
+    void write_animation_script(string path_name);
+
 public:
 
     //ratio from 0 ~ 1

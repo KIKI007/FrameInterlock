@@ -22,8 +22,23 @@
   <component name="ChangeListManager">
     <list default="true" id="9d1b2171-43b6-42b3-a689-5a22fd6f4b50" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/FrameInterlock_bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/FrameInterlock_bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-release/FrameInterlock_bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/FrameInterlock_bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release/tmp_0.dot" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/tmp_0.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release/tmp_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/tmp_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release/tmp_1.dot" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/tmp_1.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release/tmp_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/tmp_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release/tmp_2.dot" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/tmp_2.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release/tmp_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/tmp_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrameInterface.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterface.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrameInterfaceAnimation.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterfaceAnimation.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrameInterlocking.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterlocking.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrameInterlockingTree.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterlockingTree.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
@@ -42,34 +57,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FrameInterlockingTree.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FrameInterlockingTree.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12527">
-              <caret line="778" column="28" selection-start-line="778" selection-start-column="28" selection-end-line="778" selection-end-column="28" />
+            <state relative-caret-position="345">
+              <caret line="69" selection-start-line="69" selection-end-line="69" />
               <folding>
                 <element signature="e#42#76#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FrameInterlocking.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FrameInterfaceAnimation.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="58" column="63" selection-start-line="58" selection-start-column="63" selection-end-line="58" selection-end-column="63" />
-              <folding>
-                <element signature="e#141#168#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,8 +72,50 @@
       <file leaf-file-name="FrameInterfaceAnimation.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="174" column="45" selection-start-line="174" selection-start-column="45" selection-end-line="174" selection-end-column="45" />
+            <state relative-caret-position="2335">
+              <caret line="286" selection-start-line="286" selection-end-line="286" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DirectedGraph.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graph/DirectedGraph.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="139" column="9" selection-start-line="139" selection-start-column="9" selection-end-line="139" selection-end-column="9" />
+              <folding>
+                <element signature="e#111#128#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FrameInterlockingTree.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="579">
+              <caret line="81" column="76" selection-start-line="81" selection-start-column="76" selection-end-line="81" selection-end-column="76" />
+              <folding>
+                <element signature="e#137#171#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FrameInterlocking.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2068">
+              <caret line="94" column="88" selection-start-line="94" selection-start-column="88" selection-end-line="94" selection-end-column="88" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FrameInterface.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FrameInterface.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1889">
+              <caret line="461" column="38" selection-start-line="461" selection-start-column="38" selection-end-line="461" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -87,8 +123,8 @@
       <file leaf-file-name="FrameInterface.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FrameInterface.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="83" selection-start-line="83" selection-end-line="83" selection-end-column="31" />
+            <state relative-caret-position="223">
+              <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
               <folding>
                 <element signature="e#123#160#0" expanded="true" />
               </folding>
@@ -99,35 +135,8 @@
       <file leaf-file-name="Utility.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Utility.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="255" column="34" selection-start-line="255" selection-start-column="34" selection-end-line="255" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FrameInterface.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FrameInterface.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3286">
-              <caret line="958" column="9" lean-forward="true" selection-start-line="958" selection-start-column="9" selection-end-line="958" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FrameInterlocking.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1023">
-              <caret line="94" column="93" lean-forward="true" selection-start-line="94" selection-start-column="93" selection-end-line="94" selection-end-column="93" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vector" pinned="false" current-in-tab="false">
-        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="648" column="5" selection-start-line="648" selection-start-column="5" selection-end-line="648" selection-end-column="5" />
+            <state relative-caret-position="549">
+              <caret line="319" column="94" selection-start-line="306" selection-start-column="8" selection-end-line="319" selection-end-column="94" />
             </state>
           </provider>
         </entry>
@@ -135,8 +144,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="18" column="69" lean-forward="true" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
+            <state relative-caret-position="2600">
+              <caret line="146" column="53" selection-start-line="146" selection-start-column="53" selection-end-line="146" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -145,11 +154,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get_pillars</find>
-      <find>frame_interlock</find>
-      <find>asse</find>
-      <find>stop</find>
-      <find>assemblu</find>
       <find>id</find>
       <find>0b</find>
       <find>==</find>
@@ -173,8 +177,13 @@
       <find>ani</find>
       <find>30</find>
       <find>2</find>
-      <find>pillar_visited_order</find>
       <find>read</find>
+      <find>pillar_visited_order</find>
+      <find>final</find>
+      <find>-2</find>
+      <find>output</find>
+      <find>pos_in_cube_face</find>
+      <find>draw</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -198,11 +207,9 @@
         <option value="$PROJECT_DIR$/src/voxel/VoxelElement.h" />
         <option value="$PROJECT_DIR$/src/FrameMesh.cpp" />
         <option value="$PROJECT_DIR$/src/FrameMesh.h" />
-        <option value="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.h" />
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedRenderSphere.cpp" />
         <option value="$PROJECT_DIR$/src/graph/UndirectedGraph.h" />
         <option value="$PROJECT_DIR$/src/voxel/PuzzleCandidateFilter.h" />
-        <option value="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.cpp" />
         <option value="$PROJECT_DIR$/src/FrameInterlocking.h" />
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.cpp" />
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.h" />
@@ -210,17 +217,19 @@
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedPartition.h" />
         <option value="$PROJECT_DIR$/src/voxel/VPuzzleGraph.h" />
         <option value="$PROJECT_DIR$/src/voxel/VPuzzleGraph.cpp" />
-        <option value="$PROJECT_DIR$/src/FrameInterlockingTree.h" />
         <option value="$PROJECT_DIR$/src/graph/UndirectedGraph.cpp" />
         <option value="$PROJECT_DIR$/src/graph/DirectedGraph.h" />
-        <option value="$PROJECT_DIR$/src/FrameInterfaceAnimation.h" />
-        <option value="$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp" />
         <option value="$PROJECT_DIR$/src/FrameInterface.h" />
-        <option value="$PROJECT_DIR$/src/FrameInterface.cpp" />
-        <option value="$PROJECT_DIR$/src/Utility.h" />
-        <option value="$PROJECT_DIR$/src/main.cpp" />
-        <option value="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" />
+        <option value="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.h" />
+        <option value="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.cpp" />
         <option value="$PROJECT_DIR$/src/FrameInterlocking.cpp" />
+        <option value="$PROJECT_DIR$/src/Utility.h" />
+        <option value="$PROJECT_DIR$/src/FrameInterface.cpp" />
+        <option value="$PROJECT_DIR$/src/main.cpp" />
+        <option value="$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp" />
+        <option value="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" />
+        <option value="$PROJECT_DIR$/src/FrameInterfaceAnimation.h" />
+        <option value="$PROJECT_DIR$/src/FrameInterlockingTree.h" />
       </list>
     </option>
   </component>
@@ -343,35 +352,35 @@
       <workItem from="1525771924054" duration="3906000" />
       <workItem from="1525778816992" duration="35000" />
       <workItem from="1525781634579" duration="6060000" />
-      <workItem from="1525793499543" duration="31619000" />
+      <workItem from="1525793499543" duration="41269000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193920000" />
+    <option name="totallyTimeSpent" value="203570000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2048" height="1152" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48819876" visible="true" weight="0.1830291" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4875346" visible="true" weight="0.1830291" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32961932" />
+      <window_info active="true" anchor="bottom" id="Messages" order="7" visible="true" weight="0.32961932" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.098421544" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2525534" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32961932" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2525534" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32961932" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32969698" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925718" />
-      <window_info id="Favorites" order="2" sideWeight="0.51180124" side_tool="true" visible="true" weight="0.1830291" />
+      <window_info id="Favorites" order="2" sideWeight="0.51246536" side_tool="true" visible="true" weight="0.1830291" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32961932" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,13 +402,8 @@
           <line>195</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/Utility.h</url>
-          <line>557</line>
-          <option name="timeStamp" value="278" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="282" />
+      <option name="time" value="287" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -410,13 +414,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../libigl/external/nanogui/ext/eigen/Eigen/src/Core/Block.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="116" selection-start-line="116" selection-end-line="116" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../libigl/external/nanogui/ext/eigen/Eigen/src/plugins/CommonCwiseBinaryOps.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -459,13 +456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Assembly.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../libigl/external/nanogui/src/button.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
@@ -501,20 +491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPart.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4070">
-          <caret line="185" column="20" selection-start-line="185" selection-start-column="20" selection-end-line="185" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ColorCoding.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../libigl/external/nanogui/ext/eigen/Eigen/src/Core/Matrix.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -526,13 +502,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="236" selection-start-line="236" selection-end-line="236" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPart.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2" selection-start-column="2" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -664,20 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2186">
-          <caret line="184" column="34" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/graph/UndirectedGraph.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="568">
@@ -692,64 +647,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.h">
+    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPart.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="877">
-          <caret line="113" column="32" selection-start-line="113" selection-start-column="32" selection-end-line="113" selection-end-column="32" />
-          <folding>
-            <element signature="e#137#171#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="111">
+          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/graph/DirectedGraph.h">
+    <entry file="file://$PROJECT_DIR$/src/Assembly.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1148">
-          <caret line="189" column="13" lean-forward="true" selection-start-line="189" selection-start-column="13" selection-end-line="189" selection-end-column="13" />
-          <folding>
-            <element signature="e#111#128#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="491">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector">
+    <entry file="file://$PROJECT_DIR$/src/ColorCoding.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="648" column="5" selection-start-line="648" selection-start-column="5" selection-end-line="648" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="58" column="63" selection-start-line="58" selection-start-column="63" selection-end-line="58" selection-end-column="63" />
-          <folding>
-            <element signature="e#141#168#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrameInterface.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="83" selection-start-line="83" selection-end-line="83" selection-end-column="31" />
-          <folding>
-            <element signature="e#123#160#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Utility.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="255" column="34" selection-start-line="255" selection-start-column="34" selection-end-line="255" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="69" lean-forward="true" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
+        <state>
+          <caret column="2" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -760,33 +675,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp">
+    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPart.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="174" column="45" selection-start-line="174" selection-start-column="45" selection-end-line="174" selection-end-column="45" />
+        <state relative-caret-position="76">
+          <caret line="56" column="15" selection-start-line="56" selection-start-column="15" selection-end-line="56" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="67" column="53" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="249" column="18" selection-start-line="249" selection-start-column="18" selection-end-line="249" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitattributes">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/vector">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="475" column="4" selection-start-line="475" selection-start-column="4" selection-end-line="475" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graph/DirectedGraph.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="139" column="9" selection-start-line="139" selection-start-column="9" selection-end-line="139" selection-end-column="9" />
+          <folding>
+            <element signature="e#111#128#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Utility.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="319" column="94" selection-start-line="306" selection-start-column="8" selection-end-line="319" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2600">
+          <caret line="146" column="53" selection-start-line="146" selection-start-column="53" selection-end-line="146" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrameInterface.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+          <folding>
+            <element signature="e#123#160#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
+          <folding>
+            <element signature="e#141#168#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FrameInterface.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3286">
-          <caret line="958" column="9" lean-forward="true" selection-start-line="958" selection-start-column="9" selection-end-line="958" selection-end-column="9" />
+        <state relative-caret-position="1889">
+          <caret line="461" column="38" selection-start-line="461" selection-start-column="38" selection-end-line="461" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1023">
-          <caret line="94" column="93" lean-forward="true" selection-start-line="94" selection-start-column="93" selection-end-line="94" selection-end-column="93" />
+        <state relative-caret-position="2068">
+          <caret line="94" column="88" selection-start-line="94" selection-start-column="88" selection-end-line="94" selection-end-column="88" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12527">
-          <caret line="778" column="28" selection-start-line="778" selection-start-column="28" selection-end-line="778" selection-end-column="28" />
+        <state relative-caret-position="345">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
           <folding>
             <element signature="e#42#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2335">
+          <caret line="286" selection-start-line="286" selection-end-line="286" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="81" column="76" selection-start-line="81" selection-start-column="76" selection-end-line="81" selection-end-column="76" />
+          <folding>
+            <element signature="e#137#171#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -27,6 +27,8 @@ public:
 
     vector<int> num_pillar_left_in_joints;
 
+    vector<int> pillar_contact_voxels[2];
+
     vecVector3d disassembling_directions;
 
 public:
@@ -76,6 +78,8 @@ public:
     void filter_remaining_volume_partition_plan(vector<VPuzRemainVolumePartitionDat> &outer_plan);
 
     int get_voxel_number(TreeNode* node, int joint_id);
+
+    int get_pillar_contact_region(TreeNode *node, FramePillar *pillar, int *contact_voxels);
 
 public:
 

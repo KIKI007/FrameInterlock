@@ -164,12 +164,15 @@ void FrameInterfaceAnimation::compute_movable_parts(const vector<DirectGraphNode
 }
 
 bool FrameInterfaceAnimation::is_collision_free(int index, int nrm, const std::map<int, bool> &visited) {
+
     FramePillar *u = pillars_[index].get();
+    int neighbor = 0;
     for(int id = 0; id < pillars_.size(); id++)
     {
         if(visited.find(pillars_[id]->index) == visited.end())
         {
             FramePillar *v = pillars_[id].get();
+            if(u->index == v->index) continue;
             for(int ix = 0; ix < 2; ix++)
             {
                 for(int iy = 0; iy < 2; iy++)
@@ -182,5 +185,139 @@ bool FrameInterfaceAnimation::is_collision_free(int index, int nrm, const std::m
             }
         }
     }
+
+    auto opposite_face = [](int nrm) -> int
+    {
+        int XYZ = nrm / 2;
+        int sign = (nrm % 2 + 1) % 2;
+        return 2 * XYZ + sign;
+    };
+
+    for(int kd = 0; kd < 2; kd++)
+    {
+        int cube_face_nrm = u->pos_in_cube_face[kd];
+        if(opposite_face(nrm) != cube_face_nrm) continue;
+        for(int id = 0; id < pillars_.size(); id++)
+        {
+            if(visited.find(pillars_[id]->index) == visited.end())
+            {
+                FramePillar *v = pillars_[id].get();
+                if (u->index == v->index) continue;
+                for (int iy = 0; iy < 2; iy++)
+                {
+                    if (u->cube_id[kd] == v->cube_id[iy])
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
     return true;
+}
+
+
+
+void FrameInterfaceAnimation::write_animation_script(string path_name)
+{
+    if(path_name != "")
+    {
+
+        vector<string> obj_file_names;
+        vector<FrameInterfaceRenderUnit> outlist;
+        for(int id = 0; id < pillars_.size(); id++)
+        {
+            int index  = id;
+            vector<FrameInterfaceRenderUnit> list;
+            for(int jd = 0; jd < units_.size(); jd++)
+            {
+                FrameInterfaceRenderUnit &unit = units_[jd];
+                if(unit.pillar_index == index)
+                {
+                    list.push_back(unit);
+                }
+            }
+            FrameInterfaceRenderUnit combine_unit;
+            merge_into_one_unit(list, combine_unit);
+            outlist.push_back(combine_unit);
+        }
+
+        //output obj
+        for(FrameInterfaceRenderUnit &unit : outlist)
+        {
+            int index = unit.pillar_index;
+            string obj_name = "part_" + std::to_string(index) + ".obj";
+            igl::writeOBJ(path_name + obj_name, unit.V, unit.F);
+            obj_file_names.push_back(obj_name);
+        }
+
+        //output animation.motion.txt
+        std::ofstream fout;
+        fout.open(path_name + "animation.motion.txt");
+        fout << "Objects " << obj_file_names.size() << std::endl;
+        for(int id = 0; id < obj_file_names.size(); id++)
+        {
+            fout << obj_file_names[id] << " ";
+        }
+        fout << std::endl;
+
+        for(int id = 0; id < disassembling_sequences_.size(); id++)
+        {
+            int index = disassembling_sequences_[id];
+            for(int jd = 0; jd < outlist.size(); jd++)
+            {
+                FrameInterfaceRenderUnit &unit = outlist[jd];
+                if(unit.pillar_index == index)
+                {
+                    fout << "Begin Action 60" << std::endl;
+                    fout << "Move id " << jd + 1
+                         << " [" << directions_[id][0]
+                         << ", " << directions_[id][1]
+                         << ", " << directions_[id][2] << " ]"
+                         << std::endl;
+                    fout << "End" << std::endl << std::endl;
+                }
+            }
+        }
+    }
+}
+
+void
+FrameInterfaceAnimation::merge_into_one_unit(vector<FrameInterfaceRenderUnit> &list, FrameInterfaceRenderUnit &unit)
+{
+    int nV = 0;
+    int nF = 0;
+    for(FrameInterfaceRenderUnit &unit : list)
+    {
+        if(unit.visible)
+        {
+            unit.dF = RowVector3i(nV, nV, nV);
+            nV += unit.V.rows();
+            nF += unit.F.rows();
+        }
+    }
+
+    MatrixXd V = MatrixXd(nV, 3);
+    MatrixXd C = MatrixXd(nF, 3);
+    MatrixXi F = MatrixXi(nF, 3);
+
+    int iV = 0, iF = 0;
+    for(FrameInterfaceRenderUnit &unit : list)
+    {
+        for (int id = 0; id < unit.V.rows(); id++) {
+            V.row(iV++) = unit.V.row(id);
+        }
+
+        for (int id = 0; id < unit.F.rows(); id++) {
+            C.row(iF) = unit.C.row(id);
+            F.row(iF++) = unit.F.row(id) + unit.dF;
+        }
+    }
+
+    unit.V = V;
+    unit.C = C;
+    unit.F = F;
+    unit.pillar_index = list.front().pillar_index;
+    return;
 }

@@ -63,83 +63,14 @@ void FrameInterlockingTree::sort_children(TreeNode *node)
 
     if(node->children.size() > 0)
     {
-        int X[2], Y[2], Z[2];
         std::sort(node->children.begin(), node->children.end(), [&](std::shared_ptr<TreeNode> A, std::shared_ptr<TreeNode> B)
         {
-            auto create_search_space = [&](int face)
-            {
-                X[0] = Y[0] = Z[0] = 0;
-                X[1] = interface->voxel_num_ - 1;
-                Y[1] = interface->voxel_num_ - 1;
-                Z[1] = interface->voxel_num_ - 1;
-                switch(face)
-                {
-                    case 0:
-                    {
-                        X[0] = X[1] = interface->voxel_num_ - 1;
-                        break;
-                    }
-                    case 1:
-                    {
-                        X[0] = X[1] = 0;
-                        break;
-                    }
-                    case 2:
-                    {
-                        Y[0] = Y[1] = interface->voxel_num_ - 1;
-                        break;
-                    }
-                    case 3:
-                    {
-                        Y[0] = Y[1] = 0;
-                        break;
-                    }
-                    case 4:
-                    {
-                        Z[0] = Z[1] = interface->voxel_num_ - 1;
-                        break;
-                    }
-                    case 5:
-                    {
-                        Z[0] = Z[1] = 0;
-                        break;
-                    }
-                }
-            };
-
-            auto compute_number_of_voxel = [&](TreeNode *A)->int
-            {
-                int num = 0;
-                for(int kd = 0; kd < 2; kd++)
-                {
-                    FramePillar *pillar = A->disassembly_order.back();
-                    int joint_id = pillar->cube_id[kd];
-                    VoxelizedPuzzle* puzzle = A->puzzles[joint_id].get();
-                    create_search_space(pillar->pos_in_cube_face[kd]);
-                    for(int ix = X[0]; ix <= X[1]; ix++)
-                    {
-                        for(int iy = X[0]; iy <= Y[1]; iy++)
-                        {
-                            for (int iz = Z[0]; iz <= Z[1]; iz++)
-                            {
-                                if(puzzle->get_part_id(Vector3i(ix, iy, iz)) == pillar->index)
-                                {
-                                    num++;
-                                }
-                            }
-                        }
-                    }
-                }
-                return num;
-            };
-
-            int numA = compute_number_of_voxel(A.get());
-            int numB = compute_number_of_voxel(B.get());
+            int contact_num[2];
+            int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num);
+            int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num);
             return numA > numB;
-
         });
-
-
+        
         TreeNode* last_child_node = node->children.back().get();
         select_candidates(last_child_node);
         for(int id = 0; id < node->children.size() - 1; id++)
@@ -255,7 +186,7 @@ bool FrameInterlockingTree::generate_children(TreeNode *node)
     else if(node->num_pillar_finished < interface->pillars_.size() - 5)
     {
         max_number_of_children_ = 10;
-        max_variation_of_voxel_in_joint = 0;
+        max_variation_of_voxel_in_joint = 2;
         balance_inner_relation = false;
     }
     else
@@ -371,7 +302,8 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
                 VoxelizedPuzzle* puzzle = node->puzzles[cpillar->cube_id[kd]].get();
                 part_num_voxels[kd] = get_voxel_number(node, cpillar->cube_id[kd]);
 
-                if(node->num_pillar_left_in_joints[cpillar->cube_id[kd]] == 1) {
+                if(node->num_pillar_left_in_joints[cpillar->cube_id[kd]] == 1)
+                {
                     for(int nrm = 0; nrm < 6; nrm++)
                     {
                         if(legal_nrm[nrm])
@@ -380,7 +312,6 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
                             result.new_part_voxels = puzzle->parts_.back()->elist_;
                             final_parti_result[kd][nrm].push_back(result);
                         }
-
                     }
                 }
                 else
@@ -391,8 +322,16 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
                         {
                             VoxelizedPartition partioner(part_num_voxels[kd] - max_variation_of_voxel_in_joint,
                                                          part_num_voxels[kd] + max_variation_of_voxel_in_joint);
-                            partioner.input(puzzle, plan[kd],AssemblingDirection(nrm));
+                            partioner.input(puzzle, plan[kd], AssemblingDirection(nrm));
                             partioner.output(final_parti_result[kd][nrm]);
+
+                            //sort
+                            std::sort(final_parti_result[kd][nrm].begin(), final_parti_result[kd][nrm].end(), [&](const FinalPartiResult &a, const FinalPartiResult &b )
+                            {
+                                double accessA = puzzle->get_sum_accessbility(a.new_part_voxels);
+                                double accessB = puzzle->get_sum_accessbility(b.new_part_voxels);
+                                return accessA < accessB;
+                            });
                         }
                     }
 
@@ -810,6 +749,70 @@ int FrameInterlockingTree::get_voxel_number(TreeNode *node, int joint_id) {
     else
         return part_voxel_number;
 
+}
+
+int FrameInterlockingTree::get_pillar_contact_region(TreeNode *node, FramePillar *pillar, int *contact_voxels)
+{
+    int X[2], Y[2], Z[2];
+    auto create_search_space = [&](int face){
+        X[0] = Y[0] = Z[0] = 0;
+        X[1] = interface->voxel_num_ - 1;
+        Y[1] = interface->voxel_num_ - 1;
+        Z[1] = interface->voxel_num_ - 1;
+        switch(face)
+        {
+            case 0:
+            {
+                X[0] = X[1] = interface->voxel_num_ - 1;
+                break;
+            }
+            case 1:
+            {
+                X[0] = X[1] = 0;
+                break;
+            }
+            case 2:
+            {
+                Y[0] = Y[1] = interface->voxel_num_ - 1;
+                break;
+            }
+            case 3:
+            {
+                Y[0] = Y[1] = 0;
+                break;
+            }
+            case 4:
+            {
+                Z[0] = Z[1] = interface->voxel_num_ - 1;
+                break;
+            }
+            case 5:
+            {
+                Z[0] = Z[1] = 0;
+                break;
+            }
+        }
+    };
+
+    for (int kd = 0; kd < 2; kd++)
+    {
+        int joint_id = pillar->cube_id[kd];
+        VoxelizedPuzzle *puzzle = node->puzzles[joint_id].get();
+        create_search_space(pillar->pos_in_cube_face[kd]);
+        int num = 0;
+
+        for (int ix = X[0]; ix <= X[1]; ix++) {
+            for (int iy = X[0]; iy <= Y[1]; iy++) {
+                for (int iz = Z[0]; iz <= Z[1]; iz++) {
+                    if (puzzle->get_part_id(Vector3i(ix, iy, iz)) == pillar->index) {
+                        num++;
+                    }
+                }
+            }
+        }
+        contact_voxels[kd] = num;
+    }
+    return contact_voxels[0] + contact_voxels[1];
 }
 
 
