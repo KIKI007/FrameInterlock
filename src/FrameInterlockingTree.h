@@ -77,7 +77,9 @@ public:
 
     int get_voxel_number(TreeNode* node, int joint_id);
 
-    int get_pillar_contact_region(TreeNode *node, FramePillar *pillar, int *contact_voxels);
+    int get_pillar_contact_region(TreeNode *node, FramePillar *pillar, int *contact_voxels, int layer = 0);
+
+    int get_weak_joint_number(TreeNode *node, FramePillar *pillar);
 
 public:
 

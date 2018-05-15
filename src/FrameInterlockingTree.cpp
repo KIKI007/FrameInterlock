@@ -72,8 +72,12 @@ void FrameInterlockingTree::sort_children(TreeNode *node)
         std::sort(node->children.begin(), node->children.end(), [&](std::shared_ptr<TreeNode> A, std::shared_ptr<TreeNode> B)
         {
             int contact_num[2];
-            int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num);
-            int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num);
+            int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num, 0);
+            int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num, 0);
+
+            numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
+            numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
+
             return numA > numB;
         });
 
@@ -765,7 +769,7 @@ int FrameInterlockingTree::get_voxel_number(TreeNode *node, int joint_id) {
 
 }
 
-int FrameInterlockingTree::get_pillar_contact_region(TreeNode *node, FramePillar *pillar, int *contact_voxels)
+int FrameInterlockingTree::get_pillar_contact_region(TreeNode *node, FramePillar *pillar, int *contact_voxels, int layer)
 {
     int X[2], Y[2], Z[2];
     auto create_search_space = [&](int face){
@@ -780,40 +784,40 @@ int FrameInterlockingTree::get_pillar_contact_region(TreeNode *node, FramePillar
             case 0:
             {
                 //+X
-                X[0] = interface->voxel_num_ - 1;
-                X[1] = interface->voxel_num_ - 1;
+                X[0] = interface->voxel_num_ - 1 - layer;
+                X[1] = interface->voxel_num_ - 1 - layer;
                 break;
             }
             case 1:
             {
                 //-X
-                X[0] = 0;
-                X[1] = 0;
+                X[0] = layer;
+                X[1] = layer;
                 break;
             }
             case 2:
             {
                 //+Y
-                Y[0] = interface->voxel_num_ - 1;
-                Y[1] = interface->voxel_num_ - 1;
+                Y[0] = interface->voxel_num_ - 1 - layer;
+                Y[1] = interface->voxel_num_ - 1 - layer;
                 break;
             }
             case 3:
             {
-                Y[0] = 0;
-                Y[1] = 0;
+                Y[0] = layer;
+                Y[1] = layer;
                 break;
             }
             case 4:
             {
-                Z[0] = interface->voxel_num_ - 1;
-                Z[1] = interface->voxel_num_ - 1;
+                Z[0] = interface->voxel_num_ - 1 - layer;
+                Z[1] = interface->voxel_num_ - 1 - layer;
                 break;
             }
             case 5:
             {
-                Z[0] = 0;
-                Z[1] = 0;
+                Z[0] = layer;
+                Z[1] = layer;
                 break;
             }
         }
@@ -838,6 +842,21 @@ int FrameInterlockingTree::get_pillar_contact_region(TreeNode *node, FramePillar
         contact_voxels[kd] = num;
     }
     return contact_voxels[0] + contact_voxels[1];
+}
+
+int FrameInterlockingTree::get_weak_joint_number(TreeNode *node, FramePillar *pillar) {
+    int contact_num_layer1[2];
+    int contact_num_layer2[2];
+
+    get_pillar_contact_region(node, pillar, contact_num_layer1, 1);
+    get_pillar_contact_region(node, pillar, contact_num_layer2, 2);
+
+    int punished = 0;
+    for(int kd = 0; kd < 2; kd++)
+    {
+        if(contact_num_layer2[kd] > contact_num_layer1[kd]) punished += contact_num_layer2[kd] - contact_num_layer1[kd];
+    }
+    return punished;
 }
 
 
