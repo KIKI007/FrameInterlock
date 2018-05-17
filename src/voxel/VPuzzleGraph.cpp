@@ -236,8 +236,11 @@ void VPuzzleGraph::do_separation(vector<VPuzRemainVolumePartitionDat> &output)
         compute_one_loop_candidate_voxels(id);
 
         //compute all possible double directions joint candidates
-        graph_partition_plan_double[id].max_candidates_num_ = max_double_loops_partition_plan;
-        compute_two_loops_candidate_voxels(id);
+        if(max_double_loops_partition_plan != 0)
+        {
+            graph_partition_plan_double[id].max_candidates_num_ = max_double_loops_partition_plan;
+            compute_two_loops_candidate_voxels(id);
+        }
     }
 
     //do combination between XYZ joints
@@ -286,6 +289,7 @@ void VPuzzleGraph::compute_combination_of_cycleXYZ(
                 case 0:
                 {
                     //00 : no edge in blocking graph
+                    if(max_double_loops_partition_plan != 0)
                     graph_partition_plan_double[XYZ].random_choose(plan[XYZ], max_joint_each_direction);
                     break;
                 }
