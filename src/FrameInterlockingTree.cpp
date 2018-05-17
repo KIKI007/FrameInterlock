@@ -217,21 +217,22 @@ bool FrameInterlockingTree::generate_children(TreeNode *node)
 //    balance_inner_relation = true;
 
     //hyperbolic
-//    if(node->num_pillar_finished < interface->pillars_.size() - 10)
-//    {
-//        max_number_of_children_ = 100;
-//        max_variation_of_voxel_in_joint = 0;
-//        balance_inner_relation = true;
-//    }
-//    else
-//    {
-//        max_number_of_children_ = 100;
-//        max_variation_of_voxel_in_joint = 2;
-//        balance_inner_relation = false;
-//    }
-    max_number_of_children_ = 500;
-    max_variation_of_voxel_in_joint = 0;
-    balance_inner_relation = false;
+    if(node->num_pillar_finished < interface->pillars_.size() - 5)
+    {
+        max_number_of_children_ = 100;
+        max_variation_of_voxel_in_joint = 0;
+        balance_inner_relation = true;
+    }
+    else
+    {
+        max_number_of_children_ = 100;
+        max_variation_of_voxel_in_joint = 2;
+        balance_inner_relation = false;
+    }
+    //cube
+//    max_number_of_children_ = 100;
+//    max_variation_of_voxel_in_joint = 0;
+//    balance_inner_relation = false;
 
     if(node->num_pillar_finished == 0)
     {
@@ -402,9 +403,32 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
         for(int id = 0; id < concept_partition_plans.size(); id++)
         {
             VPuzRemainVolumePartitionDat concept = concept_partition_plans[id];
-            if(add_node_children(concept, 0b101010))
+            if (balance_inner_relation)
             {
-                return true;
+                if(add_node_children(concept, 0b111111))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                int split_candidate[8]= {
+                        0b101010,
+                        0b101001,
+                        0b100110,
+                        0b100101,
+                        0b011010,
+                        0b011001,
+                        0b010110,
+                        0b010101,
+                };
+                for(int splitID = 0; splitID < 8; splitID++)
+                {
+                    if(add_node_children(concept, split_candidate[splitID]))
+                    {
+                        return true;
+                    }
+                }
             }
         }
     }
@@ -757,7 +781,10 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
     {
         double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
         double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
-        return pAY > pBY;
+
+//        double pAX = pA->end_points_cood[0][0] + pA->end_points_cood[1][0];
+//        double pBX = pB->end_points_cood[0][0] + pB->end_points_cood[1][0];
+        return pAX > pBX;
     });
 
     return;
