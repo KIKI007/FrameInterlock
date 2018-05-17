@@ -75,8 +75,8 @@ void FrameInterlockingTree::sort_children(TreeNode *node)
             int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num, 0);
             int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num, 0);
 
-            numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
-            numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
+            //numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
+            //numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
 
             return numA > numB;
         });
@@ -217,17 +217,17 @@ bool FrameInterlockingTree::generate_children(TreeNode *node)
 //    balance_inner_relation = true;
 
     //hyperbolic
-    if(node->num_pillar_finished < interface->pillars_.size() - 5)
+    if(node->num_pillar_finished < interface->pillars_.size())
     {
         max_number_of_children_ = 100;
-        max_variation_of_voxel_in_joint = 0;
+        max_variation_of_voxel_in_joint = 2;
         balance_inner_relation = true;
     }
     else
     {
         max_number_of_children_ = 100;
         max_variation_of_voxel_in_joint = 2;
-        balance_inner_relation = false;
+        balance_inner_relation = true;
     }
     //cube
 //    max_number_of_children_ = 100;
@@ -779,12 +779,12 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
 
     std::sort(node->candidate_pillar.begin(), node->candidate_pillar.end(), [&](FramePillar *pA, FramePillar *pB)
     {
-//        double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
-//        double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
-
-        double pAX = pA->end_points_cood[0][0] + pA->end_points_cood[1][0];
-        double pBX = pB->end_points_cood[0][0] + pB->end_points_cood[1][0];
-        return pAX > pBX;
+        double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
+        double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
+        return pAY > pBY;
+//        double pAX = pA->end_points_cood[0][0] + pA->end_points_cood[1][0];
+//        double pBX = pB->end_points_cood[0][0] + pB->end_points_cood[1][0];
+//        return pAX > pBX;
     });
 
     return;
