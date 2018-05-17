@@ -59,6 +59,7 @@ public:
     void generate_vpuzzlegraph(VPuzzleGraph &graph, TreeNode *node, FramePillar *cpillar);
 
     void seperate_concept_design(int kd,
+                                 int split,
                                  VPuzRemainVolumePartitionDat& concept,
                                  VPuzRemainVolumePartitionDat& plan,
                                  FramePillar *cpillar);

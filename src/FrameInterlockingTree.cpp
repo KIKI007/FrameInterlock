@@ -75,8 +75,8 @@ void FrameInterlockingTree::sort_children(TreeNode *node)
             int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num, 0);
             int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num, 0);
 
-            numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
-            numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
+            //numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
+            //numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
 
             return numA > numB;
         });
@@ -187,29 +187,47 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
 
 bool FrameInterlockingTree::generate_children(TreeNode *node)
 {
-    if(node->num_pillar_finished < 3)
-    {
-        max_number_of_children_ = 500;
-        max_variation_of_voxel_in_joint = 0;
-        balance_inner_relation = false;
-    }
-//    else if(node->num_pillar_finished < interface->pillars_.size() - 5)
+    //sphere
+//    if(node->num_pillar_finished < 3)
 //    {
-//        max_number_of_children_ = 10;
+//        max_number_of_children_ = 500;
+//        max_variation_of_voxel_in_joint = 0;
+//        balance_inner_relation = false;
+//    }
+////    else if(node->num_pillar_finished < interface->pillars_.size() - 5)
+////    {
+////        max_number_of_children_ = 10;
+////        max_variation_of_voxel_in_joint = 2;
+////        balance_inner_relation = true;
+////    }
+//    else if(node->num_pillar_finished < interface->pillars_.size() - 10)
+//    {
+//        max_number_of_children_ = 500;
+//        max_variation_of_voxel_in_joint = 0;
+//        balance_inner_relation = true;
+//    }
+//    else
+//    {
+//        max_number_of_children_ = 500;
 //        max_variation_of_voxel_in_joint = 2;
 //        balance_inner_relation = true;
 //    }
-    else if(node->num_pillar_finished < interface->pillars_.size() - 10)
+//    max_number_of_children_ = 100;
+//    max_variation_of_voxel_in_joint = 0;
+//    balance_inner_relation = true;
+
+    //hyperbolic
+    if(node->num_pillar_finished < interface->pillars_.size() - 10)
     {
-        max_number_of_children_ = 500;
+        max_number_of_children_ = 100;
         max_variation_of_voxel_in_joint = 0;
         balance_inner_relation = true;
     }
     else
     {
-        max_number_of_children_ = 500;
+        max_number_of_children_ = 100;
         max_variation_of_voxel_in_joint = 2;
-        balance_inner_relation = true;
+        balance_inner_relation = false;
     }
 
     if(node->num_pillar_finished == 0)
@@ -241,6 +259,7 @@ bool FrameInterlockingTree::generate_children(TreeNode *node)
 }
 
 void FrameInterlockingTree::seperate_concept_design(int kd,
+                                                    int split,
                                                     VPuzRemainVolumePartitionDat &concept,
                                                     VPuzRemainVolumePartitionDat &plan,
                                                     FramePillar *cpillar)
@@ -248,9 +267,9 @@ void FrameInterlockingTree::seperate_concept_design(int kd,
     if(balance_inner_relation == false)
     {
         if(kd == 0)
-            plan.relation = concept.relation & 0b101010;
+            plan.relation = concept.relation & split;
         else
-            plan.relation = concept.relation & 0b010101;
+            plan.relation = concept.relation & (~split);
     }
     else
     {
@@ -306,15 +325,13 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
             concept_partition_plans.push_back(plan);
         }
 
-        for(int id = 0; id < concept_partition_plans.size(); id++)
+        auto add_node_children = [&](VPuzRemainVolumePartitionDat &concept, int split) -> bool
         {
-            VPuzRemainVolumePartitionDat concept = concept_partition_plans[id];
             VPuzRemainVolumePartitionDat plan[2];
             vector<FinalPartiResult> final_parti_result[2][6];
             for(int kd = 0; kd < 2; kd++)
             {
-                seperate_concept_design(kd, concept, plan[kd], cpillar);
-
+                seperate_concept_design(kd, split, concept, plan[kd], cpillar);
                 VoxelizedPuzzle* puzzle = node->puzzles[cpillar->cube_id[kd]].get();
                 part_num_voxels[kd] = get_voxel_number(node, cpillar->cube_id[kd]);
 
@@ -375,6 +392,16 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
                         }
                     }
                 }
+            }
+            return false;
+        };
+
+        for(int id = 0; id < concept_partition_plans.size(); id++)
+        {
+            VPuzRemainVolumePartitionDat concept = concept_partition_plans[id];
+            if(add_node_children(concept, 0b101010))
+            {
+                return true;
             }
         }
     }
