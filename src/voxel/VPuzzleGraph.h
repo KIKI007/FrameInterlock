@@ -61,7 +61,7 @@ class VPuzzleGraph {
 public:
 
     VPuzzleGraph(){
-        max_double_loops_partition_plan = 10000;
+        max_double_loops_partition_plan = 0;
         max_single_loop_partition_plan = 10000;
         max_joint_combination = 10000;
         max_voxel_combination = 10;

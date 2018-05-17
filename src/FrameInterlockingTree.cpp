@@ -75,8 +75,8 @@ void FrameInterlockingTree::sort_children(TreeNode *node)
             int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num, 0);
             int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num, 0);
 
-            //numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
-            //numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
+            numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
+            numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
 
             return numA > numB;
         });
@@ -217,18 +217,21 @@ bool FrameInterlockingTree::generate_children(TreeNode *node)
 //    balance_inner_relation = true;
 
     //hyperbolic
-    if(node->num_pillar_finished < interface->pillars_.size() - 10)
-    {
-        max_number_of_children_ = 100;
-        max_variation_of_voxel_in_joint = 0;
-        balance_inner_relation = true;
-    }
-    else
-    {
-        max_number_of_children_ = 100;
-        max_variation_of_voxel_in_joint = 2;
-        balance_inner_relation = false;
-    }
+//    if(node->num_pillar_finished < interface->pillars_.size() - 10)
+//    {
+//        max_number_of_children_ = 100;
+//        max_variation_of_voxel_in_joint = 0;
+//        balance_inner_relation = true;
+//    }
+//    else
+//    {
+//        max_number_of_children_ = 100;
+//        max_variation_of_voxel_in_joint = 2;
+//        balance_inner_relation = false;
+//    }
+    max_number_of_children_ = 500;
+    max_variation_of_voxel_in_joint = 0;
+    balance_inner_relation = false;
 
     if(node->num_pillar_finished == 0)
     {
