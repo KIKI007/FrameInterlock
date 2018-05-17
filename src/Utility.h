@@ -531,31 +531,10 @@ void graph_test()
 
 bool init_animation()
 {
-//    if(frame_interface && frame_interlock)
-//    {
-//        TreeNode *present = frame_interlock->tree_->present_node_;
-//        if(present == nullptr)
-//            return  false;
-//        if(present->num_pillar_finished != frame_interface->pillars_.size())
-//            return false;
-//
-//        frame_interface->cube_size_ = para.render_joint_size_;
-//        frame_interface->radius_ = para.render_pillar_radius;
-//        frame_animation = std::make_shared<FrameInterfaceAnimation>(FrameInterfaceAnimation(*frame_interface));
-//        vector<int> sequences;
-//
-//        for(int id = 0; id < present->disassembly_order.size(); id++)
-//            sequences.push_back(present->disassembly_order[id]->index);
-//        frame_animation->set_disassembling_sequences(sequences);
-//        vecVector3d directions = present->disassembling_directions;
-//        frame_animation->set_disassembling_direction(directions);
-//        return true;
-//    }
-//    else
-
     if(frame_interface)
     {
         frame_interface->cube_size_ = para.render_joint_size_;
+
         frame_interface->radius_ = para.render_pillar_radius;
         frame_animation = std::make_shared<FrameInterfaceAnimation>(FrameInterfaceAnimation(*frame_interface));
         if(frame_animation->compute_animation_sequences())
