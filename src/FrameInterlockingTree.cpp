@@ -779,11 +779,11 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
 
     std::sort(node->candidate_pillar.begin(), node->candidate_pillar.end(), [&](FramePillar *pA, FramePillar *pB)
     {
-        double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
-        double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
+//        double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
+//        double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
 
-//        double pAX = pA->end_points_cood[0][0] + pA->end_points_cood[1][0];
-//        double pBX = pB->end_points_cood[0][0] + pB->end_points_cood[1][0];
+        double pAX = pA->end_points_cood[0][0] + pA->end_points_cood[1][0];
+        double pBX = pB->end_points_cood[0][0] + pB->end_points_cood[1][0];
         return pAX > pBX;
     });
 
