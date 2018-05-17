@@ -132,14 +132,10 @@ std::shared_ptr<FrameInterface> FrameInterlocking::generate_interlocking()
     }
 
 
-//    if(tree_->present_node_ && tree_->present_node_->num_pillar_finished == num_pillar)
-//    {
-//        return tree_->output_frame(tree_->present_node_);
-//    }
-//    else
-//    {
-//        return nullptr;
-//    }
+    if(tree_->present_node_ && tree_->present_node_->num_pillar_finished == num_pillar)
+    {
+        output_information(tree_->present_node_);
+    }
     return tree_->output_frame(tree_->present_node_);
 }
 
@@ -152,4 +148,30 @@ std::shared_ptr<FrameInterface> FrameInterlocking::output_present_frame() {
     {
         return  nullptr;
     }
+}
+
+void FrameInterlocking::output_information(TreeNode *node)
+{
+    std::cout << "*********************** Result ***********************" << std::endl;
+    std::cout << "Pillar\tJoint\tJoint\tContact\tContact" << std::endl;
+    for(int id = 0; id < node->disassembly_order.size(); id++)
+    {
+        FramePillar *pillar = node->disassembly_order[id];
+        std::cout << pillar->index << "\t\t";
+        int index = pillar->index;
+        for(int kd = 0; kd < 2; kd++)
+        {
+            VoxelizedPuzzle *puzzle = node->puzzles[pillar->cube_id[kd]].get();
+            for(shared_pPart part: puzzle->parts_)
+            {
+                if(part->part_id_ == index)
+                    std::cout << part->elist_.size() << "\t\t";
+            }
+        }
+
+        int contact[2];
+        tree_->get_pillar_contact_region(node, pillar, contact);
+        std::cout << contact[0] << "\t\t" << contact[1] << std::endl;
+    }
+    std::cout << "*********************** Result ***********************" << std::endl;
 }

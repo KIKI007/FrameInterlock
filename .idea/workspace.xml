@@ -20,7 +20,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="9d1b2171-43b6-42b3-a689-5a22fd6f4b50" name="Default" comment="" />
+=======
+    <list default="true" id="9d1b2171-43b6-42b3-a689-5a22fd6f4b50" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-release/FrameInterlock_bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-release/FrameInterlock_bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrameInterlockingTree.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameInterlockingTree.h" afterDir="false" />
+    </list>
+>>>>>>> fabrication_version
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-release/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,11 +47,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FrameInterlockingTree.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FrameInterlockingTree.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.cpp">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="224">
               <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+=======
+            <state relative-caret-position="371">
+              <caret line="404" column="13" lean-forward="true" selection-start-line="404" selection-start-column="13" selection-end-line="404" selection-end-column="13" />
+>>>>>>> fabrication_version
               <folding>
                 <element signature="e#42#76#0" expanded="true" />
               </folding>
@@ -53,12 +67,18 @@
       <file leaf-file-name="Utility.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Utility.h">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="551">
               <caret line="555" selection-start-line="555" selection-start-column="2" selection-end-line="562" selection-end-column="7" />
+=======
+            <state relative-caret-position="6006">
+              <caret line="273" column="44" selection-start-line="273" selection-start-column="44" selection-end-line="273" selection-end-column="44" />
+>>>>>>> fabrication_version
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="FrameInterfaceAnimation.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp">
           <provider selected="true" editor-type-id="text-editor">
@@ -71,6 +91,11 @@
       <file leaf-file-name="FrameMesh.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FrameMesh.cpp">
           <provider selected="true" editor-type-id="text-editor">
+=======
+      <file leaf-file-name="FrameMesh.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FrameMesh.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+>>>>>>> fabrication_version
             <state relative-caret-position="286">
               <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
             </state>
@@ -109,13 +134,32 @@
       </file>
       <file leaf-file-name="FrameInterlocking.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.h">
+<<<<<<< HEAD
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="484">
               <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+=======
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="484">
+              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="FrameInterlockingTree.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
+              <folding>
+                <element signature="e#137#171#0" expanded="true" />
+              </folding>
+>>>>>>> fabrication_version
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="FrameInterlockingTree.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -133,6 +177,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3388">
               <caret line="154" column="1" selection-start-line="154" selection-start-column="1" selection-end-line="154" selection-end-column="1" />
+=======
+      <file leaf-file-name="FrameInterlocking.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3674">
+              <caret line="167" column="63" selection-start-line="167" selection-start-column="63" selection-end-line="167" selection-end-column="63" />
+>>>>>>> fabrication_version
             </state>
           </provider>
         </entry>
@@ -141,9 +192,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>id</find>
-      <find>0b</find>
-      <find>==</find>
       <find>input_</find>
       <find>candidate</find>
       <find>std::cou</find>
@@ -171,6 +219,9 @@
       <find>output</find>
       <find>pos_in_cube_face</find>
       <find>draw</find>
+      <find>acce</find>
+      <find>fpuz</find>
+      <find>numa</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -197,7 +248,6 @@
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedRenderSphere.cpp" />
         <option value="$PROJECT_DIR$/src/graph/UndirectedGraph.h" />
         <option value="$PROJECT_DIR$/src/voxel/PuzzleCandidateFilter.h" />
-        <option value="$PROJECT_DIR$/src/FrameInterlocking.h" />
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.cpp" />
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedRenderCube.h" />
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedPartition.cpp" />
@@ -206,17 +256,26 @@
         <option value="$PROJECT_DIR$/src/voxel/VPuzzleGraph.cpp" />
         <option value="$PROJECT_DIR$/src/graph/UndirectedGraph.cpp" />
         <option value="$PROJECT_DIR$/src/graph/DirectedGraph.h" />
-        <option value="$PROJECT_DIR$/src/FrameInterface.h" />
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.h" />
         <option value="$PROJECT_DIR$/src/voxel/VoxelizedPuzzle.cpp" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/FrameInterlocking.cpp" />
+=======
+        <option value="$PROJECT_DIR$/src/Utility.h" />
+>>>>>>> fabrication_version
         <option value="$PROJECT_DIR$/src/FrameInterface.cpp" />
         <option value="$PROJECT_DIR$/src/main.cpp" />
-        <option value="$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp" />
-        <option value="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" />
         <option value="$PROJECT_DIR$/src/FrameInterfaceAnimation.h" />
+        <option value="$PROJECT_DIR$/src/FrameInterface.h" />
+        <option value="$PROJECT_DIR$/src/FrameInterlocking.h" />
+        <option value="$PROJECT_DIR$/src/FrameInterlocking.cpp" />
+        <option value="$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp" />
         <option value="$PROJECT_DIR$/src/FrameInterlockingTree.h" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/Utility.h" />
+=======
+        <option value="$PROJECT_DIR$/src/FrameInterlockingTree.cpp" />
+>>>>>>> fabrication_version
       </list>
     </option>
   </component>
@@ -228,8 +287,9 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="y" value="23" />
     <option name="width" value="2048" />
-    <option name="height" value="1152" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -339,29 +399,49 @@
       <workItem from="1525771924054" duration="3906000" />
       <workItem from="1525778816992" duration="35000" />
       <workItem from="1525781634579" duration="6060000" />
-      <workItem from="1525793499543" duration="41269000" />
+      <workItem from="1525793499543" duration="49623000" />
+      <workItem from="1526294572963" duration="3866000" />
+      <workItem from="1526330223789" duration="1050000" />
+      <workItem from="1526371243808" duration="1939000" />
+      <workItem from="1526453688975" duration="409000" />
+      <workItem from="1526479982502" duration="3824000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="203574000" />
+=======
+    <option name="totallyTimeSpent" value="223012000" />
+>>>>>>> fabrication_version
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2048" height="1152" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48263028" visible="true" weight="0.1830291" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48263028" visible="true" weight="0.1830291" />
+>>>>>>> fabrication_version
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.3286908" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.098421544" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25162488" />
+=======
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25162488" />
+>>>>>>> fabrication_version
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32961932" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32969698" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39925718" />
       <window_info id="Favorites" order="2" sideWeight="0.51736975" side_tool="true" visible="true" weight="0.1830291" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="2" weight="0.2525534" />
+=======
+>>>>>>> fabrication_version
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4875346" visible="true" weight="0.1830291" />
@@ -377,8 +457,11 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32961932" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Messages" order="7" visible="true" weight="0.32961932" />
       <window_info id="Favorites" order="2" sideWeight="0.51246536" side_tool="true" visible="true" weight="0.1830291" />
+=======
+>>>>>>> fabrication_version
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +484,7 @@
           <option name="timeStamp" value="118" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="287" />
+      <option name="time" value="288" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -412,10 +495,17 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/Utility.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7018">
           <caret line="319" column="94" selection-start-line="306" selection-start-column="8" selection-end-line="319" selection-end-column="94" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3212">
+          <caret line="146" column="53" selection-start-line="146" selection-start-column="53" selection-end-line="146" selection-end-column="53" />
+>>>>>>> fabrication_version
         </state>
       </provider>
     </entry>
@@ -545,6 +635,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/FrameMesh.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -552,6 +643,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> fabrication_version
     <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPartition.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13627">
@@ -559,6 +652,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/FrameMesh.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -566,6 +660,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> fabrication_version
     <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPartition.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1606">
@@ -664,6 +760,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -671,6 +768,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> fabrication_version
     <entry file="file://$PROJECT_DIR$/src/voxel/VoxelizedPart.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -699,9 +798,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Utility.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7018">
+          <caret line="319" column="94" selection-start-line="306" selection-start-column="8" selection-end-line="319" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3212">
+          <caret line="146" column="53" selection-start-line="146" selection-start-column="53" selection-end-line="146" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/graph/DirectedGraph.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
+        <state relative-caret-position="3058">
           <caret line="139" column="9" selection-start-line="139" selection-start-column="9" selection-end-line="139" selection-end-column="9" />
           <folding>
             <element signature="e#111#128#0" expanded="true" />
@@ -709,17 +822,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Utility.h">
+    <entry file="file://$PROJECT_DIR$/src/FrameMesh.h">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="551">
           <caret line="555" selection-start-line="555" selection-start-column="2" selection-end-line="562" selection-end-column="7" />
+=======
+        <state relative-caret-position="418">
+          <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+>>>>>>> fabrication_version
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+    <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2600">
-          <caret line="146" column="53" selection-start-line="146" selection-start-column="53" selection-end-line="146" selection-end-column="53" />
+        <state relative-caret-position="484">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -733,16 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
-          <folding>
-            <element signature="e#141#168#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FrameInterface.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14784">
@@ -750,36 +858,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.cpp">
+    <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3388">
-          <caret line="154" column="1" selection-start-line="154" selection-start-column="1" selection-end-line="154" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+        <state relative-caret-position="525">
+          <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
           <folding>
-            <element signature="e#42#76#0" expanded="true" />
+            <element signature="e#141#168#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FrameInterfaceAnimation.cpp">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="14784">
+          <caret line="672" column="67" selection-start-line="672" selection-start-column="67" selection-end-line="672" selection-end-column="67" />
+=======
         <state relative-caret-position="6006">
           <caret line="273" column="44" selection-start-line="273" selection-start-column="44" selection-end-line="273" selection-end-column="44" />
+>>>>>>> fabrication_version
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrameMesh.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="3388">
+          <caret line="154" column="1" selection-start-line="154" selection-start-column="1" selection-end-line="154" selection-end-column="1" />
+=======
+        <state relative-caret-position="286">
+          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+>>>>>>> fabrication_version
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrameInterlocking.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="224">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+          <folding>
+            <element signature="e#42#76#0" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="3674">
+          <caret line="167" column="63" selection-start-line="167" selection-start-column="63" selection-end-line="167" selection-end-column="63" />
+>>>>>>> fabrication_version
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="63" column="43" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="43" />
+<<<<<<< HEAD
+        <state relative-caret-position="6006">
+          <caret line="273" column="44" selection-start-line="273" selection-start-column="44" selection-end-line="273" selection-end-column="44" />
+=======
+        <state relative-caret-position="191">
+          <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
           <folding>
             <element signature="e#137#171#0" expanded="true" />
+          </folding>
+>>>>>>> fabrication_version
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrameInterlockingTree.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="235">
+          <caret line="63" column="43" selection-start-line="63" selection-start-column="43" selection-end-line="63" selection-end-column="43" />
+=======
+        <state relative-caret-position="371">
+          <caret line="404" column="13" lean-forward="true" selection-start-line="404" selection-start-column="13" selection-end-line="404" selection-end-column="13" />
+>>>>>>> fabrication_version
+          <folding>
+            <element signature="e#42#76#0" expanded="true" />
           </folding>
         </state>
       </provider>

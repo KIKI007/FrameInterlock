@@ -20,6 +20,8 @@ public:
 
     void select_key_pillar();
 
+    void output_information(TreeNode *node);
+
 public:
 
     std::shared_ptr<FrameInterface> generate_interlocking();

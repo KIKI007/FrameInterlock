@@ -27,8 +27,6 @@ public:
 
     vector<int> num_pillar_left_in_joints;
 
-    vector<int> pillar_contact_voxels[2];
-
     vecVector3d disassembling_directions;
 
 public:
@@ -61,6 +59,7 @@ public:
     void generate_vpuzzlegraph(VPuzzleGraph &graph, TreeNode *node, FramePillar *cpillar);
 
     void seperate_concept_design(int kd,
+                                 int split,
                                  VPuzRemainVolumePartitionDat& concept,
                                  VPuzRemainVolumePartitionDat& plan,
                                  FramePillar *cpillar);
@@ -79,11 +78,13 @@ public:
 
     int get_voxel_number(TreeNode* node, int joint_id);
 
-    int get_pillar_contact_region(TreeNode *node, FramePillar *pillar, int *contact_voxels);
+    int get_pillar_contact_region(TreeNode *node, FramePillar *pillar, int *contact_voxels, int layer = 0);
+
+    int get_weak_joint_number(TreeNode *node, FramePillar *pillar);
 
 public:
 
-    void accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, Vector3d direction);
+    bool accept_partition_plan(TreeNode *node, FramePillar *pillar, const vector<FinalPartiResult> &final_parti, Vector3d direction);
 
     void sort_children(TreeNode *node);
 

@@ -270,11 +270,12 @@ void FrameInterfaceAnimation::write_animation_script(string path_name)
                 FrameInterfaceRenderUnit &unit = outlist[jd];
                 if(unit.pillar_index == index)
                 {
-                    fout << "Begin Action 60" << std::endl;
+
+                    fout << "Begin Action 300" << std::endl;
                     fout << "Move id " << jd + 1
-                         << " [" << directions_[id][0]
-                         << ", " << directions_[id][1]
-                         << ", " << directions_[id][2] << " ]"
+                         << " [" << directions_[id][0] * 3
+                         << ", " << directions_[id][1] * 3
+                         << ", " << directions_[id][2] * 3 << " ]"
                          << std::endl;
                     fout << "End" << std::endl << std::endl;
                 }
