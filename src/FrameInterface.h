@@ -61,7 +61,6 @@ public:
 
     void draw_pillar(FramePillar *pillar, FrameInterfaceRenderUnit &unit);
 
-
 public:
 
     void create_void_joints();

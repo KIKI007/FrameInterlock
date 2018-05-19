@@ -91,6 +91,7 @@ void FrameInterlocking::select_key_pillar()
 //        }
 //    }
 
+    key = frame_interface_->pillars_[4].get();
     std::cout << "Key is :\t" << key->index << std::endl;
     tree_->root_->candidate_pillar.push_back(key);
 }

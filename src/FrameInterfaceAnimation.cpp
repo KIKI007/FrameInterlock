@@ -70,10 +70,22 @@ void FrameInterfaceAnimation::draw_animation(MatrixXd &V, MatrixXi &F, MatrixXd 
 bool FrameInterfaceAnimation::compute_animation_sequences()
 {
     //following the order of Y
+    map_joint_pillars_.clear();
+    map_joint_pillars_.resize(joint_voxels_.size());
+
+    for(int id = 0; id < pillars_.size(); id++)
+    {
+        int e0 = pillars_[id]->cube_id[0];
+        int e1 = pillars_[id]->cube_id[1];
+        map_joint_pillars_[e0].push_back(pillars_[id].get());
+        map_joint_pillars_[e1].push_back(pillars_[id].get());
+    }
+
     disassembling_sequences_.clear();
     directions_.clear();
 
     std::shared_ptr<DirectedGraph>  graph[3];
+
     std::shared_ptr<Assembly> assembly = output_assembly();
     InterlockSDChecking checker;
     Vector3d vec[3] = {
@@ -113,19 +125,51 @@ bool FrameInterfaceAnimation::compute_animation_sequences()
             return false;
         }
 
-        std::sort(movable_parts.begin(), movable_parts.end(), [&](const AnimationMovablePart &iA, const AnimationMovablePart &iB)
+        for(int id = 0; id < movable_parts.size(); id++)
         {
-            Vector3d pA = frame_mesh_->points_[pillars_[iA.part_id]->cube_id[0]] +
-                          frame_mesh_->points_[pillars_[iA.part_id]->cube_id[1]];
-            Vector3d pB = frame_mesh_->points_[pillars_[iB.part_id]->cube_id[0]] +
-                          frame_mesh_->points_[pillars_[iB.part_id]->cube_id[1]];
-            return pA[1] > pB[1];
+            FramePillar *pillar = pillars_[movable_parts[id].part_id].get();
+            movable_parts[id].num_neighbor = compute_neighbor_not_visited_num(pillar, movable_parts[id].both, visited);
+        }
+
+        for(int id = 0; id < movable_parts.size(); id++)
+        {
+            std::cout << movable_parts[id].part_id
+                      << " " << movable_parts[id].num_neighbor
+                      << " " << movable_parts[id].both << std::endl;
+        }
+        std::cout << std::endl;
+
+        std::sort(movable_parts.begin(), movable_parts.end(), [&](AnimationMovablePart &iA, AnimationMovablePart &iB)
+        {
+            FramePillar *pillarA = pillars_[iA.part_id].get();
+            FramePillar *pillarB = pillars_[iB.part_id].get();
+
+            Vector3d pA = frame_mesh_->points_[pillarA->cube_id[0]] +
+                          frame_mesh_->points_[pillarA->cube_id[1]];
+            Vector3d pB = frame_mesh_->points_[pillarB->cube_id[0]] +
+                          frame_mesh_->points_[pillarB->cube_id[1]];
+
+            if(iA.both == false && iB.both == true)
+            {
+                return true;
+            }
+            else if(iA.both == iB.both)
+            {
+                if(iA.num_neighbor < iB.num_neighbor)
+                    return true;
+                else if(iA.num_neighbor == iB.num_neighbor && pA[1] > pB[1])
+                    return true;
+            }
+            return  false;
+//            return numA < numB;
         });
 
         int index = movable_parts.front().part_id;
+
+
         disassembling_sequences_.push_back(index);
         directions_.push_back(movable_parts.front().move_direction);
-        visited[index] = true;
+        visited.insert(std::make_pair(index, true));
         for(int XYZ = 0; XYZ < 3; XYZ++)
             graph[XYZ]->remove_node(index);
     }
@@ -216,8 +260,6 @@ bool FrameInterfaceAnimation::is_collision_free(int index, int nrm, const std::m
 
     return true;
 }
-
-
 
 void FrameInterfaceAnimation::write_animation_script(string path_name)
 {

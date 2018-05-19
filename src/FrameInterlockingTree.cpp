@@ -69,17 +69,17 @@ void FrameInterlockingTree::sort_children(TreeNode *node)
 
     if(node->children.size() > 0)
     {
-        std::sort(node->children.begin(), node->children.end(), [&](std::shared_ptr<TreeNode> A, std::shared_ptr<TreeNode> B)
-        {
-            int contact_num[2];
-            int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num, 0);
-            int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num, 0);
-
-            //numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
-            //numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
-
-            return numA > numB;
-        });
+//        std::sort(node->children.begin(), node->children.end(), [&](std::shared_ptr<TreeNode> A, std::shared_ptr<TreeNode> B)
+//        {
+//            int contact_num[2];
+//            int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num, 0);
+//            int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num, 0);
+//
+//            //numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
+//            //numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
+//
+//            return numA > numB;
+//        });
 
         TreeNode* last_child_node = node->children.back().get();
         select_candidates(last_child_node);
@@ -219,8 +219,8 @@ bool FrameInterlockingTree::generate_children(TreeNode *node)
     //hyperbolic
     if(node->num_pillar_finished < interface->pillars_.size())
     {
-        max_number_of_children_ = 100;
-        max_variation_of_voxel_in_joint = 2;
+        max_number_of_children_ = 5;
+        max_variation_of_voxel_in_joint = 0;
         balance_inner_relation = true;
     }
     else

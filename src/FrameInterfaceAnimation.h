@@ -10,7 +10,10 @@
 
 struct AnimationMovablePart
 {
+public:
     int part_id;
+    int num_neighbor;
+    bool both;
     Vector3d move_direction;
 };
 
@@ -32,6 +35,7 @@ public:
                 }
             }
         }
+
         return;
     }
 
@@ -46,6 +50,24 @@ public:
     {
         directions_ = directions;
     }
+
+    int compute_neighbor_not_visited_num(FramePillar *pillar, bool &both, const std::map<int, bool> &visited)
+    {
+        int num[2] = {0, 0};
+        for(int kd = 0; kd < 2; kd++)
+        {
+            num[kd] = 0;
+            int joint_id = pillar->cube_id[kd];
+            for(FramePillar *q: map_joint_pillars_[joint_id])
+            {
+                if(visited.find(q->index) == visited.end() && q->index != pillar->index)
+                    num[kd]++;
+            }
+        }
+        if(num[0] > 0 && num[1] > 0) both = true;
+        else both = false;
+        return num[0] + num[1];
+    };
 
 public:
 
@@ -78,6 +100,8 @@ public:
     int max_length;
 
     vector<FrameInterfaceRenderUnit> units_;
+
+    vector<vector<FramePillar *>> map_joint_pillars_;
 };
 
 
