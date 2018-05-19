@@ -50,36 +50,27 @@ bool FrameInterlockingTree::accept_partition_plan(TreeNode *node,
     child_node->disassembly_order.push_back(cpillar);
     child_node->disassembling_directions.push_back(direction);
 
-//    int contact_region[2] = {0, 0};
-//    get_pillar_contact_region(child_node.get(), cpillar, contact_region);
-//    if(contact_region[0] <= 1 || contact_region[1] <= 1)
-//        return false;
-
     //push into node
     node->children.push_back(child_node);
 
-//    for(int id = 0; id < child_node->disassembly_order.size(); id++)
-//        std::cout << child_node->disassembly_order[id]->index <<", ";
-//    std::cout << std::endl;
     return true;
 }
 
 void FrameInterlockingTree::sort_children(TreeNode *node)
 {
-
     if(node->children.size() > 0)
     {
-//        std::sort(node->children.begin(), node->children.end(), [&](std::shared_ptr<TreeNode> A, std::shared_ptr<TreeNode> B)
-//        {
-//            int contact_num[2];
-//            int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num, 0);
-//            int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num, 0);
-//
-//            //numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
-//            //numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
-//
-//            return numA > numB;
-//        });
+        std::sort(node->children.begin(), node->children.end(), [&](std::shared_ptr<TreeNode> A, std::shared_ptr<TreeNode> B)
+        {
+            int contact_num[2];
+            int numA = get_pillar_contact_region(A.get(), A->disassembly_order.back(), contact_num, 0);
+            int numB = get_pillar_contact_region(B.get(), B->disassembly_order.back(), contact_num, 0);
+
+            //numA -= get_weak_joint_number(A.get(), A->disassembly_order.back());
+            //numB -= get_weak_joint_number(B.get(), B->disassembly_order.back());
+
+            return numA > numB;
+        });
 
         TreeNode* last_child_node = node->children.back().get();
         select_candidates(last_child_node);
@@ -117,18 +108,13 @@ void FrameInterlockingTree::generate_key_plan(TreeNode *node,
     }
 
     //set key relation
-    int concept_relation = 0b110111;
+    int concept_relation = 0b111101;
     //int relation = 0;
 
     //compute key conceptual partition plan
     for (int kd = 0; kd < 2; kd++)
     {
-        int relation;
-        if(kd == 0)
-            relation = concept_relation & 0b101010;
-        else
-            relation = concept_relation & 0b010101;
-
+        int relation = concept_relation;
         VoxelizedPuzzle *puzzle = node->puzzles[key_pillar->cube_id[kd]].get();
         VPuzRemainVolumePartitionDat plan;
 
@@ -141,6 +127,7 @@ void FrameInterlockingTree::generate_key_plan(TreeNode *node,
         plan.relation = relation;
         concept_plan.push_back(plan);
     }
+
 }
 
 bool FrameInterlockingTree::generate_key(TreeNode *node)
@@ -162,7 +149,7 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
             VoxelizedPartition partioner(part_num_voxels[kd], part_num_voxels[kd]);
 
             partioner.maximum_inner_partition_plan_ = 1000;
-            partioner.input(puzzle, concept_plan[kd], posY);
+            partioner.input(puzzle, concept_plan[kd], posX);
             partioner.output(final_parti_result[kd]);
         }
 
@@ -187,52 +174,10 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
 
 bool FrameInterlockingTree::generate_children(TreeNode *node)
 {
-    //sphere
-//    if(node->num_pillar_finished < 3)
-//    {
-//        max_number_of_children_ = 500;
-//        max_variation_of_voxel_in_joint = 0;
-//        balance_inner_relation = false;
-//    }
-////    else if(node->num_pillar_finished < interface->pillars_.size() - 5)
-////    {
-////        max_number_of_children_ = 10;
-////        max_variation_of_voxel_in_joint = 2;
-////        balance_inner_relation = true;
-////    }
-//    else if(node->num_pillar_finished < interface->pillars_.size() - 10)
-//    {
-//        max_number_of_children_ = 500;
-//        max_variation_of_voxel_in_joint = 0;
-//        balance_inner_relation = true;
-//    }
-//    else
-//    {
-//        max_number_of_children_ = 500;
-//        max_variation_of_voxel_in_joint = 2;
-//        balance_inner_relation = true;
-//    }
-//    max_number_of_children_ = 100;
-//    max_variation_of_voxel_in_joint = 0;
-//    balance_inner_relation = true;
+    max_number_of_children_ = 2;
+    max_variation_of_voxel_in_joint = 0;
+    balance_inner_relation = false;
 
-    //hyperbolic
-    if(node->num_pillar_finished < interface->pillars_.size())
-    {
-        max_number_of_children_ = 5;
-        max_variation_of_voxel_in_joint = 0;
-        balance_inner_relation = true;
-    }
-    else
-    {
-        max_number_of_children_ = 100;
-        max_variation_of_voxel_in_joint = 2;
-        balance_inner_relation = true;
-    }
-    //cube
-//    max_number_of_children_ = 100;
-//    max_variation_of_voxel_in_joint = 0;
-//    balance_inner_relation = false;
 
     if(node->num_pillar_finished == 0)
     {
@@ -379,6 +324,7 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
             int dY[6] = {0, 0, 1, -1, 0, 0};
             int dZ[6] = {0, 0, 0, 0, 1, -1};
 
+            bool accept = false;
             for(int nrm = 0; nrm < 6; nrm++)
             {
                 for(int ix = 0; ix < final_parti_result[0][nrm].size(); ix++)
@@ -393,11 +339,12 @@ bool FrameInterlockingTree::generate_children(TreeNode *node, FramePillar *cpill
                             node->children.back()->relation = concept.relation;
                             if(node->children.size() > max_number_of_children_)
                                 return true;
+                            accept = true;
                         }
                     }
                 }
             }
-            return false;
+            return accept;
         };
 
         for(int id = 0; id < concept_partition_plans.size(); id++)
@@ -781,7 +728,7 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
     {
         double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
         double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
-        return pAY > pBY;
+        return pAY < pBY;
 //        double pAX = pA->end_points_cood[0][0] + pA->end_points_cood[1][0];
 //        double pBX = pB->end_points_cood[0][0] + pB->end_points_cood[1][0];
 //        return pAX > pBX;

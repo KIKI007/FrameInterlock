@@ -134,9 +134,9 @@ int main() {
         {
             if(para.is_animation)
             {
-                for(int id = 0; id < 1000; id++)
+                for(int id = 0; id < 100; id++)
                 {
-                    para.animation_ratio = id / 1000.0;
+                    para.animation_ratio = id / 100.0;
                     draw_animation();
 
                     usleep(50000);
