@@ -183,6 +183,9 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
 
 bool FrameInterlockingTree::generate_children(TreeNode *node)
 {
+    balance_inner_relation = false;
+    max_variation_of_voxel_in_joint = 1;
+    max_number_of_children_ = 10;
 
     if(node->num_pillar_finished == 0)
     {
@@ -729,11 +732,43 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
         }
     }
 
+
+
     std::sort(node->candidate_pillar.begin(), node->candidate_pillar.end(), [&](FramePillar *pA, FramePillar *pB)
     {
         double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
         double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
-        return pAY > pBY;
+
+        int numA = 0;
+        for(int kd = 0; kd < 2; kd++)
+        {
+            int joint_id = pA->cube_id[kd];
+            for(FramePillar *q : map_joint_pillars_[joint_id])
+            {
+                if(q->index != pA->index && node->pillar_visited_order.find(q->index) == node->pillar_visited_order.end())
+                    numA++;
+            }
+        }
+
+        int numB = 0;
+        for(int kd = 0; kd < 2; kd++)
+        {
+            int joint_id = pB->cube_id[kd];
+            for(FramePillar *q : map_joint_pillars_[joint_id])
+            {
+                if(q->index != pB->index && node->pillar_visited_order.find(q->index) == node->pillar_visited_order.end())
+                    numB++;
+            }
+        }
+
+        if(numA < numB)
+            return true;
+        else if(numA == numB)
+        {
+            if(pAY > pBY)
+                return true;
+        }
+        return false;
     });
 
     return;

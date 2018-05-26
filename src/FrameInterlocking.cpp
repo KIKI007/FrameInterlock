@@ -86,7 +86,7 @@ void FrameInterlocking::select_key_pillar()
 
 std::shared_ptr<FrameInterface> FrameInterlocking::generate_interlocking()
 {
-    std::srand(150);
+    std::srand(std::time(NULL));
 
     if(tree_ == nullptr)
         init_tree();
@@ -137,6 +137,9 @@ std::shared_ptr<FrameInterface> FrameInterlocking::generate_interlocking()
     {
         output_information(tree_->present_node_);
     }
+
+    if(tree_->present_node_ == nullptr)
+        return nullptr;
     return tree_->output_frame(tree_->present_node_);
 }
 

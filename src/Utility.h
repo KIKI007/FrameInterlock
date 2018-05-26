@@ -425,10 +425,18 @@ void generate_children()
 
 void automatic_generate()
 {
+    string path = "/Users/ziqwang/Desktop/WorkSpace/frame_chair";
     if(frame_interlock)
     {
-        frame_interface = frame_interlock->generate_interlocking();
-        draw_frame_mesh();
+        for(int id = 0; id < 100; id++)
+        {
+            frame_interlock.reset();
+            frame_interlock = std::make_shared<FrameInterlocking>(FrameInterlocking(frame_interface));
+            std::shared_ptr<FrameInterface> finterface = frame_interlock->generate_interlocking();
+            string file_name = path + "/chair_" + std::to_string(id) + ".fpuz";
+            if(finterface)
+                finterface->write_fpuz(file_name);
+        }
     }
     return;
 }
