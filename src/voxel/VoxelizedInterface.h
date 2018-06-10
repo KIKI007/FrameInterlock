@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 11.03.18.
+// Created by *** on 11.03.18.
 //
 
 #ifndef TI_STABLE_VOXELIZEDASSEMBLY_H

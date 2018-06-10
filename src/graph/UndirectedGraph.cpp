@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 02.05.18.
+// Created by *** on 02.05.18.
 //
 
 #include "UndirectedGraph.h"

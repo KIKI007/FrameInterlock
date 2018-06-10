@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 06.05.18.
+// Created by *** on 06.05.18.
 //
 
 #ifndef FRAMEINTERLOCK_FRAMEINTERFACEANIMATION_H

@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 28.04.18.
+// Created by *** on 28.04.18.
 //
 
 #ifndef FRAMEINTERLOCK_FRAMEINTERLOCKING_H
@@ -36,5 +36,28 @@ public:
 
 };
 
+class Timer
+{
+public:
+
+    Timer(std::string name) {name_ = name;clear();}
+
+public:
+
+    void start(){timer_ = clock();}
+
+    void end(){tot_time += (double)(clock() - timer_)/(CLOCKS_PER_SEC);}
+
+    void clear(){tot_time = 0;}
+
+    double present_time(){return (double)(clock() - timer_)/(CLOCKS_PER_SEC);}
+
+    void print(){std::cout << name_ << ":\t\t" << tot_time << std::endl;}
+
+public:
+    std::string name_;
+    clock_t timer_;
+    double tot_time;
+};
 
 #endif //FRAMEINTERLOCK_FRAMEINTERLOCKING_H

@@ -139,7 +139,7 @@ int main() {
                     para.animation_ratio = id / 1000.0;
                     draw_animation();
 
-                    usleep(50000);
+                    usleep(10000);
                 }
             }
         });

@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 01.03.18.
+// Created by *** on 01.03.18.
 //
 
 #ifndef TI_STABLE_PART_H

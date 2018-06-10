@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 28.04.18.
+// Created by *** on 28.04.18.
 //
 
 #include "FrameInterlocking.h"
@@ -91,6 +91,8 @@ std::shared_ptr<FrameInterface> FrameInterlocking::generate_interlocking()
     if(tree_ == nullptr)
         init_tree();
 
+    Timer time("Total");
+    time.start();
     int it_times = 0;
     int num_pillar = frame_interface_->pillars_.size();
     while(tree_->present_node_ && tree_->present_node_->num_pillar_finished < num_pillar)
@@ -137,7 +139,8 @@ std::shared_ptr<FrameInterface> FrameInterlocking::generate_interlocking()
     {
         output_information(tree_->present_node_);
     }
-
+    time.end();
+    time.print();
     if(tree_->present_node_ == nullptr)
         return nullptr;
     return tree_->output_frame(tree_->present_node_);

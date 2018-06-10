@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 19.03.18.
+// Created by *** on 19.03.18.
 //
 
 #ifndef UNDERSTAND_INTERLOCK_VPUZZLEGRAPH_H

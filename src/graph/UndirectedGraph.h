@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 23.04.18.
+// Created by *** on 23.04.18.
 //
 
 #ifndef FRAMEINTERLOCK_UNDIRECTEDGRAPH_H

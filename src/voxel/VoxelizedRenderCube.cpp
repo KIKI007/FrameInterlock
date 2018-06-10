@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 17.03.18.
+// Created by *** on 17.03.18.
 //
 
 #include "VoxelizedRenderCube.h"

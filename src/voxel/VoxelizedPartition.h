@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 06.04.18.
+// Created by *** on 06.04.18.
 //
 
 #ifndef UNDERSTAND_INTERLOCK_VOXELIZEDPARTITION_H

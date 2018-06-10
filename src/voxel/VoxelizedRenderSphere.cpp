@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 18.03.18.
+// Created by *** on 18.03.18.
 //
 
 #include "VoxelizedRenderSphere.h"

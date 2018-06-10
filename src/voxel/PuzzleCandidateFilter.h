@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 22.03.18.
+// Created by *** on 22.03.18.
 //
 
 #ifndef UNDERSTAND_INTERLOCK_PUZZLECANDIDATEFILTER_H

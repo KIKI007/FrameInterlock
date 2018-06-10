@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 25.04.18.
+// Created by *** on 25.04.18.
 //
 
 #ifndef FRAMEINTERLOCK_UTILITY_H
@@ -72,7 +72,7 @@ void draw_frame_mesh()
         frame_interface->cube_size_ = para.render_joint_size_;
         frame_interface->radius_ = para.render_pillar_radius;
         frame_interface->draw(renderV, renderF, renderC, para.render_frame_mesh, para.render_joint_knots, para.render_joint_sphere_);
-
+        //frame_interface->draw(renderV, renderF, renderC, false, para.render_joint_knots, false);
         viewer.data.clear();
         viewer.data.set_mesh(renderV, renderF);
         viewer.data.set_colors(renderC);
@@ -425,18 +425,19 @@ void generate_children()
 
 void automatic_generate()
 {
-    string path = "/Users/ziqwang/Desktop/WorkSpace/frame_chair";
+    string path = "/Users/***/Desktop/WorkSpace/frame_chair";
     if(frame_interlock)
     {
-        for(int id = 0; id < 100; id++)
-        {
+        //for(int id = 0; id < 100; id++)
+        //{
             frame_interlock.reset();
             frame_interlock = std::make_shared<FrameInterlocking>(FrameInterlocking(frame_interface));
-            std::shared_ptr<FrameInterface> finterface = frame_interlock->generate_interlocking();
-            string file_name = path + "/chair_" + std::to_string(id) + ".fpuz";
-            if(finterface)
-                finterface->write_fpuz(file_name);
-        }
+            frame_interface = frame_interlock->generate_interlocking();
+            draw_frame_mesh();
+            //string file_name = path + "/chair_" + std::to_string(id) + ".fpuz";
+            //if(finterface)
+                //finterface->write_fpuz(file_name);
+        //}
     }
     return;
 }

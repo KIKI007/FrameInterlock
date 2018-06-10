@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 06.05.18.
+// Created by *** on 06.05.18.
 //
 
 #include "FrameInterfaceAnimation.h"
@@ -271,11 +271,11 @@ void FrameInterfaceAnimation::write_animation_script(string path_name)
                 if(unit.pillar_index == index)
                 {
 
-                    fout << "Begin Action 300" << std::endl;
+                    fout << "Begin Action 130" << std::endl;
                     fout << "Move id " << jd + 1
-                         << " [" << directions_[id][0] * 3
-                         << ", " << directions_[id][1] * 3
-                         << ", " << directions_[id][2] * 3 << " ]"
+                         << " [" << directions_[id][0] * 0.2
+                         << ", " << directions_[id][1] * 0.2
+                         << ", " << directions_[id][2] * 0.2 << " ]"
                          << std::endl;
                     fout << "End" << std::endl << std::endl;
                 }

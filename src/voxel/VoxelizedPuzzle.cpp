@@ -1,5 +1,5 @@
  //
-// Created by ziqwang on 16.03.18.
+// Created by *** on 16.03.18.
 //
 #include "VoxelizedPuzzle.h"
 VoxelizedPuzzle::VoxelizedPuzzle(int nx, int ny, int nz, int joint_id, std::shared_ptr<ColorCoding> coder)

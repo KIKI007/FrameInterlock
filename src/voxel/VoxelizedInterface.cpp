@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 11.03.18.
+// Created by *** on 11.03.18.
 //
 
 #include "VoxelizedInterface.h"

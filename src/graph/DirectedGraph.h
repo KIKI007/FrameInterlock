@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 01.03.18.
+// Created by *** on 01.03.18.
 //
 
 #ifndef TI_STABLE_DIRECTEDGRAPH_H
@@ -53,7 +53,7 @@ public:
         {
             std::shared_ptr<DirectedGraphNode> p = std::make_shared<DirectedGraphNode>();
             p->index_ = id;
-            p->label = std::to_string(id);
+            p->label = std::to_string(id + 1);
             nodeLists_.push_back(p);
         }
     }
@@ -185,7 +185,7 @@ public:
                 for(int jd = 0; jd < p->neighborList_.size(); jd++)
                 {
                     q = p->neighborList_[jd].node.lock();
-                    fout << p->label << " -> " << q->label << "\n";
+                    fout << q->label << " -> " << p->label << "\n";
                 }
             }
             fout << "}";

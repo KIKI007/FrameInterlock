@@ -1,5 +1,5 @@
 //
-// Created by ziqwang on 16.03.18.
+// Created by *** on 16.03.18.
 //
 
 #include "VoxelizedPart.h"

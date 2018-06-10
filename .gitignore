@@ -37,3 +37,7 @@ cmake-build-debug/*
 .idea/workspace.xml
 .idea/workspace.xml
 *.make
+
+cmake-build-debug/
+
+cmake-build-release/
