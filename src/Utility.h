@@ -124,7 +124,7 @@ void show_pillar_index()
     for(int id = 0; id < frame_interface->pillars_.size(); id++)
     {
         std::shared_ptr<FramePillar> pillar = frame_interface->pillars_[id];
-        viewer.data.add_label((pillar->end_points_cood[0] + pillar->end_points_cood[1])/2, std::to_string(pillar->index));
+        viewer.data.add_label((pillar->end_points_cood[0] + pillar->end_points_cood[1])/2, std::to_string(pillar->index + 1));
     }
 }
 

@@ -68,16 +68,22 @@ void FrameInterlocking::init_tree()
 
 void FrameInterlocking::select_key_pillar()
 {
-    double maxY = -std::numeric_limits<double>::infinity();
+    double max = -std::numeric_limits<double>::infinity();
     FramePillar *key;
     for(std::shared_ptr<FramePillar> pillar: frame_interface_->pillars_)
     {
         double valueY = pillar->end_points_cood[0][1] + pillar->end_points_cood[1][1];
-        if(maxY < valueY)
+        if(max < valueY)
         {
-            maxY = valueY;
+            max = valueY;
             key = pillar.get();
         }
+//        double valueZ = pillar->end_points_cood[0][2] + pillar->end_points_cood[1][2];
+//        if(max < valueZ)
+//        {
+//            max = valueZ;
+//            key = pillar.get();
+//        }
     }
 
     std::cout << "Key is :\t" << key->index << std::endl;

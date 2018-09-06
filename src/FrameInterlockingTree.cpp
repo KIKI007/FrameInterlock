@@ -183,9 +183,20 @@ bool FrameInterlockingTree::generate_key(TreeNode *node)
 
 bool FrameInterlockingTree::generate_children(TreeNode *node)
 {
-    balance_inner_relation = false;
-    max_variation_of_voxel_in_joint = 1;
-    max_number_of_children_ = 10;
+    int num_pillar = interface->pillars_.size();
+    //if(node->num_pillar_finished > num_pillar * 0.2)
+    {
+        balance_inner_relation = true;
+        max_variation_of_voxel_in_joint = 2;
+        max_number_of_children_ = 2;
+    }
+//    else
+//    {
+//        balance_inner_relation = false;
+//        max_variation_of_voxel_in_joint = 2;
+//        max_number_of_children_ = 10;
+//    }
+
 
     if(node->num_pillar_finished == 0)
     {
@@ -738,6 +749,8 @@ void FrameInterlockingTree::select_candidates(TreeNode *node)
     {
         double pAY = pA->end_points_cood[0][1] + pA->end_points_cood[1][1];
         double pBY = pB->end_points_cood[0][1] + pB->end_points_cood[1][1];
+//        double pAY = pA->end_points_cood[0][2] + pA->end_points_cood[1][2];
+//        double pBY = pB->end_points_cood[0][2] + pB->end_points_cood[1][2];
 
         int numA = 0;
         for(int kd = 0; kd < 2; kd++)
